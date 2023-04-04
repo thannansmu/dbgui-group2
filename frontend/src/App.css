@@ -42,3 +42,31 @@
   color: #fff;
   font-size: 100px;
 }
+
+.About {
+  position: relative;
+  color: black;
+  font-size: 25px;
+}
+
+.About::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 110%;
+  height: 110%;
+  background-image: url('./images/img-10.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+.About-text {
+  padding-left: 3em; /* Add 3em padding to the left */
+  font-size: 18px;
+  margin-top: 0; /* Remove default top margin */
+  margin-bottom: 1em; /* Add bottom margin for spacing */
+}
+

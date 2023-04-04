@@ -4,6 +4,10 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Home from './components/pages/Home';
+import Services from './components/pages/Services';
+import About from './components/pages/About';
+
+
 
 function App() {
 
@@ -64,6 +68,9 @@ function App() {
       <Navbar />
     <Routes> 
       <Route path = '/' element={<Home />} />
+      <Route path = '/services-page' element={<Services />} />
+      <Route path = '/about-tutors' element={<About />} />
+
     </Routes>
     
     </Router>
