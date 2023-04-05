@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import './CreateAccountForm.css';
-import { TextField } from '../common/textField';
-import { TextAreaField } from '../common/textAreaField';
-import CheckboxList from '../common/checkbox';
-import { SelectField } from '../common/selectField';
-import { TimeFrame } from '../common/TimeFrame';
-import { AvailabilityList } from './availability';
+import { TextField, TextAreaField, CheckboxList, SelectField, TimeFrame } from '../common';
+import { AvailabilityList } from '../createAccount';
 
 const TutorForm = ({ accountType }) => {
     const [day, setDay] = useState("");
@@ -82,7 +78,7 @@ const TutorForm = ({ accountType }) => {
     }
 };
   
-const CreateAccountForm = ({accountType}) => {
+export const CreateAccountForm = ({accountType}) => {
 
   const [ userName, setUserName ] = useState('');
   const [ password, setPassword ] = useState('');
@@ -135,8 +131,5 @@ const CreateAccountForm = ({accountType}) => {
           <br/>
           <button id='register' onClick={onRegister}>Register</button>
       </div>
-      
   )
-}
-
-export default CreateAccountForm;
+};

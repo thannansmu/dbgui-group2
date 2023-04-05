@@ -1,4 +1,4 @@
-const CheckboxList = ({ id, label, value, setValue, options, checkedItems, setCheckedItems }) => {
+export const CheckboxList = ({ id, label, value, setValue, options, checkedItems, setCheckedItems }) => {
 
   const handleChange = (event) => {
     setCheckedItems({ ...checkedItems, [event.target.name]: event.target.checked });
@@ -21,6 +21,4 @@ const CheckboxList = ({ id, label, value, setValue, options, checkedItems, setCh
       ))}
     </div>
   );
-}
-
-export default CheckboxList;
+};
