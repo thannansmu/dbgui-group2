@@ -12,15 +12,17 @@ const TutorForm = ({ accountType }) => {
   
     const addAvailability = () => {
 
-      const newAvailableTime = (
-        <div key={availability.length} className="availability">
-          <div className="availableTime">{day} {startTime} {endTime}</div>
-        </div>
-      );
-      setAvailability([...availability, newAvailableTime]);
-      setDay('');
-      setStartTime('');
-      setEndTime('');
+      if(day && startTime && endTime){
+        const newAvailableTime = (
+          <div key={availability.length} className="availability">
+            <div className="availableTime">{day} {startTime} {endTime}</div>
+          </div>
+        );
+        setAvailability([...availability, newAvailableTime]);
+        setDay('');
+        setStartTime('');
+        setEndTime('');
+        };
     };
 
     const removeAvailability = (index) => {
