@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../App.css'
 
-export default function About() {
+export const About = () => {
     return (
       <div className="About Page">
         
