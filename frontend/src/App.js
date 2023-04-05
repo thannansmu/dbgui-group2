@@ -68,7 +68,6 @@ function App() {
       <Route path = '/' element={<Home />} />
       <Route path = '/services-page' element={<Services />} />
       <Route path = '/about-tutors' element={<About />} />
-      <Route path = '/login' element={<LoginForm accountType={'student'}/>} />
 
     </Routes>
     
