@@ -57,8 +57,11 @@ function Navbar() {
 
             
             </ul>
-            {button && <Button buttonStyle='btn--outline'>Log in/Create Account</Button>}
-
+            {button && (
+            <Button buttonStyle="btn--outline" to="/sign-up">
+              log in/Create Account
+            </Button>
+          )}
             
 
 
