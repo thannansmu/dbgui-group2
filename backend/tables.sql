@@ -60,7 +60,12 @@ CREATE Table Report (
 
 
 CREATE Table FavoriteTutors (
-    
+    favoriteTutorID INT,
+    username VARCHAR(20),
+    studentID INT,
+    tutorID INT,
+    PRIMARY KEY (favoriteTutorID),
+    FOREIGN KEY (studentID) REFERENCES Students(studentID)
 );
 
 
