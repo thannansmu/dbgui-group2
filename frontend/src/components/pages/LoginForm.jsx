@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { TextField } from '../common';
+import '../styles/LoginForm.css';
+import '../styles/Button.css';
 
 export const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -10,9 +12,9 @@ export const LoginForm = () => {
     /*remember to got to call post route*/
 
     return <>
-        <h1>Login</h1>
+        <h1 className='login-title'>Login</h1>
 
-        <form>
+        <form className='login-form'>
             <TextField id='username'
                 label='Username'
                 value={username}
@@ -23,7 +25,7 @@ export const LoginForm = () => {
                 value={password}
                 setValue={setPassword} />
 
-            <button type='button'>Login</button>
+            <button className='btn' type='button'>Login</button>
         </form>
     </>;
 }
