@@ -12,16 +12,18 @@ export const LoginForm = () => {
     return <>
         <h1>Login</h1>
 
-        <TextField id='username'
-            label='Username'
-            value={username}
-            setValue={setUsername} />
+        <form>
+            <TextField id='username'
+                label='Username'
+                value={username}
+                setValue={setUsername} />
 
-        <TextField id='password'
-            label='Password'
-            value={password}
-            setValue={setPassword} />
+            <TextField id='password'
+                label='Password'
+                value={password}
+                setValue={setPassword} />
 
-        <button type='button'>Login</button>
+            <button type='button'>Login</button>
+        </form>
     </>;
 }
