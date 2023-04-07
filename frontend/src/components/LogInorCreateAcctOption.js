@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from './Button';
+import { LoginForm } from './pages';
 
 export default function LogInorCreateAcctOption(){
     const [click, setClick] = useState(false);

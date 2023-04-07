@@ -3,7 +3,7 @@ import axios from 'axios';
 import React from 'react';
 import Navbar from './components/Navbar';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import Home from './components/pages/Home';
+import {Home, LoginForm} from './components/pages';
 import Services from './components/pages/Services';
 import About from './components/pages/About';
 import LogInorCreateAcctOption from './components/LogInorCreateAcctOption';
@@ -73,6 +73,7 @@ function App() {
       <Route path = '/services-page' element={<Services />} />
       <Route path = '/about-tutors' element={<About />} />
       <Route path = '/sign-up' element={<LogInorCreateAcctOption />} />
+      <Route path = '/login' element={<LoginForm />} />
 
 
     </Routes>

@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { TextField } from '../common';
 
-export const LoginForm = ({ accountType }) => {
+export const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    /*if accountType = student, tutor, or admin, call the backend
-      to see if the username & password exist in those tables*/
+    /*call the backend to see if the username & password exist in user table*/
 
     /*remember to got to call post route*/
 
