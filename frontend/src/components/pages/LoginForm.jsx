@@ -14,18 +14,22 @@ export const LoginForm = () => {
     return <>
         <h1 className='login-title'>Login</h1>
 
-        <form className='login-form'>
-            <TextField id='username'
-                label='Username'
-                value={username}
-                setValue={setUsername} />
+        <div className='login-form'>
+            <div className='login-field'>
+                <TextField id='username'
+                    label='Username'
+                    value={username}
+                    setValue={setUsername} />
+            </div>
 
-            <TextField id='password'
-                label='Password'
-                value={password}
-                setValue={setPassword} />
+            <div className='login-field'>
+                <TextField id='password'
+                    label='Password'
+                    value={password}
+                    setValue={setPassword} />
+            </div>
 
             <button className='btn' type='button'>Login</button>
-        </form>
+        </div>
     </>;
 }
