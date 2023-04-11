@@ -1,11 +1,11 @@
-export const TextAreaField = ({id, label, value, setValue}) => {
+export const TextAreaField = ({ id, label, value, setValue }) => {
     return <>
-        <div>
-            <label htmlFor={ id }>{label}</label>
+        <div className="form-group mb-3">
+            <label htmlFor={id}>{label}</label>
             <textarea id={id} name={id}
+                className="form-control"
                 value={value}
-                onChange={event => setValue(event.target.value)}>
-            </textarea>  
+                onChange={event => setValue(event.target.value)} />
         </div>
     </>;
 }
