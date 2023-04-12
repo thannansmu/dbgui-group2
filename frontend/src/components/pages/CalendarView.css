@@ -1,0 +1,14 @@
+table {
+    border-radius: 1;
+    border-style: solid;
+    border-spacing: 0;
+}
+
+th, td{
+    border-radius: 1;
+    border-style: solid;
+}
+
+td[class$="-available"] {
+    background-color: green;
+}
