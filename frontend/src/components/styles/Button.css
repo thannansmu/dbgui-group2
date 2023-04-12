@@ -41,5 +41,22 @@ background: white;
 color: #242424;
 transition: all 0.3s ease-out;
 
-
 }
+
+.button-container .page-button {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    padding: 10px 20px;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  

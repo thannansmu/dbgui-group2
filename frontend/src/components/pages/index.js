@@ -5,3 +5,4 @@ export * from './LoginForm';
 export * from './UserInfo';
 export * from './YourQuestions';
 export * from './CreateAccount.jsx';
+export * from './YourAppointments.jsx';

@@ -3,9 +3,8 @@ import axios from 'axios';
 import React from 'react';
 import {Navbar} from './components/Navbar';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import {Home, About, Services, LoginForm, CreateAccount} from './components/pages';
+import {Home, About, Services, LoginForm, CreateAccount, YourAppointments} from './components/pages';
 import LogInorCreateAcctOption from './components/LogInorCreateAcctOption';
-
 function App() {
 
   const url = 'http://localhost:8000'
@@ -70,7 +69,7 @@ function App() {
       <Route path = '/sign-up' element={<LogInorCreateAcctOption />} />
       <Route path = '/login' element={<LoginForm />} />
       <Route path = '/create-account' element={<CreateAccount />} />
-
+      <Route path = '/booked-appt' element={<YourAppointments />} />
     </Routes>
     
     </Router>
