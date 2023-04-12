@@ -40,7 +40,7 @@ app.get('/users', (req, res) => {
   })
 })
 
-app.get(`/users/${username}`, (req, res) => {
+app.get(`/users/:username`, (req, res) => {
   const username = req.body;
   connection.query(`SELECT * FROM User WHERE username = ${username}`, (err, rows, fields) => {
     if (err) throw err
@@ -49,7 +49,7 @@ app.get(`/users/${username}`, (req, res) => {
   })
 })
 
-app.get(`/users/${username}/${attribute}`, (req, res, username, attribute) => {
+app.get(`/users/:username/:attribute`, (req, res) => {
     
 })
 
@@ -65,24 +65,51 @@ app.post('/users/add', (req, res) => {
     })
 })
 
-app.put(`/users/${username}/${attribute}/update`, (req, res) => {
+app.put(`/users/:username/:attribute/update`, (req, res) => {
+    const {username, attribute, updatedValue} = req.body;  
+    connection.query(`UPDATE users SET ${attribute} = ${updatedValue} WHERE username = ${username}`, (err, rows, fields) => {
+      if (err) throw err
+      res.status(200)
+      res.send(`Updated ${attribute} for ${username}`)
+    })
+})
+
+app.get(`/users/:username/requests`, (req, res) => {
+  const username = req.body;
+  connection.query(`SELECT * FROM Requests WHERE username = ${username}`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+  })
+})
+
+app.get(`/users/:username/comments`, (req, res) => {
+  const username = req.body;
+  connection.query(`SELECT * FROM Comments WHERE username = ${username}`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+  })
+})
+
+app.post(`/users/:username/add_request`, (req, res) => {
     
 })
 
-app.get(`/users/${username}/requests`, (req, res) => {
+app.post(`/users/:username/add_comment`, (req, res) => {
     
 })
 
-app.get(`/users/${username}/comments`, (req, res) => {
-    
+app.delete(`/users/:username/delete`, (req, res) => {
+  
 })
 
-app.post(`/users/${username}/add_request`, (req, res) => {
-    
+app.delete(`/delete_request/:requestID`, (req, res) => {
+  
 })
 
-app.post(`/users/${username}/add_comment`, (req, res) => {
-    
+app.delete(`/delete_comment/:commentID`, (req, res) => {
+  
 })
 
 
