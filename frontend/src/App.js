@@ -1,5 +1,13 @@
 import './App.css';
 import axios from 'axios';
+import React from 'react';
+import Navbar from './components/Navbar';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import {Home, About, Services, LoginForm, CreateAccount} from './components/pages';
+import LogInorCreateAcctOption from './components/LogInorCreateAcctOption';
+
+
+
 
 function App() {
 
@@ -55,14 +63,22 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <h1>Hello World!</h1>
-      <button onClick={checkAPI}>Check API</button>
-      <button onClick={sendJSON}>Send JSON</button>
-      <button onClick={sendUser}>Send User to DB</button>
-      <button onClick={getUsers}>Get Users from DB</button>
-      <button onClick={clearUsers}>Clear Users in DB</button>
-    </div>
+    <>
+    <Router>
+      <Navbar />
+    <Routes> 
+      <Route path = '/' element={<Home />} />
+      <Route path = '/services-page' element={<Services />} />
+      <Route path = '/about-tutors' element={<About />} />
+      <Route path = '/sign-up' element={<LogInorCreateAcctOption />} />
+      <Route path = '/login' element={<LoginForm />} />
+      <Route path = '/create-account' element={<CreateAccount />} />
+
+    </Routes>
+    
+    </Router>
+      
+    </>
   );
 }
 
