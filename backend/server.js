@@ -41,7 +41,7 @@ app.get('/users', (req, res) => {
 })
 
 app.get(`/users/:username`, (req, res) => {
-  const username = req.body;
+  const username = req.params.username;
   connection.query(`SELECT * FROM User WHERE username = ${username}`, (err, rows, fields) => {
     if (err) throw err
     res.status(200)
@@ -50,12 +50,19 @@ app.get(`/users/:username`, (req, res) => {
 })
 
 app.get(`/users/:username/:attribute`, (req, res) => {
+  const username = req.params.username;
+  const attribite = req.params.attribute;
+  connection.query(`SELECT ${attribite} FROM User WHERE username = ${username}`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+  })
     
 })
 
 app.post('/users/add', (req, res) => {
-    const {user, first, last, pwd, biog, userRle} = req.body
-    const query = `INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES ('${user}', '${first}', '${last}', '${pwd}', '${biog}', '${userRle}')`
+    const {user, first, last, pwd, biog, userRole} = req.body
+    const query = `INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES ('${user}', '${first}', '${last}', '${pwd}', '${biog}', '${userRole}')`
     connection.query(query, (err, rows, fields) => {
       if (err) throw err
       
@@ -66,7 +73,9 @@ app.post('/users/add', (req, res) => {
 })
 
 app.put(`/users/:username/:attribute/update`, (req, res) => {
-    const {username, attribute, updatedValue} = req.body;  
+    const username = req.params.username;
+    const attribute = req.params.attribute;
+    const updatedValue = req.body;  
     connection.query(`UPDATE users SET ${attribute} = ${updatedValue} WHERE username = ${username}`, (err, rows, fields) => {
       if (err) throw err
       res.status(200)
@@ -75,7 +84,7 @@ app.put(`/users/:username/:attribute/update`, (req, res) => {
 })
 
 app.get(`/users/:username/requests`, (req, res) => {
-  const username = req.body;
+  const username = req.params.username;;
   connection.query(`SELECT * FROM Requests WHERE username = ${username}`, (err, rows, fields) => {
     if (err) throw err
     res.status(200)
@@ -84,7 +93,7 @@ app.get(`/users/:username/requests`, (req, res) => {
 })
 
 app.get(`/users/:username/comments`, (req, res) => {
-  const username = req.body;
+  const username = req.params.username;;
   connection.query(`SELECT * FROM Comments WHERE username = ${username}`, (err, rows, fields) => {
     if (err) throw err
     res.status(200)
@@ -101,7 +110,12 @@ app.post(`/users/:username/add_comment`, (req, res) => {
 })
 
 app.delete(`/users/:username/delete`, (req, res) => {
-  
+  const username = req.params.username;;
+  connection.query(`DELETE FROM User WHERE username=${username}`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+  })
 })
 
 app.delete(`/delete_request/:requestID`, (req, res) => {
