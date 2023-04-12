@@ -64,6 +64,8 @@ const TutorForm = ({ accountType }) => {
             defaultOption="Select Day"
             setValue={setDay}
             value={day}
+            optionLabelKey='label'
+            optionValueKey='value'
           />
           <TimeFrame
             startTime={startTime}
@@ -129,6 +131,9 @@ export const CreateAccountForm = ({accountType}) => {
               value={bio}
               setValue={setBio}
           />
+
+          {/* if registering as a tutor, show TutorForm
+              otherwise hide the form */}
           <TutorForm accountType={accountType}/>
           <br/>
           <button id='register' onClick={onRegister}>Register</button>
