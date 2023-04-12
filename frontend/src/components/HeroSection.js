@@ -5,8 +5,8 @@ import './styles/HeroSection.css';
 
 
 
-function HeroSection(){
-    return(
+export const HeroSection = () =>{
+    return<>
     <div classname= 'hero-container'>
         <video src= "/videos/video-2.mp4" autoPlay loop muted/>
         <center>
@@ -19,9 +19,8 @@ function HeroSection(){
             buttonSize='btn--large'>About the Tutors</Button> */}
         
         </div>
-    </div>)
+    </div>
+    </>;
 
 
 }
-
-export default HeroSection
