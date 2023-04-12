@@ -115,7 +115,7 @@ CREATE Table TimesAvaliable (
    timeID INT,
    tutorID INT,
    tutorTime VARCHAR(20),
-   tutorDate VARCHAR(20),
+   tutorDay VARCHAR(20),
    PRIMARY KEY (timeID),
    FOREIGN KEY (tutorID) REFERENCES Tutors(tutorID)
 );

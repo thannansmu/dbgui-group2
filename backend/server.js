@@ -32,11 +32,20 @@ app.listen(port, () => {
 
 
 app.get('/users', (req, res) => {
-    
+  connection.query(`SELECT * FROM User`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+  })
 })
 
-app.get(`/users/${username}`, (req, res, username) => {
-    
+app.get(`/users/${username}`, (req, res) => {
+  const username = req.body;
+  connection.query(`SELECT * FROM User WHERE username = ${username}`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+  })
 })
 
 app.get(`/users/${username}/${attribute}`, (req, res, username, attribute) => {
@@ -66,12 +75,6 @@ app.post(`/users/${username}/add_request`, (req, res) => {
 app.post(`/users/${username}/add_comment`, (req, res) => {
     
 })
-
-
-
-
-
-
 
 
 
