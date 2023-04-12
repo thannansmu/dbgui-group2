@@ -5,23 +5,22 @@ import './styles/HeroSection.css';
 
 
 
-function HeroSection(){
-    return(
-    <div classname= 'hero-container'>
-        <video src= "/videos/video-2.mp4" autoPlay loop muted/>
-        <center>
-        <h1 style={{color: 'white'}}>               Learning Never Exhausts the Mind</h1>
-        <p style={{color: 'white'}}>                Join Now!</p>
-        </center>
-        <div className="hero-btns">
-            
-        {/* <Button className='btns' buttonStyle= 'btn--primary'
+export const HeroSection = () => {
+    return <>
+        <div classname='hero-container'>
+            <video src="/videos/video-2.mp4" autoPlay loop muted />
+            <center>
+                <h1 style={{ color: 'white' }}>               Learning Never Exhausts the Mind</h1>
+                <p style={{ color: 'white' }}>                Join Now!</p>
+            </center>
+            <div className="hero-btns">
+
+                {/* <Button className='btns' buttonStyle= 'btn--primary'
             buttonSize='btn--large'>About the Tutors</Button> */}
-        
+
+            </div>
         </div>
-    </div>)
+    </>;
 
 
 }
-
-export default HeroSection
