@@ -55,7 +55,7 @@ app.get(`/users/${username}/${attribute}`, (req, res, username, attribute) => {
 
 app.post('/users/add', (req, res) => {
     const {user, first, last, pwd, biog, userRle} = req.body
-    const query = `INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES ('${user}', '${first}', '${last}', '${pwd}', '${biog}', '${userRole}')`
+    const query = `INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES ('${user}', '${first}', '${last}', '${pwd}', '${biog}', '${userRle}')`
     connection.query(query, (err, rows, fields) => {
       if (err) throw err
       
