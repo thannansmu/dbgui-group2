@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {Button} from './Button';
 import './styles/Navbar.css';
 
-function Navbar() {
+export const Navbar = () => {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
 
@@ -21,8 +21,7 @@ function Navbar() {
     }, []);
 
     window.addEventListener('resize', showButton);
-    return (
-        <>
+    return <>
     <nav className="navbar">
        <div className="navbar-container"> 
         <Link to = "/" className="navbar-logo" onClick={closeMobileMenu}>
@@ -68,8 +67,5 @@ function Navbar() {
 
        </div>
     </nav>
-    </>
-    );
+    </>;
 }
-
-export default Navbar;

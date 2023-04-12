@@ -1,13 +1,10 @@
 import './App.css';
 import axios from 'axios';
 import React from 'react';
-import Navbar from './components/Navbar';
+import {Navbar} from './components/Navbar';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import {Home, About, Services, LoginForm, CreateAccount} from './components/pages';
 import LogInorCreateAcctOption from './components/LogInorCreateAcctOption';
-
-
-
 
 function App() {
 
