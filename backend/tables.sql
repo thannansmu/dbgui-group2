@@ -8,9 +8,9 @@ CREATE Table User (
     username VARCHAR(20),
     firstName VARCHAR(20),
     lastName VARCHAR(20),
-    id INT,
-    password VARCHAR(20),
+    passWord VARCHAR(20),
     bio VARCHAR(500),
+    id INT,
     userRole VARCHAR(20),
     PRIMARY KEY (username)
 );

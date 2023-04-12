@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const port = 8000
+const id = 0
 
 // Enable Cross-Origin Resource Sharing
 const cors = require('cors')
@@ -53,7 +54,15 @@ app.get(`/users/${username}/${attribute}`, (req, res, username, attribute) => {
 })
 
 app.post('/users/add', (req, res) => {
-    
+    const {user, first, last, pwd, biog, userRle} = req.body
+    const query = `INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES ('${user}', '${first}', '${last}', '${pwd}', '${biog}', '${userRole}')`
+    connection.query(query, (err, rows, fields) => {
+      if (err) throw err
+      
+      console.log(rows)
+      res.status(200)
+      res.send("Successfully added user!")
+    })
 })
 
 app.put(`/users/${username}/${attribute}/update`, (req, res) => {
