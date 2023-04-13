@@ -8,3 +8,4 @@ export * from './CreateAccount.jsx';
 export * from './YourAppointments.jsx';
 export * from './Schedule_Tutor_Filter';
 export * from './Ask_Question'
+export * from './Review_Tutor'
