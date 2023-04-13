@@ -48,8 +48,8 @@ export const ProfilePage = () => {
             </Button>
           )}
           {button && (
-            <Button to="/review-appt" className="page-button" style={buttonStyles}>
-             <i> Review Appointment</i>
+            <Button to="/review-tutor" className="page-button" style={buttonStyles}>
+             <i> Review Tutor</i>
             </Button>
           )}
           {button && (
