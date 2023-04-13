@@ -16,14 +16,14 @@ CREATE Table User (
 );
 
 CREATE Table Students(
-    studentID INT,
+    studentID INT AUTO_INCREMENT,
     username VARCHAR(20),
     PRIMARY KEY (studentID),
     FOREIGN KEY (username) REFERENCES User(username)
 );
 
 CREATE Table Tutors (
-    tutorID INT,
+    tutorID INT AUTO_INCREMENT,
     username VARCHAR(20),
     PRIMARY KEY (tutorID),
     FOREIGN KEY (username) REFERENCES User(username)
@@ -31,14 +31,14 @@ CREATE Table Tutors (
 
 
 CREATE Table Administration (
-    adminID INT,
+    adminID INT AUTO_INCREMENT,
     username VARCHAR(20),
     PRIMARY KEY (adminID),
     FOREIGN KEY (username) REFERENCES User(username)
 );
 
 CREATE Table Question (
-    questionID INT,
+    questionID INT AUTO_INCREMENT,
     studentID INT,
     tutorID INT,
     questionText VARCHAR(500),
@@ -49,7 +49,7 @@ CREATE Table Question (
 );
 
 CREATE Table Report (
-    reportID INT,
+    reportID INT AUTO_INCREMENT,
     username VARCHAR(20),
     adminID INT,
     report VARCHAR(100),
@@ -60,7 +60,7 @@ CREATE Table Report (
 
 
 CREATE Table FavoriteTutors (
-    favoriteTutorID INT,
+    favoriteTutorID INT AUTO_INCREMENT,
     username VARCHAR(20),
     studentID INT,
     tutorID INT,
@@ -70,7 +70,7 @@ CREATE Table FavoriteTutors (
 
 
 CREATE Table Comments (
-  commentID INT,
+  commentID INT AUTO_INCREMENT,
   username VARCHAR(20),
   commentRecieverID INT,
   comment VARCHAR(500),
@@ -80,7 +80,7 @@ CREATE Table Comments (
 
 
 CREATE Table Reviews (
-    reviewID INT,
+    reviewID INT AUTO_INCREMENT,
     username VARCHAR(20),
     studentID INT,
     tutorID INT,
@@ -91,7 +91,7 @@ CREATE Table Reviews (
 
 
 CREATE Table Requests (
-    requestID INT,
+    requestID INT AUTO_INCREMENT,
     username VARCHAR(20),
     studentID INT,
     tutorID INT,
@@ -101,7 +101,7 @@ CREATE Table Requests (
 );
 
 CREATE Table Ratings (
-    ratingID INT,
+    ratingID INT AUTO_INCREMENT,
     username VARCHAR(20),
     studentID INT,
     tutorID INT,
@@ -112,7 +112,7 @@ CREATE Table Ratings (
 
 
 CREATE Table TimesAvaliable (
-   timeID INT,
+   timeID INT AUTO_INCREMENT,
    tutorID INT,
    tutorTime VARCHAR(20),
    tutorDay VARCHAR(20),
@@ -122,7 +122,7 @@ CREATE Table TimesAvaliable (
 
 
 CREATE Table TutoringSessions (
-    sessionID INT,
+    sessionID INT AUTO_INCREMENT,
     tutorID INT,
     tutorSession VARCHAR(50),
     PRIMARY KEY (sessionID),
@@ -131,7 +131,7 @@ CREATE Table TutoringSessions (
 
 
 CREATE Table SubjectsTaught (
-    subjectID INT,
+    subjectID INT AUTO_INCREMENT,
     tutorID INT,
     subject VARCHAR(20),
     PRIMARY KEY (subjectID),

@@ -16,7 +16,7 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'CoolPasswordThanks',
-  database: 'DBUI'
+  database: 'tutoringTables'
 })
 
 connection.connect()
@@ -128,12 +128,18 @@ app.delete(`/users/:username/delete`, (req, res) => {
 })
 
 app.delete(`/delete_request/:requestID`, (req, res) => {
+<<<<<<< HEAD
   const username = req.params.username;;
   connection.query(`DELETE FROM Requests WHERE requesrID=${requestID}`, (err, rows, fields) => {
+=======
+  const rID = req.params.requestID;;
+  connection.query(`DELETE FROM Requests WHERE requestID=${rID}`, (err, rows, fields) => {
+>>>>>>> ad9e993f17ccba2d0f2676cab1fbb55fecd4cb9a
     if (err) throw err
     res.status(200)
     res.send(rows)
   })
+<<<<<<< HEAD
   
 })
 
@@ -145,6 +151,17 @@ app.delete(`/delete_comment/:commentID`, (req, res) => {
     res.send(rows)
   })
   
+=======
+})
+
+app.delete(`/delete_comment/:commentID`, (req, res) => {
+  const cID = req.params.commentID;;
+  connection.query(`DELETE FROM Comments WHERE commentID=${cID}`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)    
+  })
+>>>>>>> ad9e993f17ccba2d0f2676cab1fbb55fecd4cb9a
 })
 
 
