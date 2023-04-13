@@ -3,9 +3,9 @@ import axios from "axios";
 const url = 'http://localhost:8000';
 
 
-//Login Route
+//Login Route... needs to be POST but it doesn't exist (yet)
 export const LoginCheck = (username, password) => new Promise((resolve, reject) => {
-    axios.post(`${url}/users`, {'usernaem':username, 'password':password})
+    axios.post(`${url}/users`, {'username':username, 'password':password})
         .then(resp => resolve(resp.data))
         .catch(error => {
             alert(error);
@@ -15,7 +15,7 @@ export const LoginCheck = (username, password) => new Promise((resolve, reject) 
 
 //Register Route
 export const addUser = (user) => new Promise((resolve, reject) => {
-    axios.post(`${apiEndpoint}`, user)
+    axios.post(`${url}/users/add`, user)
         .then(resp => resolve(resp.data))
         .catch(error => {
             alert(error);
