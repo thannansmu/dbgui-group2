@@ -4,8 +4,8 @@ const url = 'http://localhost:8000';
 
 
 //Login Route
-export const getUserById = (username, password) => new Promise((resolve, reject) => {
-    axios.get(`${apiEndpoint}/${username, password}`)
+export const LoginCheck = (username, password) => new Promise((resolve, reject) => {
+    axios.post(`${url}/users`, {'usernaem':username, 'password':password})
         .then(resp => resolve(resp.data))
         .catch(error => {
             alert(error);

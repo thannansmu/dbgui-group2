@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import { LoginCheck } from '../../api'
 import { useState, useEffect } from 'react';
 import { TextField } from '../common';
 import '../styles/LoginForm.css';
@@ -6,10 +8,27 @@ import '../styles/Button.css';
 export const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMsg, setErrorMsg] = useState('');
 
-    /*call the backend to see if the username & password exist in user table*/
+    useEffect(() =>{
+        setErrorMsg('');
+    }, [username, password]);
 
-    /*remember to got to call post route*/
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+      
+        LoginCheck(username, password).then(accessToken => {
+            if (accessToken != null) {
+                setAuth({ username, accessToken });
+                setUserName('');
+                setPassword('');
+                navigate(`/`);
+            }
+            else {
+                setErrorMessage("Unsuccessful login attempt. Please try again.");
+            }
+        });
+    };
 
     return <>
         <h1 className='login-title'>Login</h1>
@@ -29,7 +48,7 @@ export const LoginForm = () => {
                     setValue={setPassword} />
             </div>
 
-            <button className='btn' type='button'>Login</button>
+            <button className='btn' type='button' onClick={ handleSubmit }>Login</button>
         </div>
     </>;
 }
