@@ -16,7 +16,7 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'CoolPasswordThanks',
-  database: 'DBUI'
+  database: 'tutoringTables'
 })
 
 connection.connect()
