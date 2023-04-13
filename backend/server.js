@@ -102,7 +102,16 @@ app.get(`/users/:username/comments`, (req, res) => {
 })
 
 app.post(`/users/:username/add_request`, (req, res) => {
+  const {requestID, studentID, tutorID, request} = req.body
+  const query = `INSERT INTO Requests (requestID, studentID, tutorID, request) VALUES ('${requestID}', '${studentID}', '${tutorID}', '${request}')`
+  connection.query(query, (err, rows, fields) => {
+    if (err) throw err
     
+    console.log(rows)
+    res.status(200)
+    res.send("Successfully added Request!")
+  })
+   
 })
 
 app.post(`/users/:username/add_comment`, (req, res) => {
@@ -119,10 +128,22 @@ app.delete(`/users/:username/delete`, (req, res) => {
 })
 
 app.delete(`/delete_request/:requestID`, (req, res) => {
+  const username = req.params.username;;
+  connection.query(`DELETE FROM Requests WHERE requesrID=${requestID}`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+  })
   
 })
 
 app.delete(`/delete_comment/:commentID`, (req, res) => {
+  const username = req.params.username;;
+  connection.query(`DELETE FROM Comments WHERE commentID=${commentID}`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+  })
   
 })
 
