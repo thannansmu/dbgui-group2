@@ -14,18 +14,17 @@ export const LoginForm = () => {
         setErrorMsg('');
     }, [username, password]);
 
+    //need to somehow call login route & navigate to student/admin or tutor
     const handleSubmit = async (e) => {
         e.preventDefault();
       
         LoginCheck(username, password).then(accessToken => {
             if (accessToken != null) {
-                setAuth({ username, accessToken });
-                setUserName('');
+                setUsername('');
                 setPassword('');
-                navigate(`/`);
             }
             else {
-                setErrorMessage("Unsuccessful login attempt. Please try again.");
+                setErrorMsg("Unsuccessful login attempt. Please try again.");
             }
         });
     };
