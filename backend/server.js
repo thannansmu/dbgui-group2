@@ -119,11 +119,21 @@ app.delete(`/users/:username/delete`, (req, res) => {
 })
 
 app.delete(`/delete_request/:requestID`, (req, res) => {
-  
+  const rID = req.params.requestID;;
+  connection.query(`DELETE FROM Requests WHERE requestID=${rID}`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+  })
 })
 
 app.delete(`/delete_comment/:commentID`, (req, res) => {
-  
+  const cID = req.params.commentID;;
+  connection.query(`DELETE FROM Comments WHERE commentID=${cID}`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)    
+  })
 })
 
 
