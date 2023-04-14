@@ -36,6 +36,7 @@ app.get('/users', (req, res) => {
     if (err) throw err
     res.status(200)
     res.send(rows)
+    console.log(rows)
   })
 })
 
@@ -45,6 +46,7 @@ app.get(`/users/:username`, (req, res) => {
     if (err) throw err
     res.status(200)
     res.send(rows)
+    console.log(rows);
   })
 })
 
@@ -55,6 +57,7 @@ app.get(`/users/:username/:attribute`, (req, res) => {
     if (err) throw err
     res.status(200)
     res.send(rows)
+    console.log(rows)
   })
     
 })
@@ -64,10 +67,9 @@ app.post('/users/add', (req, res) => {
     const query = `INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES ('${username}', '${firstName}', '${lastName}', '${passWord}', '${bio}', '${userRole}')`
     connection.query(query, (err, rows, fields) => {
       if (err) throw err
-      
-      console.log(rows)
       res.status(200)
       res.send("Successfully added user!")
+      console.log(`Inserted user into database\nusername = ${username}, firstName = ${firstName}, lastName = ${lastName}, password = ${passWord}, bio = ${bio}, userRole = ${userRole}`);
     })
 })
 
@@ -79,6 +81,7 @@ app.put(`/users/:username/:attribute/update`, (req, res) => {
       if (err) throw err
       res.status(200)
       res.send(`Updated ${attribute} for ${username}`)
+      console.log(`Updated ${attribute} for ${username} to ${updatedValue}`)
     })
 })
 
@@ -88,6 +91,7 @@ app.get(`/users/:username/requests`, (req, res) => {
     if (err) throw err
     res.status(200)
     res.send(rows)
+    console.log(rows)
   })
 })
 
@@ -97,10 +101,12 @@ app.get(`/users/:username/comments`, (req, res) => {
     if (err) throw err
     res.status(200)
     res.send(rows)
+    console.log(rows)
   })
 })
 
 app.post(`/users/:username/add_request`, (req, res) => {
+  const username = req.params.username;
   const {requestID, studentID, tutorID, request} = req.body
   const query = `INSERT INTO Requests (requestID, studentID, tutorID, request) VALUES ('${requestID}', '${studentID}', '${tutorID}', '${request}')`
   connection.query(query, (err, rows, fields) => {
@@ -109,6 +115,7 @@ app.post(`/users/:username/add_request`, (req, res) => {
     console.log(rows)
     res.status(200)
     res.send("Successfully added Request!")
+    console.log(`Added request for ${username}\nrequestID = ${requestID} studentID = ${studentID} tutorID = ${tutorID} request = ${request}`)
   })
    
 })
@@ -124,6 +131,7 @@ app.delete(`/users/:username/delete`, (req, res) => {
     if (err) throw err
     res.status(200)
     res.send(rows)
+    console.log(`Deleted user ${username} from database`)
   })
 })
 
@@ -133,6 +141,7 @@ app.delete(`/delete_request/:requestID`, (req, res) => {
     if (err) throw err
     res.status(200)
     res.send(rows)
+    console.log(`Deleted request with requestID ${requestID} from database`)
   })
   
 })
@@ -143,6 +152,7 @@ app.delete(`/delete_comment/:commentID`, (req, res) => {
     if (err) throw err
     res.status(200)
     res.send(rows)
+    console.log(`Deleted request with commentID ${commentID} from database`)
   })
   
 })
