@@ -1,6 +1,7 @@
 import React from 'react';
 import '../App.css';
 import { Button } from './Button';
+import './styles/HeroSection.css'
 import './styles/Button.css';
 
 export const HeroSection = () => {
