@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { LoginCheck } from '../../api'
 import { useState, useEffect } from 'react';
 import { TextField } from '../common';
@@ -9,19 +9,22 @@ export const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() =>{
         setErrorMsg('');
     }, [username, password]);
 
-    //need to somehow call login route & navigate to student/admin or tutor
+    //call login route & navigate to student/admin or tutor if successful
     const handleSubmit = async (e) => {
         e.preventDefault();
       
         LoginCheck(username, password).then(accessToken => {
             if (accessToken != null) {
+                console.log(accessToken.username);
                 setUsername('');
                 setPassword('');
+                navigate('/profile');
             }
             else {
                 setErrorMsg("Unsuccessful login attempt. Please try again.");

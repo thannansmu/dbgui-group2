@@ -1,11 +1,34 @@
+import { useState, useEffect } from 'react';
 import { UserInfo } from '../UserInfo';
+import { Button } from '../../Button';
 import '../../styles/Tutor.css';
 import '../../styles/Button.css';
 
 export const TutorProfile = () => {
+    const [click, setClick] = useState(false);
+    const [button, setButton] = useState(true);
+
+
+    const handleClick = () => setClick(!click);
+    const closeMobileMenu = () => setClick(false);
+
+    const showButton = () => {
+        if (window.innerWidth <= 960) {
+            setButton(false);
+        } else {
+            setButton(true);
+        }
+    };
+
+    useEffect(() => {
+        showButton();
+    }, []);
+
+    window.addEventListener('resize', showButton);
+
     return <>
         <h1 className='title'>Your Profile</h1>
-        
+
         <div>
 
             <br></br>
@@ -16,9 +39,9 @@ export const TutorProfile = () => {
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
-            
+
             <div className="button-container" style={{ display: 'flex', flexDirection: 'column' }}>
-                
+
                 {button && (
                     <Button to="/appts" className="page-button" style={buttonStyles}>
                         <i>  View Appointments</i>
