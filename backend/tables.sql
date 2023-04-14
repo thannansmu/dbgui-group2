@@ -10,7 +10,6 @@ CREATE Table User (
     lastName VARCHAR(20),
     passWord VARCHAR(20),
     bio VARCHAR(500),
-    id INT AUTO_INCREMENT,
     userRole VARCHAR(20),
     PRIMARY KEY (username)
 );
@@ -19,14 +18,14 @@ CREATE Table Students(
     studentID INT AUTO_INCREMENT,
     username VARCHAR(20),
     PRIMARY KEY (studentID),
-    FOREIGN KEY (username) REFERENCES User(username)
+    FOREIGN KEY (username) REFERENCES User(username) ON DELETE CASCADE
 );
 
 CREATE Table Tutors (
     tutorID INT AUTO_INCREMENT,
     username VARCHAR(20),
     PRIMARY KEY (tutorID),
-    FOREIGN KEY (username) REFERENCES User(username)
+    FOREIGN KEY (username) REFERENCES User(username) ON DELETE CASCADE
 );
 
 
@@ -34,7 +33,7 @@ CREATE Table Administration (
     adminID INT AUTO_INCREMENT,
     username VARCHAR(20),
     PRIMARY KEY (adminID),
-    FOREIGN KEY (username) REFERENCES User(username)
+    FOREIGN KEY (username) REFERENCES User(username) ON DELETE CASCADE
 );
 
 CREATE Table Question (
@@ -44,8 +43,8 @@ CREATE Table Question (
     questionText VARCHAR(500),
     answer VARCHAR(500),
     PRIMARY KEY (questionID),
-    FOREIGN KEY (studentID) REFERENCES Students(studentID),
-    FOREIGN KEY (tutorID) REFERENCES Tutors(tutorID)
+    FOREIGN KEY (studentID) REFERENCES Students(studentID) ON DELETE CASCADE,
+    FOREIGN KEY (tutorID) REFERENCES Tutors(tutorID) ON DELETE CASCADE
 );
 
 CREATE Table Report (
@@ -54,8 +53,8 @@ CREATE Table Report (
     adminID INT,
     report VARCHAR(100),
     PRIMARY KEY (reportID),
-    FOREIGN KEY (username) REFERENCES User(username),
-    FOREIGN KEY (adminID) REFERENCES Administration(adminID)
+    FOREIGN KEY (username) REFERENCES User(username) ON DELETE CASCADE,
+    FOREIGN KEY (adminID) REFERENCES Administration(adminID) ON DELETE CASCADE
 );
 
 
@@ -65,7 +64,7 @@ CREATE Table FavoriteTutors (
     studentID INT,
     tutorID INT,
     PRIMARY KEY (favoriteTutorID),
-    FOREIGN KEY (studentID) REFERENCES Students(studentID)
+    FOREIGN KEY (studentID) REFERENCES Students(studentID) ON DELETE CASCADE
 );
 
 
@@ -75,7 +74,7 @@ CREATE Table Comments (
   commentRecieverID INT,
   comment VARCHAR(500),
   PRIMARY KEY (commentID),
-  FOREIGN KEY (username) REFERENCES User(username)
+  FOREIGN KEY (username) REFERENCES User(username) ON DELETE CASCADE
 );
 
 
@@ -86,7 +85,7 @@ CREATE Table Reviews (
     tutorID INT,
     review VARCHAR(500),
     PRIMARY KEY (reviewID),
-    FOREIGN KEY (username) REFERENCES User(username)
+    FOREIGN KEY (username) REFERENCES User(username) ON DELETE CASCADE
 );
 
 
@@ -97,7 +96,7 @@ CREATE Table Requests (
     tutorID INT,
     request VARCHAR(500),
     PRIMARY KEY (requestID),
-    FOREIGN KEY (username) REFERENCES User(username)
+    FOREIGN KEY (username) REFERENCES User(username) ON DELETE CASCADE
 );
 
 CREATE Table Ratings (
@@ -107,7 +106,7 @@ CREATE Table Ratings (
     tutorID INT,
     rating FLOAT,
     PRIMARY KEY (ratingID),
-    FOREIGN KEY (username) REFERENCES User(username)
+    FOREIGN KEY (username) REFERENCES User(username) ON DELETE CASCADE
 );
 
 
@@ -117,7 +116,7 @@ CREATE Table TimesAvaliable (
    tutorTime VARCHAR(20),
    tutorDay VARCHAR(20),
    PRIMARY KEY (timeID),
-   FOREIGN KEY (tutorID) REFERENCES Tutors(tutorID)
+   FOREIGN KEY (tutorID) REFERENCES Tutors(tutorID) ON DELETE CASCADE
 );
 
 
@@ -126,7 +125,7 @@ CREATE Table TutoringSessions (
     tutorID INT,
     tutorSession VARCHAR(50),
     PRIMARY KEY (sessionID),
-    FOREIGN KEY (tutorID) REFERENCES Tutors(tutorID)
+    FOREIGN KEY (tutorID) REFERENCES Tutors(tutorID) ON DELETE CASCADE
 );
 
 
@@ -135,6 +134,6 @@ CREATE Table SubjectsTaught (
     tutorID INT,
     subject VARCHAR(20),
     PRIMARY KEY (subjectID),
-    FOREIGN KEY (tutorID) REFERENCES Tutors(tutorID)
+    FOREIGN KEY (tutorID) REFERENCES Tutors(tutorID) ON DELETE CASCADE
 );
 
