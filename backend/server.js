@@ -122,7 +122,7 @@ app.get(`/users/:username/comments`, (req, res) => {
 app.post(`/users/:username/add_request`, (req, res) => {
   const username = req.params.username;
   const {requestID, studentID, tutorID, request} = req.body
-  const query = `INSERT INTO Requests (requestID, studentID, tutorID, request) VALUES (${requestID},'${username}', ${studentID}, ${tutorID}, '${request}')`
+  const query = `INSERT INTO Requests (requestID, username, studentID, tutorID, request) VALUES ('${requestID}','${username}', '${studentID}', '${tutorID}', '${request}')`
   connection.query(query, (err, rows, fields) => {
     if (err) throw err
     
@@ -137,7 +137,7 @@ app.post(`/users/:username/add_request`, (req, res) => {
 app.post(`/users/:username/add_comment`, (req, res) => {
   const username = req.params.username;
   const {commentID, commentRecieverID, comment} = req.body
-  const query = `INSERT INTO Comments (commentID, username, commentRecieverID, comment) VALUES (${commentID}, '${username}', ${commentRecieverID}, '${comment}')`
+  const query = `INSERT INTO Comments (commentID, username, commentRecieverID, comment) VALUES ('${commentID}', '${username}', '${commentRecieverID}', '${comment}')`
   connection.query(query, (err, rows, fields) => {
     if (err) throw err
     
