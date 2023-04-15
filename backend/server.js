@@ -122,7 +122,7 @@ app.get(`/users/:username/comments`, (req, res) => {
 app.post(`/users/:username/add_request`, (req, res) => {
   const username = req.params.username;
   const {requestID, studentID, tutorID, request} = req.body
-  const query = `INSERT INTO Requests (requestID, studentID, tutorID, request) VALUES ('${requestID}', '${studentID}', '${tutorID}', '${request}')`
+  const query = `INSERT INTO Requests (requestID, studentID, tutorID, request) VALUES (${requestID},'${username}', ${studentID}, ${tutorID}, '${request}')`
   connection.query(query, (err, rows, fields) => {
     if (err) throw err
     
@@ -135,7 +135,17 @@ app.post(`/users/:username/add_request`, (req, res) => {
 })
 
 app.post(`/users/:username/add_comment`, (req, res) => {
+  const username = req.params.username;
+  const {commentID, commentRecieverID, comment} = req.body
+  const query = `INSERT INTO Comments (commentID, username, commentRecieverID, comment) VALUES (${commentID}, '${username}', ${commentRecieverID}, '${comment}')`
+  connection.query(query, (err, rows, fields) => {
+    if (err) throw err
     
+    console.log(rows)
+    res.status(200)
+    res.send("Successfully added Comment!")
+    console.log(`Added request for ${username}\ncommentID = ${commentID} commentRecieverID = ${commentRecieverID} comment = ${comment}`)
+  })
 })
 
 app.delete(`/users/:username/delete`, (req, res) => {
