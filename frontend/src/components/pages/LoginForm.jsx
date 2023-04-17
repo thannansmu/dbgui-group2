@@ -18,10 +18,10 @@ export const LoginForm = () => {
     //call login route & navigate to student/admin or tutor if successful
     const handleSubmit = async (e) => {
         e.preventDefault();
-      
+
         LoginCheck(username, password).then(accessToken => {
-            if (accessToken != null) {
-                console.log(accessToken.username);
+            
+            if (accessToken != null && accessToken[0]['passWord'] === password) {
                 setUsername('');
                 setPassword('');
                 navigate('/profile');
