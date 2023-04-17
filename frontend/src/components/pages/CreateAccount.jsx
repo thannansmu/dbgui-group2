@@ -1,12 +1,34 @@
 import axios from 'axios';
 import React from 'react';
 import {CreateAccountForm} from '../createAccount';
+import { useState } from 'react';
 
 export const CreateAccount = () => {
     
-    return(
-        <div>
-            <CreateAccountForm accountType={'tutor'}/>
+    const [accountType, setAccountType] = useState("");
+    const [accountTypeSelected, setAccountTypeSelected] = useState(false);
+
+
+    const renderCreateAccountForm = (accountTypeInput) => {
+        setAccountType(accountTypeInput);
+        setAccountTypeSelected(true);
+    };
+
+    if(!accountTypeSelected){
+        return<>
+        <div className='accountTypeSelection'>
+            <h2 style={{marginTop: '1rem'}}>I'm a...</h2>
+            <div className='container' id='accountTypeContainer'>
+                <button className='accountType' onClick={() => renderCreateAccountForm('student')}>Student</button>
+                <button className='accountType' onClick={() => renderCreateAccountForm('tutor')}>Tutor</button>
+            </div>
         </div>
-    );
+    </>
+    }
+
+    else{
+        return<>
+        <CreateAccountForm accountType={accountType}/>
+    </>
+    }
 };

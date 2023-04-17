@@ -2,6 +2,36 @@
     text-align: center;
 }
 
+.accountTypeSelection {
+    text-align: center;
+}
+
+[class*="container"] {
+    border-width: 1;
+    border-style: solid;
+}
+
+#accountTypeContainer {
+    max-width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 1rem;
+    margin-top: 2rem;
+    background-color: rgb(240, 240, 240);
+    border-radius: 1rem;
+    min-width: 55%;
+}
+
+button.accountType {
+    margin: 1rem;
+    padding: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-radius: 1rem;
+}
+
 .availability {
     display: flex;
     align-items: center;
