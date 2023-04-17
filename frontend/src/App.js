@@ -6,6 +6,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import {Home, About, Services, LoginForm, CreateAccount} from './components/pages';
 import LogInorCreateAcctOption from './components/LogInorCreateAcctOption';
 import { ProfilePage } from './components/pages/ProfilePage';
+import { TutorProfile } from './components/pages/tutorView';
 
 function App() {
 
@@ -72,6 +73,7 @@ function App() {
       <Route path = '/login' element={<LoginForm />} />
       <Route path = '/create-account' element={<CreateAccount />} />
       <Route path = '/profile' element={<ProfilePage />} />
+      <Route path = '/tutor-profile' element={<TutorProfile />} />
 
     </Routes>
     

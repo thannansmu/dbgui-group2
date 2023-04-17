@@ -8,26 +8,29 @@ import '../styles/Button.css';
 export const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMsg, setErrorMsg] = useState('');
     const navigate = useNavigate();
 
-    useEffect(() =>{
-        setErrorMsg('');
-    }, [username, password]);
-
-    //call login route & navigate to student/admin or tutor if successful
+    //calls login route & navigate to student/admin or tutor if successful
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         LoginCheck(username, password).then(accessToken => {
             
-            if (accessToken != null && accessToken[0]['passWord'] === password) {
+            if (accessToken[0] != null && accessToken[0]['passWord'] === password) {
                 setUsername('');
                 setPassword('');
-                navigate('/profile');
+
+                if(accessToken[0]['userRole'] === 'student')
+                    navigate('/profile');
+                else
+                    navigate('/tutor-profile');
+                
+                console.log("Successful login!");
             }
             else {
-                setErrorMsg("Unsuccessful login attempt. Please try again.");
+                setUsername('');
+                setPassword('');
+                alert("Unsuccessful login attempt. Please try again.");
             }
         });
     };
