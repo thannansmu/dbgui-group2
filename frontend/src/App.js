@@ -4,7 +4,7 @@ import React from 'react';
 import {Navbar} from './components/Navbar';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import {Home, About, Services, LoginForm, CreateAccount} from './components/pages';
-import LogInorCreateAcctOption from './components/LogInorCreateAcctOption';
+import { LogInorCreateAcctOption } from './components/LogInorCreateAcctOption';
 import { ProfilePage } from './components/pages/ProfilePage';
 import { TutorProfile } from './components/pages/tutorView';
 
