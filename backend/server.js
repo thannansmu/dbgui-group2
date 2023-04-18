@@ -21,7 +21,7 @@ const connection = mysql.createConnection({
 
 connection.connect()
 
-// API routes
+// Test API
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
@@ -31,7 +31,7 @@ app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
 
-
+//Returns all users in database
 app.get('/users', (req, res) => {
   connection.query(`SELECT * FROM User`, (err, rows, fields) => {
     if (err) throw err
@@ -41,6 +41,7 @@ app.get('/users', (req, res) => {
   })
 })
 
+//Returns all info for specific user
 app.get(`/users/:username`, (req, res) => {
   const username = req.params.username;
   connection.query(`SELECT * FROM User WHERE username = '${username}'`, (err, rows, fields) => {
@@ -51,6 +52,7 @@ app.get(`/users/:username`, (req, res) => {
   })
 })
 
+//Returns specific attribute value from specific user
 app.get(`/users/:username/:attribute`, (req, res) => {
   const username = req.params.username;
   const attribite = req.params.attribute;
@@ -62,6 +64,7 @@ app.get(`/users/:username/:attribute`, (req, res) => {
   })
 })
 
+//Adds user to database
 app.post('/users/add', (req, res) => {
     const {username, firstName, lastName, passWord, bio, userRole} = req.body
     const query = `INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES ('${username}', '${firstName}', '${lastName}', '${passWord}', '${bio}', '${userRole}'); `;
@@ -87,6 +90,7 @@ app.post('/users/add', (req, res) => {
     })
 })
 
+//Updates the value of an atribute for specific user
 app.put(`/users/:username/:attribute/update`, (req, res) => {
     const username = req.params.username;
     const attribute = req.params.attribute;
@@ -99,6 +103,7 @@ app.put(`/users/:username/:attribute/update`, (req, res) => {
     })
 })
 
+//Gets all requests for specific user
 app.get(`/users/:username/requests`, (req, res) => {
   const username = req.params.username;;
   connection.query(`SELECT * FROM Requests WHERE username = '${username}'`, (err, rows, fields) => {
@@ -109,6 +114,7 @@ app.get(`/users/:username/requests`, (req, res) => {
   })
 })
 
+//Gets all comments for specific user
 app.get(`/users/:username/comments`, (req, res) => {
   const username = req.params.username;;
   connection.query(`SELECT * FROM Comments WHERE username = '${username}'`, (err, rows, fields) => {
@@ -119,6 +125,7 @@ app.get(`/users/:username/comments`, (req, res) => {
   })
 })
 
+//Addes request to specific user
 app.post(`/users/:username/add_request`, (req, res) => {
   const username = req.params.username;
   const {requestID, studentID, tutorID, request} = req.body
@@ -134,6 +141,7 @@ app.post(`/users/:username/add_request`, (req, res) => {
    
 })
 
+//Adds comment to specific user
 app.post(`/users/:username/add_comment`, (req, res) => {
   const username = req.params.username;
   const {commentID, commentRecieverID, comment} = req.body
@@ -148,6 +156,7 @@ app.post(`/users/:username/add_comment`, (req, res) => {
   })
 })
 
+//Deletes user from database
 app.delete(`/users/:username/delete`, (req, res) => {
   const username = req.params.username;
   console.log(`DELETE FROM User WHERE username='${username}'`);
@@ -159,6 +168,7 @@ app.delete(`/users/:username/delete`, (req, res) => {
   })
 })
 
+//Deletes request from database
 app.delete(`/delete_request/:requestID`, (req, res) => {
   const requestID = req.params.requestID;
   connection.query(`DELETE FROM Requests WHERE requestID='${requestID}'`, (err, rows, fields) => {
@@ -170,6 +180,7 @@ app.delete(`/delete_request/:requestID`, (req, res) => {
   
 })
 
+//Deletes comments from database
 app.delete(`/delete_comment/:commentID`, (req, res) => {
   const commentID = req.params.commentID;
   connection.query(`DELETE FROM Comments WHERE commentID='${commentID}'`, (err, rows, fields) => {
@@ -180,81 +191,4 @@ app.delete(`/delete_comment/:commentID`, (req, res) => {
   })
   
 })
-
-
-
-
-
-
-
-
-//Old Stuff
-// app.put('/parse', (req, res) => {
-//     console.log(req.body)
-    
-//     try {
-//         const { first, last, age, admin } = req.body
-//         const name = `${first} ${last}`
-//         const isAdmin = admin ? "is an admin" : "is not an admin"
-
-//         res.status(200)
-//         res.send(`${name} is ${age} years old and ${isAdmin}`)
-//     } catch (err) {
-//         console.log(err)
-//     }
-// })
-
-// app.get('/db', (req, res) => {
-//     connection.query('SHOW TABLES', (err, rows, fields) =>{
-//         if (err) throw err
-
-//         console.log(rows)
-//         res.status(200)
-//         res.send(rows)
-//     })
-// })
-
-// app.post('/user', (req, res) => {
-//     const { first, last, age, admin } = req.body
-//     const query = `INSERT INTO users (first_name, last_name, age, admin) VALUES ('${first}', '${last}', ${age}, ${admin})`
-//     connection.query(query, (err, rows, fields) => {
-//         if (err) throw err
-
-//         console.log(rows)
-//         res.status(200)
-//         res.send("Successfully added user!")
-//     })
-// })
-
-// app.get('/users', (req, res) => {
-//     connection.query(`SELECT * FROM users`, (err, rows, fields) => {
-//         if (err) throw err
-
-//         res.status(200)
-//         res.send(rows)
-//     })
-// })
-
-// app.put('/users/clear', (req, res) => {
-//     connection.query(`DELETE FROM users`, (err, rows, fields) => {
-//         if (err) throw err
-
-//         res.status(200)
-//         res.send("Successfully cleared users!")
-//     })
-// })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
