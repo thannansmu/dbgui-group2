@@ -221,6 +221,12 @@ INSERT INTO Ratings (userName, studentID, tutorID, rating) VALUES ('user2', 2, 3
 INSERT INTO Ratings (userName, studentID, tutorID, rating) VALUES ('user3', 3, 2, 4.5);
 INSERT INTO Ratings (userName, studentID, tutorID, rating) VALUES ('user4', 4, 5, 4);
 
+INSERT INTO SubjectsTaught (tutorID, subject) VALUES (1, 'Computer Science');
+INSERT INTO SubjectsTaught (tutorID, subject) VALUES (2, 'Writing');
+INSERT INTO SubjectsTaught (tutorID, subject) VALUES (3, 'Math');
+INSERT INTO SubjectsTaught (tutorID, subject) VALUES (4, 'Science');
+INSERT INTO SubjectsTaught (tutorID, subject) VALUES (5, 'Business');
+
 
 
 
