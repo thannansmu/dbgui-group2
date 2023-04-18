@@ -24,8 +24,7 @@ export const Schedule_Tutor_Filter = () => {
   const [subject, setSubject] = useState('');
   const [time, setTime] = useState('');
   const [rating, setRating] = useState('');
-
-
+  const [name, setName] = useState('');
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -44,6 +43,26 @@ export const Schedule_Tutor_Filter = () => {
 
   window.addEventListener('resize', showButton);
 
+  // Example data for tutors
+  const tutorData = [
+    { name: 'John Doe', time: '10:00 AM', subject: 'Math' },
+    { name: 'Jane Smith', time: '11:00 AM', subject: 'Science' },
+    { name: 'Bob Johnson', time: '1:00 PM', subject: 'History' },
+  ];
+
+  // Function to filter tutors based on user input
+  const filterTutors = () => {
+    return tutorData.filter((tutor) => {
+      const subjectMatch = !subject || tutor.subject.toLowerCase().includes(subject.toLowerCase());
+      const timeMatch = !time || tutor.time.toLowerCase().includes(time.toLowerCase());
+      const nameMatch = !name || tutor.name.toLowerCase().includes(name.toLowerCase());
+
+      return subjectMatch && timeMatch && nameMatch;
+    });
+  };
+
+  const filteredTutors = filterTutors();
+
   return (
     <div>
       <h1><b><u>Filters:</u></b></h1>
@@ -57,13 +76,17 @@ export const Schedule_Tutor_Filter = () => {
           <input type="text" id="time" value={time} onChange={(e) => setTime(e.target.value)} />
         </div>
         <div>
+        <label htmlFor="name">Name:</label>
+        <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} /> {/* Changed variable name from 'rating' to 'name' */}
+      </div>
+        <div>
           <label htmlFor="rating">Rating:</label>
           <input type="text" id="rating" value={rating} onChange={(e) => setRating(e.target.value)} />
         </div>
       </div>
-      <TutorCard name="John Doe" time="10:00 AM" subject="Math" />
-      <TutorCard name="Jane Smith" time="11:00 AM" subject="Science" />
-      <TutorCard name="Bob Johnson" time="1:00 PM" subject="History" />
+      {filteredTutors.map((tutor) => (
+        <TutorCard key={tutor.name} name={tutor.name} time={tutor.time} subject={tutor.subject} />
+      ))}
     </div>
   );
 };
