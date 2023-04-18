@@ -8,6 +8,7 @@ import { LogInorCreateAcctOption } from './components/LogInorCreateAcctOption';
 import { ProfilePage } from './components/pages/ProfilePage';
 import { TutorProfile } from './components/pages/tutorView';
 import { Review_Tutor } from './components/pages';
+import { CalendarView } from './components/pages/CalendarView';
 
 function App() {
 
@@ -80,6 +81,7 @@ function App() {
       <Route path = '/review-tutor' element={<Review_Tutor/>}/>
       <Route path = '/profile' element={<ProfilePage />} />
       <Route path = '/tutor-profile' element={<TutorProfile />} />
+      <Route path = '/calendar-view' element={<CalendarView />} />    
 
     </Routes>
     

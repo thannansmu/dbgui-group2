@@ -6,8 +6,8 @@ import { TutorProfile } from './tutorView/TutorProfile';
 
 export const Home = () => {
     return <>
-        <HeroSection />
-        {/* <TutorProfile /> */}
+        {/* <HeroSection /> */}
+        <ProfilePage />
 
     </>;
 }

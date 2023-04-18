@@ -12,7 +12,7 @@ const TutorCard = ({ name, time, subject }) => {
         console.log(`Viewing profile for ${name}`);
         // TODO: Implement logic to display tutor's profile
       }}>View Profile</Button>
-      <Button>Book Appointment</Button>
+      <Button to='/calendar-view'>Book Appointment</Button>
     </div>
   );
 };
