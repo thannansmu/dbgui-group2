@@ -1,13 +1,13 @@
 import React from 'react';
 import '../App.css';
 import { Button } from './Button';
-import './styles/HeroSection.css';
-
-
+import './styles/HeroSection.css'
+import './styles/Button.css';
 
 export const HeroSection = () => {
+    
     return <>
-        <div classname='hero-container'>
+        <div className='hero-container'>
             <video src="/videos/video-2.mp4" autoPlay loop muted />
             <center>
                 <h1 style={{ color: 'white' }}>               Learning Never Exhausts the Mind</h1>
@@ -15,12 +15,10 @@ export const HeroSection = () => {
             </center>
             <div className="hero-btns">
 
-                {/* <Button className='btns' buttonStyle= 'btn--primary'
-            buttonSize='btn--large'>About the Tutors</Button> */}
+                <Button className='btns' buttonStyle='btn--primary'
+                    buttonSize='btn--large'>About the Tutors</Button>
 
             </div>
         </div>
     </>;
-
-
 }

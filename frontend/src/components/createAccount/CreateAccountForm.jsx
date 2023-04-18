@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './CreateAccountForm.css';
 import { TextField, TextAreaField, CheckboxList, SelectField, TimeFrame } from '../common';
 import { AvailabilityList } from '../createAccount';
+import { addUser } from '../../api';
 
 const TutorForm = ({ accountType }) => {
   const [day, setDay] = useState("");
@@ -97,11 +98,17 @@ export const CreateAccountForm = ({ accountType }) => {
   const [bio, setBio] = useState('');
 
   const onRegister = () => {
+
+    //TODO: need to define userRole
+    addUser({ "username":userName, "passWord":password, "firstName":firstName,
+              "lastName":lastName, "bio":bio, "userRole":"student" });
     setFirstName('');
     setLastName('');
     setBio('');
     setPassword('');
     setUserName('');
+
+    //perhaps navigate to the login page?
   };
 
   if (accountType){

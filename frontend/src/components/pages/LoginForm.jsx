@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+import { LoginCheck } from '../../api'
 import { useState, useEffect } from 'react';
 import { TextField } from '../common';
 import '../styles/LoginForm.css';
@@ -6,10 +8,32 @@ import '../styles/Button.css';
 export const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
-    /*call the backend to see if the username & password exist in user table*/
+    //calls login route & navigate to student/admin or tutor if successful
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    /*remember to got to call post route*/
+        LoginCheck(username).then(accessToken => {
+            
+            if (accessToken[0] != null && accessToken[0]['passWord'] === password) {
+                setUsername('');
+                setPassword('');
+
+                if(accessToken[0]['userRole'] === 'student')
+                    navigate('/profile');
+                else
+                    navigate('/tutor-profile');
+                
+                console.log("Successful login!");
+            }
+            else {
+                setUsername('');
+                setPassword('');
+                alert("Unsuccessful login attempt. Please try again.");
+            }
+        });
+    };
 
     return <>
         <h1 className='login-title'>Login</h1>
@@ -29,7 +53,7 @@ export const LoginForm = () => {
                     setValue={setPassword} />
             </div>
 
-            <button className='btn' type='button'>Login</button>
+            <button className='btn' type='button' onClick={ handleSubmit }>Login</button>
         </div>
     </>;
 }

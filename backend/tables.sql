@@ -10,7 +10,6 @@ CREATE Table User (
     lastName VARCHAR(20),
     passWord VARCHAR(20),
     bio VARCHAR(500),
-    id INT,
     userRole VARCHAR(20),
     PRIMARY KEY (username)
 );

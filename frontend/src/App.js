@@ -4,9 +4,11 @@ import React from 'react';
 import {Navbar} from './components/Navbar';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import {Home, About, Services, LoginForm, CreateAccount, YourAppointments, Schedule_Tutor_Filter, Ask_Question} from './components/pages';
-import LogInorCreateAcctOption from './components/LogInorCreateAcctOption';
+import { LogInorCreateAcctOption } from './components/LogInorCreateAcctOption';
 import { ProfilePage } from './components/pages/ProfilePage';
-import { Review_Tutor } from './components/pages/Review_Tutor';
+import { TutorProfile } from './components/pages/tutorView';
+import { Review_Tutor } from './components/pages';
+
 function App() {
 
   const url = 'http://localhost:8000'
@@ -76,6 +78,9 @@ function App() {
       <Route path = '/ask-question' element={<Ask_Question/>}/>
       <Route path = '/main-student-screen' element={<ProfilePage/>}/>
       <Route path = '/review-tutor' element={<Review_Tutor/>}/>
+      <Route path = '/profile' element={<ProfilePage />} />
+      <Route path = '/tutor-profile' element={<TutorProfile />} />
+
     </Routes>
     
     </Router>

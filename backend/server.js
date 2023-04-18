@@ -141,7 +141,6 @@ app.post(`/users/:username/add_request`, (req, res) => {
    
 })
 
-//Adds comment to specific user
 app.post(`/users/:username/add_comment`, (req, res) => {
   const username = req.params.username;
   const {commentID, commentRecieverID, comment} = req.body
@@ -156,7 +155,6 @@ app.post(`/users/:username/add_comment`, (req, res) => {
   })
 })
 
-//Deletes user from database
 app.delete(`/users/:username/delete`, (req, res) => {
   const username = req.params.username;
   console.log(`DELETE FROM User WHERE username='${username}'`);
@@ -168,8 +166,7 @@ app.delete(`/users/:username/delete`, (req, res) => {
   })
 })
 
-//Deletes request from database
-app.delete(`/delete_request/:requestID`, (req, res) => {
+app.delete(`/requests/delete_request/:requestID`, (req, res) => {
   const requestID = req.params.requestID;
   connection.query(`DELETE FROM Requests WHERE requestID='${requestID}'`, (err, rows, fields) => {
     if (err) throw err
@@ -180,8 +177,7 @@ app.delete(`/delete_request/:requestID`, (req, res) => {
   
 })
 
-//Deletes comments from database
-app.delete(`/delete_comment/:commentID`, (req, res) => {
+app.delete(`/comments/delete_comment/:commentID`, (req, res) => {
   const commentID = req.params.commentID;
   connection.query(`DELETE FROM Comments WHERE commentID='${commentID}'`, (err, rows, fields) => {
     if (err) throw err
