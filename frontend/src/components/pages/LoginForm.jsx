@@ -14,7 +14,7 @@ export const LoginForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        LoginCheck(username, password).then(accessToken => {
+        LoginCheck(username).then(accessToken => {
             
             if (accessToken[0] != null && accessToken[0]['passWord'] === password) {
                 setUsername('');

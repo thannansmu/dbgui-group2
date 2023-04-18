@@ -159,7 +159,7 @@ app.delete(`/users/:username/delete`, (req, res) => {
   })
 })
 
-app.delete(`/delete_request/:requestID`, (req, res) => {
+app.delete(`/requests/delete_request/:requestID`, (req, res) => {
   const requestID = req.params.requestID;
   connection.query(`DELETE FROM Requests WHERE requestID='${requestID}'`, (err, rows, fields) => {
     if (err) throw err
@@ -170,7 +170,7 @@ app.delete(`/delete_request/:requestID`, (req, res) => {
   
 })
 
-app.delete(`/delete_comment/:commentID`, (req, res) => {
+app.delete(`/comments/delete_comment/:commentID`, (req, res) => {
   const commentID = req.params.commentID;
   connection.query(`DELETE FROM Comments WHERE commentID='${commentID}'`, (err, rows, fields) => {
     if (err) throw err
