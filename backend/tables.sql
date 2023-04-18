@@ -162,6 +162,47 @@ INSERT INTO Tutors (username) VALUES ('user9');
 
 INSERT INTO Administration (username) VALUES ('user10');
 
+INSERT INTO Report(username, adminID, report) VALUES ('user1', 1234, 'report1');
+INSERT INTO Report(username, adminID, report) VALUES ('user2', 1235, 'report2');
+INSERT INTO Report(username, adminID, report) VALUES ('user3', 1236, 'report3');
+INSERT INTO Report(username, adminID, report) VALUES ('user4', 1237, 'report4');
+INSERT INTO Report(username, adminID, report) VALUES ('user5', 1238, 'report5');
+
+
+INSERT INTO FavoriteTutors(username, studentID, tutorID) VALUES ('user4', 1001, 2001); 
+INSERT INTO FavoriteTutors(username, studentID, tutorID) VALUES ('user6', 1002, 2002); 
+INSERT INTO FavoriteTutors(username, studentID, tutorID) VALUES ('user7', 1003, 2003); 
+INSERT INTO FavoriteTutors(username, studentID, tutorID) VALUES ('user8', 1004, 2004); 
+INSERT INTO FavoriteTutors(username, studentID, tutorID) VALUES ('user9', 1005, 2005); 
+
+INSERT INTO Comments(username, commentRecieverID, comment) VALUES ('user1', 456, 'hello');
+INSERT INTO Comments(username, commentRecieverID, comment) VALUES ('user2', 457, 'hey');
+INSERT INTO Comments(username, commentRecieverID, comment) VALUES ('user3', 458, 'hii');
+INSERT INTO Comments(username, commentRecieverID, comment) VALUES ('user4', 459, 'bye');
+INSERT INTO Comments(username, commentRecieverID, comment) VALUES ('user5', 460, 'hel');
+
+INSERT INTO Reviews(username, studentID, tutorID, review) VALUES ('user1', 1, 1, 'good')
+INSERT INTO Reviews(username, studentID, tutorID, review) VALUES ('user3',3,2, 'excellent' )
+INSERT INTO Reviews(username, studentID, tutorID, review) VALUES ('user4',4,5, 'amazing' )
+
+INSERT INTO Requests(username, studentID, tutorID, request) VALUES('user1' 1, 1, 'meet at 5')
+INSERT INTO Requests(username, studentID, tutorID, request) VALUES('user3' 3,2, 'meet at 2')
+INSERT INTO Requests(username, studentID, tutorID, request) VALUES('user4', 4, 5, 'meet at 11')
+
+INSERT INTO TimesAvailable(tutorID, tutorTime, tutorDay) VALUES (1, '3:00', 'Monday');
+INSERT INTO TimesAvailable(tutorID, tutorTime, tutorDay) VALUES (2, '5:00', 'Tuesday');
+INSERT INTO TimesAvailable(tutorID, tutorTime, tutorDay) VALUES (5, '7:00', 'Wednesday');
+
+INSERT INTO TutoringSessions(tutorID, tutorSession) VALUES (1, '3:00');
+INSERT INTO TutoringSessions(tutorID, tutorSession) VALUES (2, '5:00');
+INSERT INTO TutoringSessions(tutorID, tutorSession) VALUES (1, '7:00');
+
+
+
+
+
+
+
 
 
 
