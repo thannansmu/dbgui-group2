@@ -3,21 +3,21 @@ import './CalendarView.css';
 import { TextField, TextAreaField, CheckboxList, SelectField, TimeFrame } from '../common';
 
 export const CalendarView = () => {
-    
+
     const availability = [
         {
             availableTime: [
-                {day: 'monday', startTime: '08:30', endTime: '12:00'}
+                { day: 'monday', startTime: '08:30', endTime: '12:00' }
             ]
         },
         {
             availableTime: [
-                {day: 'tuesday', startTime: '10:00', endTime: '13:00'}
+                { day: 'tuesday', startTime: '10:00', endTime: '13:00' }
             ]
         },
         {
             availableTime: [
-                {day: 'thursday', startTime: '14:00', endTime: '15:00'}
+                { day: 'thursday', startTime: '14:00', endTime: '15:00' }
             ]
         }
     ];
@@ -35,7 +35,7 @@ export const CalendarView = () => {
         { value: "Friday", label: "Friday" },
         { value: "Saturday", label: "Saturday" },
         { value: "Sunday", label: "Sunday" },
-      ];
+    ];
     const isCellAvailable = (day, time) => {
         for (let i = 0; i < availability.length; i++) {
             const availableTime = availability[i].availableTime[0];
@@ -59,7 +59,7 @@ export const CalendarView = () => {
             );
         });
     };
-    
+
     return (<>
         <div>
             <table>
@@ -73,19 +73,20 @@ export const CalendarView = () => {
                     {renderTableRows()}
                 </tbody>
             </table>
-            <h3>Availability</h3>
-          <SelectField
-            options={days}
-            defaultOption="Select Day"
-            setValue={setDay}
-            value={day}
-          />
-          <TimeFrame
-            startTime={startTime}
-            setStartTime={setStartTime}
-            endTime={endTime}
-            setEndTime={setEndTime}
-          />
+            <h3>Book Appointment</h3>
+            <SelectField
+                options={days}
+                defaultOption="Select Day"
+                setValue={setDay}
+                value={day}
+            />
+            <TimeFrame
+                startTime={startTime}
+                setStartTime={setStartTime}
+                endTime={endTime}
+                setEndTime={setEndTime}
+            />
+            <button>Submit</button>
         </div>
     </>);
 };

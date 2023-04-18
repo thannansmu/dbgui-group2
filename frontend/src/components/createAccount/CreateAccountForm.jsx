@@ -14,8 +14,8 @@ const TutorForm = ({ accountType }) => {
 
     if (day && startTime && endTime) {
       const newAvailableTime = (
-        <div key={availability.length} className="availability">
-          <div className="availableTime">{day} {startTime} {endTime}</div>
+        <div key={availability.length}>
+          <div className="availableTime">{day}: {startTime} - {endTime}</div>
         </div>
       );
       setAvailability([...availability, newAvailableTime]);
@@ -52,31 +52,37 @@ const TutorForm = ({ accountType }) => {
     return (
       <>
         <h3>Subjects Taught:</h3>
-        <CheckboxList
-          options={subjects}
-          checkedItems={checkedItems}
-          setCheckedItems={setCheckedItems}
-        />
+        <div className='tutorForm-checkbox'>
+          <CheckboxList
+            options={subjects}
+            checkedItems={checkedItems}
+            setCheckedItems={setCheckedItems}
+          />
+        </div>
         <br />
-        <h3>Availability</h3>
-        <SelectField
-          options={days}
-          defaultOption="Select Day"
-          setValue={setDay}
-          value={day}
-          optionLabelKey='label'
-          optionValueKey='value'
-        />
-        <TimeFrame
-          startTime={startTime}
-          setStartTime={setStartTime}
-          endTime={endTime}
-          setEndTime={setEndTime}
-        />
-        <button onClick={addAvailability}>
-          Add Availability
-        </button>
-        <AvailabilityList availability={availability} removeAvailability={removeAvailability} />
+        <h3>Availability:</h3>
+        <div className='tutorForm-availability'>
+          <div className='tutorForm-availability-select'>
+            <SelectField
+              options={days}
+              label="Select Day: "
+              setValue={setDay}
+              value={day}
+              optionLabelKey='label'
+              optionValueKey='value'
+            />
+            <TimeFrame
+              startTime={startTime}
+              setStartTime={setStartTime}
+              endTime={endTime}
+              setEndTime={setEndTime}
+            />
+          </div>
+          <button className='createAccount' onClick={addAvailability}>
+            Add Availability
+          </button>
+          <AvailabilityList availability={availability} removeAvailability={removeAvailability} />
+        </div>
       </>
     );
   }
@@ -102,40 +108,42 @@ export const CreateAccountForm = ({ accountType }) => {
     return (
       <div className='createAccountForm'>
         <h2>Create Account</h2>
-        <TextField
-          id="createUserName"
-          label="Username:"
-          value={userName}
-          setValue={setUserName}
-        />
-        <TextField
-          id="createPassword"
-          label="Password:"
-          value={password}
-          setValue={setPassword}
-        />
-        <TextField
-          id="createFirstName"
-          label="First Name:"
-          value={firstName}
-          setValue={setFirstName}
-        />
-        <TextField
-          id="createLastName"
-          label="Last Name:"
-          value={lastName}
-          setValue={setLastName}
-        />
-        <TextAreaField
-          id="createBio"
-          label="Bio:"
-          value={bio}
-          setValue={setBio}
-        />
+        <div className='userForm'>
+            <TextField
+              id="createUserName"
+              label="Username:"
+              value={userName}
+              setValue={setUserName}
+            />
+            <TextField
+              id="createPassword"
+              label="Password:"
+              value={password}
+              setValue={setPassword}
+            />
+            <TextField
+              id="createFirstName"
+              label="First Name:"
+              value={firstName}
+              setValue={setFirstName}
+            />
+            <TextField
+              id="createLastName"
+              label="Last Name:"
+              value={lastName}
+              setValue={setLastName}
+            />
+          <TextAreaField
+            id="createBio"
+            label="Bio:"
+            value={bio}
+            setValue={setBio}
+          />
+        </div>
 
         <TutorForm accountType={accountType} />
         <br />
-        <button id='register' onClick={onRegister}>Register</button>
+        <button className='createAccount' id='register' style={{marginBottom: '2rem'}} onClick={onRegister}>Register</button>
       </div>
     )
   }
