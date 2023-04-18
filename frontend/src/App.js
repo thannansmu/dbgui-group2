@@ -3,9 +3,10 @@ import axios from 'axios';
 import React from 'react';
 import {Navbar} from './components/Navbar';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import {Home, About, Services, LoginForm, CreateAccount} from './components/pages';
+import {Home, About, Services, LoginForm, CreateAccount, YourAppointments, Schedule_Tutor_Filter, Ask_Question} from './components/pages';
 import LogInorCreateAcctOption from './components/LogInorCreateAcctOption';
-
+import { ProfilePage } from './components/pages/ProfilePage';
+import { Review_Tutor } from './components/pages/Review_Tutor';
 function App() {
 
   const url = 'http://localhost:8000'
@@ -70,7 +71,11 @@ function App() {
       <Route path = '/sign-up' element={<LogInorCreateAcctOption />} />
       <Route path = '/login' element={<LoginForm />} />
       <Route path = '/create-account' element={<CreateAccount />} />
-
+      <Route path = '/booked-appt' element={<YourAppointments />} />
+      <Route path = '/schedule-appt' element={<Schedule_Tutor_Filter />} />
+      <Route path = '/ask-question' element={<Ask_Question/>}/>
+      <Route path = '/main-student-screen' element={<ProfilePage/>}/>
+      <Route path = '/review-tutor' element={<Review_Tutor/>}/>
     </Routes>
     
     </Router>
