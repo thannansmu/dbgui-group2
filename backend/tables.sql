@@ -175,6 +175,11 @@ INSERT INTO FavoriteTutors (username, studentID, tutorID) VALUES ('user1', 1, 1)
 INSERT INTO FavoriteTutors (username, studentID, tutorID) VALUES ('user3', 3, 2);
 INSERT INTO FavoriteTutors (username, studentID, tutorID) VALUES ('user4', 4, 5);
 
+INSERT INTO Ratings (userName, studentID, tutorID, rating) VALUES ('user1', 1, 1, 5);
+INSERT INTO Ratings (userName, studentID, tutorID, rating) VALUES ('user2', 2, 3, 0.9);
+INSERT INTO Ratings (userName, studentID, tutorID, rating) VALUES ('user3', 3, 2, 4.5);
+INSERT INTO Ratings (userName, studentID, tutorID, rating) VALUES ('user4', 4, 5, 4);
+
 
 
 
