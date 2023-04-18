@@ -22,3 +22,6 @@ export const addUser = (user) => new Promise((resolve, reject) => {
             reject(error);
         });
 });
+
+//Update Profile Route
+//Delete User Route
