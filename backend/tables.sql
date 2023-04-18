@@ -165,24 +165,24 @@ INSERT INTO Tutors (username) VALUES ('user11');
 
 INSERT INTO Administration (username) VALUES ('user10');
 
-INSERT INTO Report(username, adminID, report) VALUES ('user1', 1234, 'report1');
-INSERT INTO Report(username, adminID, report) VALUES ('user2', 1235, 'report2');
-INSERT INTO Report(username, adminID, report) VALUES ('user3', 1236, 'report3');
-INSERT INTO Report(username, adminID, report) VALUES ('user4', 1237, 'report4');
-INSERT INTO Report(username, adminID, report) VALUES ('user5', 1238, 'report5');
+INSERT INTO Report(username, adminID, report) VALUES ('user1', 1, 'report1');
+INSERT INTO Report(username, adminID, report) VALUES ('user2', 1, 'report2');
+INSERT INTO Report(username, adminID, report) VALUES ('user3', 1, 'report3');
+INSERT INTO Report(username, adminID, report) VALUES ('user4', 1, 'report4');
+INSERT INTO Report(username, adminID, report) VALUES ('user5', 1, 'report5');
 
 
-INSERT INTO FavoriteTutors(username, studentID, tutorID) VALUES ('user4', 1001, 2001); 
-INSERT INTO FavoriteTutors(username, studentID, tutorID) VALUES ('user6', 1002, 2002); 
-INSERT INTO FavoriteTutors(username, studentID, tutorID) VALUES ('user7', 1003, 2003); 
-INSERT INTO FavoriteTutors(username, studentID, tutorID) VALUES ('user8', 1004, 2004); 
-INSERT INTO FavoriteTutors(username, studentID, tutorID) VALUES ('user9', 1005, 2005); 
+INSERT INTO FavoriteTutors(username, studentID, tutorID) VALUES ('user4', 1, 1); 
+INSERT INTO FavoriteTutors(username, studentID, tutorID) VALUES ('user6', 2, 2); 
+INSERT INTO FavoriteTutors(username, studentID, tutorID) VALUES ('user7', 3, 3); 
+INSERT INTO FavoriteTutors(username, studentID, tutorID) VALUES ('user8', 4, 4); 
+INSERT INTO FavoriteTutors(username, studentID, tutorID) VALUES ('user9', 5, 5); 
 
-INSERT INTO Comments(username, commentRecieverID, comment) VALUES ('user1', 456, 'hello');
-INSERT INTO Comments(username, commentRecieverID, comment) VALUES ('user2', 457, 'hey');
-INSERT INTO Comments(username, commentRecieverID, comment) VALUES ('user3', 458, 'hii');
-INSERT INTO Comments(username, commentRecieverID, comment) VALUES ('user4', 459, 'bye');
-INSERT INTO Comments(username, commentRecieverID, comment) VALUES ('user5', 460, 'hel');
+INSERT INTO Comments(username, commentRecieverID, comment) VALUES ('user1', 1, 'hello');
+INSERT INTO Comments(username, commentRecieverID, comment) VALUES ('user2', 2, 'hey');
+INSERT INTO Comments(username, commentRecieverID, comment) VALUES ('user3', 3, 'hii');
+INSERT INTO Comments(username, commentRecieverID, comment) VALUES ('user4', 4, 'bye');
+INSERT INTO Comments(username, commentRecieverID, comment) VALUES ('user5', 5, 'hel');
 
 INSERT INTO Reviews(username, studentID, tutorID, review) VALUES ('user1', 1, 1, 'good')
 INSERT INTO Reviews(username, studentID, tutorID, review) VALUES ('user3',3,2, 'excellent' )
@@ -199,12 +199,6 @@ INSERT INTO TimesAvailable(tutorID, tutorTime, tutorDay) VALUES (5, '7:00', 'Wed
 INSERT INTO TutoringSessions(tutorID, tutorSession) VALUES (1, '3:00');
 INSERT INTO TutoringSessions(tutorID, tutorSession) VALUES (2, '5:00');
 INSERT INTO TutoringSessions(tutorID, tutorSession) VALUES (1, '7:00');
-
-
-
-
-
-
 
 
 INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (1, 1, 'What is the difference between pass by value and pass by reference for pointers?', '');
