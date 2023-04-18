@@ -148,6 +148,8 @@ INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES
 INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES ('user8', 'Jessica', 'Harris', '1234567890', 'Calculus tutor with years of experience', 'tutor'); 
 INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES ('user9', 'Daniel', 'Perez', 'test', 'Biology tutor', 'tutor'); 
 INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES ('user10', 'Lisa', 'Allen', '0987654321', 'I am the admin for this website', 'admin'); 
+INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES ('user11', 'Patrick', 'Bateman', 'bizBro', 'Top business tutor in New Yrok City', 'tutor'); 
+
 
 INSERT INTO Students (username) VALUES ('user1');
 INSERT INTO Students (username) VALUES ('user2');
@@ -159,6 +161,7 @@ INSERT INTO Tutors (username) VALUES ('user6');
 INSERT INTO Tutors (username) VALUES ('user7');
 INSERT INTO Tutors (username) VALUES ('user8');
 INSERT INTO Tutors (username) VALUES ('user9');
+INSERT INTO Tutors (username) VALUES ('user11');
 
 INSERT INTO Administration (username) VALUES ('user10');
 
@@ -204,7 +207,19 @@ INSERT INTO TutoringSessions(tutorID, tutorSession) VALUES (1, '7:00');
 
 
 
+INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (1, 1, 'What is the difference between pass by value and pass by reference for pointers?', '');
+INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (3, 2, 'When was the Declaration of Independence signed?', '');
+INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (4, 5, 'What are the components of a SWOT Analysis?', '');
+INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (5, 3, 'What is the derivative of x-squared plus 3x?', '');
 
+INSERT INTO FavoriteTutors (username, studentID, tutorID) VALUES ('user1', 1, 1);
+INSERT INTO FavoriteTutors (username, studentID, tutorID) VALUES ('user3', 3, 2);
+INSERT INTO FavoriteTutors (username, studentID, tutorID) VALUES ('user4', 4, 5);
+
+INSERT INTO Ratings (userName, studentID, tutorID, rating) VALUES ('user1', 1, 1, 5);
+INSERT INTO Ratings (userName, studentID, tutorID, rating) VALUES ('user2', 2, 3, 0.9);
+INSERT INTO Ratings (userName, studentID, tutorID, rating) VALUES ('user3', 3, 2, 4.5);
+INSERT INTO Ratings (userName, studentID, tutorID, rating) VALUES ('user4', 4, 5, 4);
 
 
 
