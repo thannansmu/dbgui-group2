@@ -171,6 +171,10 @@ INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (3, 2, 'W
 INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (4, 5, 'What are the components of a SWOT Analysis?', '');
 INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (5, 3, 'What is the derivative of x-squared plus 3x?', '');
 
+INSERT INTO FavoriteTutors (username, studentID, tutorID) VALUES ('user1', 1, 1);
+INSERT INTO FavoriteTutors (username, studentID, tutorID) VALUES ('user3', 3, 2);
+INSERT INTO FavoriteTutors (username, studentID, tutorID) VALUES ('user4', 4, 5);
+
 
 
 
