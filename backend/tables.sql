@@ -137,3 +137,35 @@ CREATE Table SubjectsTaught (
     FOREIGN KEY (tutorID) REFERENCES Tutors(tutorID) ON DELETE CASCADE
 );
 
+
+INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES ('user1', 'James', 'Smith', 'password123', 'CS student at SMU', 'student'); 
+INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES ('user2', 'Mary', 'Thomas', 'password459', 'Engineering student from Austin, TX', 'student'); 
+INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES ('user3', 'Robert', 'Johnson', 'password789', 'Grad student at Michigan', 'student'); 
+INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES ('user4', 'Susan', 'Jones', 'pAsSwOrD123', 'Buissness major at Harvard', 'student'); 
+INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES ('user5', 'William', 'Davis', 'this is a password', 'Ohio State Class of 2024', 'student'); 
+INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES ('user6', 'Sarah', 'Garcia', 'p@ssw0rd123', 'TA for Data Structures at SMU', 'tutor'); 
+INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES ('user7', 'Thomas', 'Anderson', '321drowssap', 'History/Writing tutor', 'tutor'); 
+INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES ('user8', 'Jessica', 'Harris', '1234567890', 'Calculus tutor with years of experience', 'tutor'); 
+INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES ('user9', 'Daniel', 'Perez', 'test', 'Biology tutor', 'tutor'); 
+INSERT INTO User (username, firstName, lastName, passWord, bio, userRole) VALUES ('user10', 'Lisa', 'Allen', '0987654321', 'I am the admin for this website', 'admin'); 
+
+INSERT INTO Students (username) VALUES ('user1');
+INSERT INTO Students (username) VALUES ('user2');
+INSERT INTO Students (username) VALUES ('user3');
+INSERT INTO Students (username) VALUES ('user4');
+INSERT INTO Students (username) VALUES ('user5');
+
+INSERT INTO Tutors (username) VALUES ('user6');
+INSERT INTO Tutors (username) VALUES ('user7');
+INSERT INTO Tutors (username) VALUES ('user8');
+INSERT INTO Tutors (username) VALUES ('user9');
+
+INSERT INTO Administration (username) VALUES ('user10');
+
+
+
+
+
+
+
+
