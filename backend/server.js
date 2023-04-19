@@ -221,29 +221,85 @@ app.post(`/users/:username/add_subject_taught`, (req, res) => {
 
 app.get(`/users/:username/reports`, (req, res) => {
   
+  const username = req.params.username;
+  const attribite = req.params.reports;
+  connection.query(`SELECT ${attribite} FROM Report WHERE username = '${username}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+})
 })
 
 app.get(`/users/:username/favoritetutors`, (req, res) => {
+  const username = req.params.username;
+  const attribite = req.params.favoritetutors;
+  connection.query(`SELECT ${attribite} FROM FavoriteTutors WHERE username = '${username}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+})
   
 })
 
 app.get(`/users/:username/reviews`, (req, res) => {
+  const username = req.params.username;
+  const attribite = req.params.reviews;
+  connection.query(`SELECT ${attribite} FROM Reviews WHERE username = '${username}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+})
   
 })
 
 app.get(`/users/:username/ratings`, (req, res) => {
+  const username = req.params.username;
+  const attribite = req.params.ratings;
+  connection.query(`SELECT ${attribite} FROM Ratings WHERE username = '${username}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+})
   
 })
 
 app.get(`/users/:username/times_avaliable`, (req, res) => {
+  const username = req.params.username;
+  const attribite = req.params.times_available;
+  connection.query(`SELECT ${attribite} FROM TimesAvailable WHERE username = '${username}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+})
   
 })
 
 app.get(`/users/:username/tutoring_sessions`, (req, res) => {
+  const username = req.params.username;
+  const attribite = req.params.tutoring_sessions;
+  connection.query(`SELECT ${attribite} FROM TutoringSessions WHERE username = '${username}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+})
   
 })
 
 app.get(`/users/:username/subjects_taught`, (req, res) => {
+  const username = req.params.username;
+  const attribite = req.params.subjects_taught;
+  connection.query(`SELECT ${attribite} FROM SubjectsTaught WHERE username = '${username}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+})
   
 })
 
