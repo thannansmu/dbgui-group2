@@ -138,7 +138,6 @@ app.post(`/users/:username/add_request`, (req, res) => {
     res.send("Successfully added Request!")
     console.log(`Added request for ${username}\nrequestID = ${requestID} studentID = ${studentID} tutorID = ${tutorID} request = ${request}`)
   })
-   
 })
 
 //Adds comment to specific user
@@ -189,6 +188,63 @@ app.delete(`/delete_comment/:commentID`, (req, res) => {
     res.send(rows)
     console.log(`Deleted request with commentID ${commentID} from database`)
   })
+})
+
+
+app.post(`/users/:username/add_report`, (req, res) => {
   
 })
+
+app.post(`/users/:username/add_favoritetutor`, (req, res) => {
+  
+})
+
+app.post(`/users/:username/add_review`, (req, res) => {
+  
+})
+
+app.post(`/users/:username/add_rating`, (req, res) => {
+  
+})
+
+app.post(`/users/:username/add_time_avaliable`, (req, res) => {
+  
+})
+
+app.post(`/users/:username/add_tutoring_session`, (req, res) => {
+  
+})
+
+app.post(`/users/:username/add_subject_taught`, (req, res) => {
+  
+})
+
+app.get(`/users/:username/reports`, (req, res) => {
+  
+})
+
+app.get(`/users/:username/favoritetutors`, (req, res) => {
+  
+})
+
+app.get(`/users/:username/reviews`, (req, res) => {
+  
+})
+
+app.get(`/users/:username/ratings`, (req, res) => {
+  
+})
+
+app.get(`/users/:username/times_avaliable`, (req, res) => {
+  
+})
+
+app.get(`/users/:username/tutoring_sessions`, (req, res) => {
+  
+})
+
+app.get(`/users/:username/subjects_taught`, (req, res) => {
+  
+})
+
 
