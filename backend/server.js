@@ -276,6 +276,21 @@ app.post(`/users/:username/add_review`, (req, res) => {
   
 })
 
+//Adds questions to database
+app.post(`/users/:username/add_question`, (req, res) => {
+  const username = req.params.username;
+  const {studentID, tutorID, question, answer} = req.body
+  const query = `INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (${studentID}, '${tutorID}', '${question}', '${answer}')`
+  connection.query(query, (err, rows, fields) => {
+    if (err) throw err
+    
+    console.log(rows)
+    res.status(200)
+    res.send("Successfully added review!")
+  })
+  
+})
+
 //Adds rating to database
 app.post(`/users/:username/add_rating`, (req, res) => {
   const username = req.params.username;
@@ -361,6 +376,19 @@ app.get(`/:username/reviews`, (req, res) => {
   const username = req.params.username;
   
   connection.query(`SELECT * FROM Reviews WHERE username = '${username}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+})
+  
+})
+
+//Gets questions for tutor
+app.get(`/:tutorID/questions`, (req, res) => {
+  const tutorID = req.params.tutorID;
+  
+  connection.query(`SELECT * FROM Questions WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
     if (err) throw err
     res.status(200)
     res.send(rows)
