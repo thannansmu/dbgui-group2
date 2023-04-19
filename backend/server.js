@@ -290,11 +290,11 @@ app.post(`/users/:username/add_rating`, (req, res) => {
   })
 })
 
-//Adds time avaliable to database
-app.post(`/users/:username/add_time_avaliable`, (req, res) => {
+//Adds time available to database
+app.post(`/users/:username/add_time_available`, (req, res) => {
   const username = req.params.username;
   const {tutorID, tutorTime, tutorDay} = req.body
-  const query = `INSERT INTO TimesAvaliable (tutorID, tutorTime, tutorDay) VALUES (${tutorID}, '${tutorTime}', ${tutorDay})`
+  const query = `INSERT INTO TimesAvailable (tutorID, tutorTime, tutorDay) VALUES (${tutorID}, '${tutorTime}', ${tutorDay})`
   connection.query(query, (err, rows, fields) => {
     if (err) throw err
     
@@ -382,8 +382,8 @@ app.get(`/users/:username/ratings`, (req, res) => {
   
 })
 
-//Gets times avaliable for user
-app.get(`/users/:username/times_avaliable`, (req, res) => {
+//Gets times available for user
+app.get(`/users/:username/times_available`, (req, res) => {
   const username = req.params.username;
   
   connection.query(`SELECT * FROM TimesAvailable WHERE username = '${username}'`, (err, rows, fields) => {
