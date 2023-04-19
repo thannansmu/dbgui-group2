@@ -72,6 +72,28 @@ app.get(`/users/:username`, (req, res) => {
   })
 })
 
+//Returns all info for specific student
+app.get(`/:studentID/info`, (req, res) => {
+  const studentID = req.params.tutorID;
+  connection.query(`SELECT * FROM Students WHERE studentID = '${studentID}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+  })
+})
+
+//Returns all info for specific tutor
+app.get(`/:tutorID/info`, (req, res) => {
+  const tutorID = req.params.tutorID;
+  connection.query(`SELECT * FROM Tutors WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+  })
+})
+
 //Returns specific attribute value from specific user
 app.get(`/users/:username/:attribute`, (req, res) => {
   const username = req.params.username;
