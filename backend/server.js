@@ -333,7 +333,7 @@ app.post(`/users/:username/add_subject_taught`, (req, res) => {
 })
 
 //Gets reports for user
-app.get(`/users/:username/reports`, (req, res) => {
+app.get(`/:username/reports`, (req, res) => {
   const username = req.params.username;
   
   connection.query(`SELECT * FROM Report WHERE username = '${username}'`, (err, rows, fields) => {
@@ -345,7 +345,7 @@ app.get(`/users/:username/reports`, (req, res) => {
 })
 
 //Gets favorite tutors for user
-app.get(`/users/:username/favoritetutors`, (req, res) => {
+app.get(`/:username/favoritetutors`, (req, res) => {
   const username = req.params.username;
   connection.query(`SELECT * FROM FavoriteTutors WHERE username = '${username}'`, (err, rows, fields) => {
     if (err) throw err
@@ -357,7 +357,7 @@ app.get(`/users/:username/favoritetutors`, (req, res) => {
 })
 
 //Gets reviews for user
-app.get(`/users/:username/reviews`, (req, res) => {
+app.get(`/:username/reviews`, (req, res) => {
   const username = req.params.username;
   
   connection.query(`SELECT * FROM Reviews WHERE username = '${username}'`, (err, rows, fields) => {
@@ -370,7 +370,7 @@ app.get(`/users/:username/reviews`, (req, res) => {
 })
 
 //Gets ratings for user
-app.get(`/users/:username/ratings`, (req, res) => {
+app.get(`/:username/ratings`, (req, res) => {
   const username = req.params.username;
   
   connection.query(`SELECT * FROM Ratings WHERE username = '${username}'`, (err, rows, fields) => {
@@ -383,7 +383,7 @@ app.get(`/users/:username/ratings`, (req, res) => {
 })
 
 //Gets times available for user
-app.get(`/users/:username/times_available`, (req, res) => {
+app.get(`/:username/times_available`, (req, res) => {
   const username = req.params.username;
   
   connection.query(`SELECT * FROM TimesAvailable WHERE username = '${username}'`, (err, rows, fields) => {
@@ -396,7 +396,7 @@ app.get(`/users/:username/times_available`, (req, res) => {
 })
 
 //Gets tutoring sessions for user
-app.get(`/users/:username/tutoring_sessions`, (req, res) => {
+app.get(`/:username/tutoring_sessions`, (req, res) => {
   const username = req.params.username;
   
   connection.query(`SELECT * FROM TutoringSessions WHERE username = '${username}'`, (err, rows, fields) => {
@@ -409,7 +409,7 @@ app.get(`/users/:username/tutoring_sessions`, (req, res) => {
 })
 
 //Gets subjects taught for user
-app.get(`/users/:username/subjects_taught`, (req, res) => {
+app.get(`/:username/subjects_taught`, (req, res) => {
   const username = req.params.username;
  
   connection.query(`SELECT * FROM SubjectsTaught WHERE username = '${username}'`, (err, rows, fields) => {
