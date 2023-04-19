@@ -41,6 +41,26 @@ app.get('/users', (req, res) => {
   })
 })
 
+//Returns all students in database
+app.get(`/students`, (req, res) => {
+  connection.query(`SELECT * FROM Students`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+  })
+})
+
+//Returns all tutors in database
+app.get(`/tutors`, (req, res) => {
+  connection.query(`SELECT * FROM Tutors`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+  })
+})
+
 //Returns all info for specific user
 app.get(`/users/:username`, (req, res) => {
   const username = req.params.username;
@@ -49,6 +69,28 @@ app.get(`/users/:username`, (req, res) => {
     res.status(200)
     res.send(rows)
     console.log(rows);
+  })
+})
+
+//Returns all info for specific student
+app.get(`/:studentID/info`, (req, res) => {
+  const studentID = req.params.tutorID;
+  connection.query(`SELECT * FROM Students WHERE studentID = '${studentID}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+  })
+})
+
+//Returns all info for specific tutor
+app.get(`/:tutorID/info`, (req, res) => {
+  const tutorID = req.params.tutorID;
+  connection.query(`SELECT * FROM Tutors WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
   })
 })
 
@@ -138,7 +180,6 @@ app.post(`/users/:username/add_request`, (req, res) => {
     res.send("Successfully added Request!")
     console.log(`Added request for ${username}\nrequestID = ${requestID} studentID = ${studentID} tutorID = ${tutorID} request = ${request}`)
   })
-   
 })
 
 app.post(`/users/:username/add_comment`, (req, res) => {
@@ -185,6 +226,194 @@ app.delete(`/comments/delete_comment/:commentID`, (req, res) => {
     res.send(rows)
     console.log(`Deleted request with commentID ${commentID} from database`)
   })
+})
+
+//Adds report to database
+app.post(`/users/:username/add_report`, (req, res) => {
+  const username = req.params.username;
+  const {adminID, report} = req.body
+  const query = `INSERT INTO Report (username, adminID, report) VALUES ('${username}', ${adminID}, '${report}')`
+  connection.query(query, (err, rows, fields) => {
+    if (err) throw err
+    
+    console.log(rows)
+    res.status(200)
+    res.send("Successfully added Report!")
+    console.log(`Added report for ${username}\n adminID = ${adminID} request = ${report}`)  
+  })
+})
+
+//Adds favorite tutor to database
+app.post(`/users/:username/add_favoritetutor`, (req, res) => {
+  const username = req.params.username;
+  const {studentID, tutorID} = req.body
+  const query = `INSERT INTO FavoriteTutors (username, studentID, tutorID) VALUES ('${username}', ${studentID}, '${tutorID}')`
+  connection.query(query, (err, rows, fields) => {
+    if (err) throw err
+    
+    console.log(rows)
+    res.status(200)
+    res.send("Successfully added favorite tutor!")
+  })
+})
+
+//Adds review to database
+app.post(`/users/:username/add_review`, (req, res) => {
+  const username = req.params.username;
+  const {studentID, tutorID, review} = req.body
+  const query = `INSERT INTO Reviews (username, studentID, tutorID, review) VALUES ('${username}', ${studentID}, '${tutorID}', '${review}')`
+  connection.query(query, (err, rows, fields) => {
+    if (err) throw err
+    
+    console.log(rows)
+    res.status(200)
+    res.send("Successfully added review!")
+  })
   
 })
+
+//Adds rating to database
+app.post(`/users/:username/add_rating`, (req, res) => {
+  const username = req.params.username;
+  const {studentID, tutorID, rating} = req.body
+  const query = `INSERT INTO Ratings (username, studentID, tutorID, rating) VALUES ('${username}', ${studentID}, '${tutorID}', '${rating}')`
+  connection.query(query, (err, rows, fields) => {
+    if (err) throw err
+    
+    console.log(rows)
+    res.status(200)
+    res.send("Successfully added rating!")
+  })
+})
+
+//Adds time avaliable to database
+app.post(`/users/:username/add_time_avaliable`, (req, res) => {
+  const username = req.params.username;
+  const {tutorID, tutorTime, tutorDay} = req.body
+  const query = `INSERT INTO TimesAvaliable (tutorID, tutorTime, tutorDay) VALUES (${tutorID}, '${tutorTime}', ${tutorDay})`
+  connection.query(query, (err, rows, fields) => {
+    if (err) throw err
+    
+    console.log(rows)
+    res.status(200)
+    res.send("Successfully added time!")
+  })
+})
+
+//Adds tutoring sesison to database
+app.post(`/users/:username/add_tutoring_session`, (req, res) => {
+  const username = req.params.username;
+  const {tutorID, tutorSession} = req.body
+  const query = `INSERT INTO TutoringSessions (tutorID, tutorSession) VALUES (${tutorID}, '${tutorSession}')`
+  connection.query(query, (err, rows, fields) => {
+    if (err) throw err
+    
+    console.log(rows)
+    res.status(200)
+    res.send("Successfully added session!")
+  })
+})
+
+//Adds subject taught to database
+app.post(`/users/:username/add_subject_taught`, (req, res) => {
+  const username = req.params.username;
+  const {tutorID, subject} = req.body
+  const query = `INSERT INTO SubjectsTaught (tutorID, subject) VALUES (${tutorID}, '${subject}')`
+  connection.query(query, (err, rows, fields) => {
+    if (err) throw err
+    
+    console.log(rows)
+    res.status(200)
+    res.send("Successfully added subject!")
+  })
+})
+
+//Gets reports for user
+app.get(`/users/:username/reports`, (req, res) => {
+  const username = req.params.username;
+  
+  connection.query(`SELECT * FROM Report WHERE username = '${username}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+})
+})
+
+//Gets favorite tutors for user
+app.get(`/users/:username/favoritetutors`, (req, res) => {
+  const username = req.params.username;
+  connection.query(`SELECT * FROM FavoriteTutors WHERE username = '${username}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+})
+  
+})
+
+//Gets reviews for user
+app.get(`/users/:username/reviews`, (req, res) => {
+  const username = req.params.username;
+  
+  connection.query(`SELECT * FROM Reviews WHERE username = '${username}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+})
+  
+})
+
+//Gets ratings for user
+app.get(`/users/:username/ratings`, (req, res) => {
+  const username = req.params.username;
+  
+  connection.query(`SELECT * FROM Ratings WHERE username = '${username}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+})
+  
+})
+
+//Gets times avaliable for user
+app.get(`/users/:username/times_avaliable`, (req, res) => {
+  const username = req.params.username;
+  
+  connection.query(`SELECT * FROM TimesAvailable WHERE username = '${username}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+})
+  
+})
+
+//Gets tutoring sessions for user
+app.get(`/users/:username/tutoring_sessions`, (req, res) => {
+  const username = req.params.username;
+  
+  connection.query(`SELECT * FROM TutoringSessions WHERE username = '${username}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+})
+  
+})
+
+//Gets subjects taught for user
+app.get(`/users/:username/subjects_taught`, (req, res) => {
+  const username = req.params.username;
+ 
+  connection.query(`SELECT * FROM SubjectsTaught WHERE username = '${username}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+})
+})
+
 

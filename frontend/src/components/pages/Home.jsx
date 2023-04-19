@@ -7,7 +7,6 @@ import { TutorProfile } from './tutorView/TutorProfile';
 export const Home = () => {
     return <>
         <HeroSection />
-        {/* <ProfilePage /> */}
 
     </>;
 }
