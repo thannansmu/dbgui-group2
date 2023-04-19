@@ -384,11 +384,21 @@ app.get(`/:username/reviews`, (req, res) => {
   
 })
 
+//Gets questions for student
+app.get(`student/:studentID/questions`, (req, res) => {
+  const studentID = req.params.studentID;
+  connection.query(`SELECT * FROM Question WHERE studentID = ${studentID}`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+})
+})
+
 //Gets questions for tutor
-app.get(`/:tutorID/questions`, (req, res) => {
+app.get(`tutor/:tutorID/questions`, (req, res) => {
   const tutorID = req.params.tutorID;
-  
-  connection.query(`SELECT * FROM Questions WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
+  connection.query(`SELECT * FROM Question WHERE tutorID = ${tutorID}`, (err, rows, fields) => {
     if (err) throw err
     res.status(200)
     res.send(rows)
