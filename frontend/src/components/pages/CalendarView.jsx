@@ -60,6 +60,16 @@ export const CalendarView = () => {
             );
         });
     };
+/*
+    const book = () => {
+        if (!(day && startTime && endTime)) {
+            setDay('');
+            setEndTime('');
+            setStartTime('');
+        }
+        for (var k=(startTime%100); k<)
+    };
+*/
 
     return (<>
         <div className='entireCalendar'>
