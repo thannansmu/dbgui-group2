@@ -15,7 +15,7 @@ export const getTutors = () => new Promise((resolve, reject) => {
 });
 
 //Get Tutor
-export const getUser = (username) => new Promise((resolve, reject) => {
+export const getTutor = (username) => new Promise((resolve, reject) => {
     axios.get(`${url}/users/${username}`)
         .then(resp => resolve(resp.data))
         .catch(error => {
@@ -30,7 +30,7 @@ export const getUser = (username) => new Promise((resolve, reject) => {
 
 ////////////////////////////////POST ROUTES//////////////////////////////////
 //Register
-export const addUser = (user) => new Promise((resolve, reject) => {
+export const addTutor = (user) => new Promise((resolve, reject) => {
     axios.post(`${url}/users/add`, user)
         .then(resp => resolve(resp.data))
         .catch(error => {
@@ -45,7 +45,7 @@ export const addUser = (user) => new Promise((resolve, reject) => {
 
 //////////////////////////////////PUT ROUTES/////////////////////////////////
 //Update Profile
-export const updateUser = (username, attribute, updatedValue) => new Promise((resolve, reject) => {
+export const updateTutor = (username, attribute, updatedValue) => new Promise((resolve, reject) => {
     axios.put(`${url}/${username}/${attribute}/update`, updatedValue)
         .then(resp => resolve(resp.data))
         .catch(error => {
@@ -60,7 +60,7 @@ export const updateUser = (username, attribute, updatedValue) => new Promise((re
 
 ///////////////////////////////DELETE ROUTES/////////////////////////////////
 //Delete User
-export const deleteUser = (username) => new Promise((resolve, reject) => {
+export const deleteTutor = (username) => new Promise((resolve, reject) => {
     axios.delete(`${url}/${username}/delete`)
         .then(resp => resolve(resp.data))
         .catch(error => {

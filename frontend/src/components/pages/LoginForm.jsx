@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { LoginCheck } from '../../api'
+import { LoginCheck } from '../../Api'
 import { useState, useEffect } from 'react';
 import { TextField } from '../common';
 import '../styles/LoginForm.css';
