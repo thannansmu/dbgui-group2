@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CalendarView.css';
 import { TextField, TextAreaField, CheckboxList, SelectField, TimeFrame } from '../common';
-
+import { availabilityApi, getAvailabilities, addAvailability } from '../../api';
+import { userApi, getUser } from '../../api';
 export const CalendarView = () => {
 
     const availability = [
@@ -22,9 +23,39 @@ export const CalendarView = () => {
         }
     ];
 
+
     const [day, setDay] = useState("");
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("");
+    const [tutor, setTutor] = useState("");
+    const [availabilities, setAvailabilities] = useState(null);
+
+    useEffect(() => {
+        availabilityApi.getTutor('user6')
+        .then(data => setTutor(data))
+        .catch(error => console.log(error));
+    }, []);
+
+    useEffect(() => {
+        availabilityApi.getTutor('user6')
+        .then(data => setTutor(data))
+        .catch(error => console.log(error));
+    }, []);
+
+    useEffect(() => {
+        availabilityApi.getAvailabilities('user6')
+        .then(data => setAvailabilities(data))
+        .catch(error => console.log(error));
+    }, []);
+
+
+    if (!tutor) {
+        return <>
+            Loading...
+        </>
+    }
+
+console.log(availabilities);
 
     const daysOfWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     const hoursOfDay = ['06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00', '05:00'];
@@ -69,6 +100,7 @@ export const CalendarView = () => {
         }
         for (var k=(startTime%100); k<)
     };
+
 */
 
     return (<>
