@@ -23,22 +23,20 @@ export const CalendarView = () => {
         }
     ];
 
-
     const [day, setDay] = useState("");
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("");
-    const [tutor, setTutor] = useState("");
-    const [availabilities, setAvailabilities] = useState(null);
+    const [availabilities, setAvailabilities] = useState([]);
+
+    const testAvailability = [{
+        tutorId: 1,
+        tutorTime: 2,
+        tutorDay: 'Monday'
+    }];
 
     useEffect(() => {
-        availabilityApi.getTutor('user6')
-        .then(data => setTutor(data))
-        .catch(error => console.log(error));
-    }, []);
-
-    useEffect(() => {
-        availabilityApi.getTutor('user6')
-        .then(data => setTutor(data))
+        availabilityApi.addAvailability('user6', testAvailability)
+        .then(setAvailabilities([...availabilities, testAvailability]))
         .catch(error => console.log(error));
     }, []);
 
@@ -48,8 +46,7 @@ export const CalendarView = () => {
         .catch(error => console.log(error));
     }, []);
 
-
-    if (!tutor) {
+    if (!availabilities) {
         return <>
             Loading...
         </>
