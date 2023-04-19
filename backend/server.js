@@ -137,7 +137,7 @@ app.put(`/users/:username/:attribute/update`, (req, res) => {
     const username = req.params.username;
     const attribute = req.params.attribute;
     const updatedValue = req.body;  
-    connection.query(`UPDATE users SET ${attribute} = ${updatedValue} WHERE username = '${username}'`, (err, rows, fields) => {
+    connection.query(`UPDATE User SET ${attribute} = ${updatedValue} WHERE username = '${username}'`, (err, rows, fields) => {
       if (err) throw err
       res.status(200)
       res.send(`Updated ${attribute} for ${username}`)
@@ -449,3 +449,14 @@ app.get(`/:username/subjects_taught`, (req, res) => {
 })
 
 
+//Adds answer to given question
+app.put(`/users/:questionID/update_answer`, (req, res) => {
+  const questionID = req.params.questionID;
+  const updatedValue = req.body;
+  connection.query(`UPDATE Question SET answer = '${updatedValue}' WHERE questionID = ${questionID}`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(`Updated answer for question ${questionID}`)
+    console.log(`Updated answer for ${questionID} to ${updatedValue}`)
+  })
+})
