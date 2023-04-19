@@ -64,6 +64,15 @@ export const getUserComments = (username) => new Promise((resolve, reject) => {
         });
 });
 
+//Get StudentID by Username
+export const getStudentIDByUsername = (username) => new Promise((resolve, reject) => {
+    axios.get(`${url}/students/${username}`)
+        .then(resp => resolve(resp.data))
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
 ///////////////////////////////END OF GET ROUTES/////////////////////////////
 
 
