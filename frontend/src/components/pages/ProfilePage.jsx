@@ -4,7 +4,7 @@ import { YourQuestions } from './YourQuestions';
 import { Button } from '../Button';
 import '../styles/Button.css'
 
-export const ProfilePage = () => {
+export const ProfilePage = ({ loggedInUser }) => {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -30,7 +30,7 @@ export const ProfilePage = () => {
       <h1 style={{ textDecoration: 'underline' }}>Your Profile</h1>
       <div>
         <br></br>
-        <h4>User Information:</h4> <UserInfo />
+        <h4>User Information: {loggedInUser}</h4>
       </div>
       <div>
         <YourQuestions />
