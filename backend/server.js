@@ -228,7 +228,7 @@ app.delete(`/comments/delete_comment/:commentID`, (req, res) => {
   })
 })
 
-
+//Adds report to database
 app.post(`/users/:username/add_report`, (req, res) => {
   const username = req.params.username;
   const {adminID, report} = req.body
@@ -243,6 +243,7 @@ app.post(`/users/:username/add_report`, (req, res) => {
   })
 })
 
+//Adds favorite tutor to database
 app.post(`/users/:username/add_favoritetutor`, (req, res) => {
   const username = req.params.username;
   const {studentID, tutorID} = req.body
@@ -256,6 +257,7 @@ app.post(`/users/:username/add_favoritetutor`, (req, res) => {
   })
 })
 
+//Adds review to database
 app.post(`/users/:username/add_review`, (req, res) => {
   const username = req.params.username;
   const {studentID, tutorID, review} = req.body
@@ -270,6 +272,7 @@ app.post(`/users/:username/add_review`, (req, res) => {
   
 })
 
+//Adds rating to database
 app.post(`/users/:username/add_rating`, (req, res) => {
   const username = req.params.username;
   const {studentID, tutorID, rating} = req.body
@@ -283,10 +286,11 @@ app.post(`/users/:username/add_rating`, (req, res) => {
   })
 })
 
-app.post(`/users/:username/add_time_avaliable`, (req, res) => {
+//Adds time available to database
+app.post(`/users/:username/add_time_available`, (req, res) => {
   const username = req.params.username;
   const {tutorID, tutorTime, tutorDay} = req.body
-  const query = `INSERT INTO TimesAvaliable (tutorID, tutorTime, tutorDay) VALUES (${tutorID}, '${tutorTime}', ${tutorDay})`
+  const query = `INSERT INTO TimesAvailable (tutorID, tutorTime, tutorDay) VALUES (${tutorID}, '${tutorTime}', ${tutorDay})`
   connection.query(query, (err, rows, fields) => {
     if (err) throw err
     
@@ -296,6 +300,7 @@ app.post(`/users/:username/add_time_avaliable`, (req, res) => {
   })
 })
 
+//Adds tutoring sesison to database
 app.post(`/users/:username/add_tutoring_session`, (req, res) => {
   const username = req.params.username;
   const {tutorID, tutorSession} = req.body
@@ -309,6 +314,7 @@ app.post(`/users/:username/add_tutoring_session`, (req, res) => {
   })
 })
 
+//Adds subject taught to database
 app.post(`/users/:username/add_subject_taught`, (req, res) => {
   const username = req.params.username;
   const {tutorID, subject} = req.body
@@ -322,6 +328,7 @@ app.post(`/users/:username/add_subject_taught`, (req, res) => {
   })
 })
 
+//Gets reports for user
 app.get(`/users/:username/reports`, (req, res) => {
   const username = req.params.username;
   
@@ -333,6 +340,7 @@ app.get(`/users/:username/reports`, (req, res) => {
 })
 })
 
+//Gets favorite tutors for user
 app.get(`/users/:username/favoritetutors`, (req, res) => {
   const username = req.params.username;
   connection.query(`SELECT * FROM FavoriteTutors WHERE username = '${username}'`, (err, rows, fields) => {
@@ -344,6 +352,7 @@ app.get(`/users/:username/favoritetutors`, (req, res) => {
   
 })
 
+//Gets reviews for user
 app.get(`/users/:username/reviews`, (req, res) => {
   const username = req.params.username;
   
@@ -356,6 +365,7 @@ app.get(`/users/:username/reviews`, (req, res) => {
   
 })
 
+//Gets ratings for user
 app.get(`/users/:username/ratings`, (req, res) => {
   const username = req.params.username;
   
@@ -368,7 +378,8 @@ app.get(`/users/:username/ratings`, (req, res) => {
   
 })
 
-app.get(`/users/:username/times_avaliable`, (req, res) => {
+//Gets times available for user
+app.get(`/users/:username/times_available`, (req, res) => {
   const username = req.params.username;
   
   connection.query(`SELECT * FROM TimesAvailable WHERE username = '${username}'`, (err, rows, fields) => {
@@ -380,6 +391,7 @@ app.get(`/users/:username/times_avaliable`, (req, res) => {
   
 })
 
+//Gets tutoring sessions for user
 app.get(`/users/:username/tutoring_sessions`, (req, res) => {
   const username = req.params.username;
   
@@ -392,6 +404,7 @@ app.get(`/users/:username/tutoring_sessions`, (req, res) => {
   
 })
 
+//Gets subjects taught for user
 app.get(`/users/:username/subjects_taught`, (req, res) => {
   const username = req.params.username;
  
