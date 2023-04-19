@@ -99,9 +99,8 @@ export const CreateAccountForm = ({ accountType }) => {
 
   const onRegister = () => {
 
-    //TODO: need to define userRole
     addUser({ "username":userName, "passWord":password, "firstName":firstName,
-              "lastName":lastName, "bio":bio, "userRole":"student" });
+              "lastName":lastName, "bio":bio, "userRole":accountType });
     setFirstName('');
     setLastName('');
     setBio('');
