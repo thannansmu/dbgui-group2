@@ -182,6 +182,7 @@ app.post(`/users/:username/add_request`, (req, res) => {
   })
 })
 
+//Adds comment to specific user
 app.post(`/users/:username/add_comment`, (req, res) => {
   const username = req.params.username;
   const {commentID, commentRecieverID, comment} = req.body
@@ -196,6 +197,7 @@ app.post(`/users/:username/add_comment`, (req, res) => {
   })
 })
 
+//Deletes user from database
 app.delete(`/users/:username/delete`, (req, res) => {
   const username = req.params.username;
   console.log(`DELETE FROM User WHERE username='${username}'`);
@@ -207,7 +209,8 @@ app.delete(`/users/:username/delete`, (req, res) => {
   })
 })
 
-app.delete(`/requests/delete_request/:requestID`, (req, res) => {
+//Deletes request from database
+app.delete(`/delete_request/:requestID`, (req, res) => {
   const requestID = req.params.requestID;
   connection.query(`DELETE FROM Requests WHERE requestID='${requestID}'`, (err, rows, fields) => {
     if (err) throw err
@@ -218,7 +221,8 @@ app.delete(`/requests/delete_request/:requestID`, (req, res) => {
   
 })
 
-app.delete(`/comments/delete_comment/:commentID`, (req, res) => {
+//Deletes comments from database
+app.delete(`/delete_comment/:commentID`, (req, res) => {
   const commentID = req.params.commentID;
   connection.query(`DELETE FROM Comments WHERE commentID='${commentID}'`, (err, rows, fields) => {
     if (err) throw err
@@ -272,6 +276,21 @@ app.post(`/users/:username/add_review`, (req, res) => {
   
 })
 
+//Adds questions to database
+app.post(`/users/:username/add_question`, (req, res) => {
+  const username = req.params.username;
+  const {studentID, tutorID, question, answer} = req.body
+  const query = `INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (${studentID}, '${tutorID}', '${question}', '${answer}')`
+  connection.query(query, (err, rows, fields) => {
+    if (err) throw err
+    
+    console.log(rows)
+    res.status(200)
+    res.send("Successfully added review!")
+  })
+  
+})
+
 //Adds rating to database
 app.post(`/users/:username/add_rating`, (req, res) => {
   const username = req.params.username;
@@ -286,11 +305,11 @@ app.post(`/users/:username/add_rating`, (req, res) => {
   })
 })
 
-//Adds time avaliable to database
-app.post(`/users/:username/add_time_avaliable`, (req, res) => {
+//Adds time available to database
+app.post(`/users/:username/add_time_available`, (req, res) => {
   const username = req.params.username;
   const {tutorID, tutorTime, tutorDay} = req.body
-  const query = `INSERT INTO TimesAvaliable (tutorID, tutorTime, tutorDay) VALUES (${tutorID}, '${tutorTime}', ${tutorDay})`
+  const query = `INSERT INTO TimesAvailable (tutorID, tutorTime, tutorDay) VALUES (${tutorID}, '${tutorTime}', ${tutorDay})`
   connection.query(query, (err, rows, fields) => {
     if (err) throw err
     
@@ -329,7 +348,7 @@ app.post(`/users/:username/add_subject_taught`, (req, res) => {
 })
 
 //Gets reports for user
-app.get(`/users/:username/reports`, (req, res) => {
+app.get(`/:username/reports`, (req, res) => {
   const username = req.params.username;
   
   connection.query(`SELECT * FROM Report WHERE username = '${username}'`, (err, rows, fields) => {
@@ -341,7 +360,7 @@ app.get(`/users/:username/reports`, (req, res) => {
 })
 
 //Gets favorite tutors for user
-app.get(`/users/:username/favoritetutors`, (req, res) => {
+app.get(`/:username/favoritetutors`, (req, res) => {
   const username = req.params.username;
   connection.query(`SELECT * FROM FavoriteTutors WHERE username = '${username}'`, (err, rows, fields) => {
     if (err) throw err
@@ -353,7 +372,7 @@ app.get(`/users/:username/favoritetutors`, (req, res) => {
 })
 
 //Gets reviews for user
-app.get(`/users/:username/reviews`, (req, res) => {
+app.get(`/:username/reviews`, (req, res) => {
   const username = req.params.username;
   
   connection.query(`SELECT * FROM Reviews WHERE username = '${username}'`, (err, rows, fields) => {
@@ -365,8 +384,21 @@ app.get(`/users/:username/reviews`, (req, res) => {
   
 })
 
+//Gets questions for tutor
+app.get(`/:tutorID/questions`, (req, res) => {
+  const tutorID = req.params.tutorID;
+  
+  connection.query(`SELECT * FROM Questions WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+})
+  
+})
+
 //Gets ratings for user
-app.get(`/users/:username/ratings`, (req, res) => {
+app.get(`/:username/ratings`, (req, res) => {
   const username = req.params.username;
   
   connection.query(`SELECT * FROM Ratings WHERE username = '${username}'`, (err, rows, fields) => {
@@ -378,8 +410,8 @@ app.get(`/users/:username/ratings`, (req, res) => {
   
 })
 
-//Gets times avaliable for user
-app.get(`/users/:username/times_avaliable`, (req, res) => {
+//Gets times available for user
+app.get(`/:username/times_available`, (req, res) => {
   const username = req.params.username;
   
   connection.query(`SELECT * FROM TimesAvailable WHERE username = '${username}'`, (err, rows, fields) => {
@@ -392,7 +424,7 @@ app.get(`/users/:username/times_avaliable`, (req, res) => {
 })
 
 //Gets tutoring sessions for user
-app.get(`/users/:username/tutoring_sessions`, (req, res) => {
+app.get(`/:username/tutoring_sessions`, (req, res) => {
   const username = req.params.username;
   
   connection.query(`SELECT * FROM TutoringSessions WHERE username = '${username}'`, (err, rows, fields) => {
@@ -405,7 +437,7 @@ app.get(`/users/:username/tutoring_sessions`, (req, res) => {
 })
 
 //Gets subjects taught for user
-app.get(`/users/:username/subjects_taught`, (req, res) => {
+app.get(`/:username/subjects_taught`, (req, res) => {
   const username = req.params.username;
  
   connection.query(`SELECT * FROM SubjectsTaught WHERE username = '${username}'`, (err, rows, fields) => {
