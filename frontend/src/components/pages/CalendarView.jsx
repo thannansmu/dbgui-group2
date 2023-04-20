@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './CalendarView.css';
 import { TextField, TextAreaField, CheckboxList, SelectField, TimeFrame } from '../common';
-import { availabilityApi } from '../../api/availabilityApi';
-import { getAvailabilities } from '../../api/availabilityApi';
-import { addAvailability } from '../../api/availabilityApi';
-import { getTutorID } from '../../api/availabilityApi';
+import { availabilityApi } from '../../Api/availabilityApi';
+import { getAvailabilities } from '../../Api/availabilityApi';
+import { addAvailability } from '../../Api/availabilityApi';
+import { getTutorID } from '../../Api/availabilityApi';
 
 export const CalendarView = () => {
 
