@@ -205,6 +205,12 @@ INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (1, 1, 'W
 INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (3, 2, 'When was the Declaration of Independence signed?', '');
 INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (4, 5, 'What are the components of a SWOT Analysis?', '');
 INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (5, 3, 'What is the derivative of x-squared plus 3x?', '');
+INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (2, 3, 'How do I create an account for MATLAB?', '');
+INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (1, 2, 'Who was Grace Hopper?', '');
+INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (3, 5, 'Why was the IRS created?', '');
+INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (5, 4, 'Why is the Mitochondria the powerhouse of the cell?', '');
+
+
 
 INSERT INTO FavoriteTutors (username, studentID, tutorID) VALUES ('user1', 1, 1);
 INSERT INTO FavoriteTutors (username, studentID, tutorID) VALUES ('user3', 3, 2);
