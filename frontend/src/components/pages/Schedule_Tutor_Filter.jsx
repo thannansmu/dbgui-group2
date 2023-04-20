@@ -25,7 +25,7 @@ export const Schedule_Tutor_Filter = () => {
   const [name, setName] = useState('');
 
   const [tutors, setTutors] = useState([]); //only has id and username
-  const [tutorsInfo, setTutorsInfo] = useState([]); //tutor's name, times, and subjects taught
+  const tutorsInfo = []; //tutor's name, times, and subjects taught
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -41,30 +41,7 @@ export const Schedule_Tutor_Filter = () => {
   useEffect(() => {
     showButton();
     getTutors().then(list => setTutors(list));
-
-    //need tutors to have the following info: name, time, & subject
-    const infos = [];
-    for (let i = 0; i < tutors.length; i++) {
-      const obj = { id: tutors[i]['tutorID'], name: '', time: '', subject: '' };
-
-      getUser(tutors[i]['username']).then(user => {
-        obj['name'] = user[0]['firstName'] + " " + user[0]['lastName'];
-      });
-
-      getTutorTimes(tutors[i]['tutorID']).then(time => {
-        obj['time'] = time[0]['tutorTime'];
-      });
-
-      getTutorSubject(tutors[i]['tutorID']).then(subject => {
-        obj['subject'] = subject[0]['subject'];
-      });
-
-      infos.push(obj);
-    }
-    setTutorsInfo(infos);
-    console.log(tutorsInfo);
-
-  }, [tutors, tutorsInfo]);
+  }, []);
 
   window.addEventListener('resize', showButton);
 
@@ -75,16 +52,44 @@ export const Schedule_Tutor_Filter = () => {
     { name: 'Bob Johnson', time: '1:00 PM', subject: 'History' },
   ];
 
+  //need tutorsIfo to have the following info: id, name, time, & subject
+  for (let i = 0; i < tutors.length; i++) {
+    let obj = { id: tutors[i]['tutorID'], name: '', time: '', subject: '' };
+
+    getUser(tutors[i]['username']).then(user => {
+      obj['name'] = user[0]['firstName'] + " " + user[0]['lastName'];
+    });
+
+    getTutorTimes(tutors[i]['tutorID']).then(time => {
+      console.log(time);
+      if(time != null)
+        obj['time'] = time[0]['tutortime'];
+      else
+        obj['time'] = '';
+    });
+
+    getTutorSubject(tutors[i]['tutorID']).then(subject => {
+      if(subject != null)
+        obj['subject'] = subject[0]['subject'];
+      else
+        obj['subject'] = '';
+    });
+
+    tutorsInfo.push(obj);
+  }
+
   // Function to filter tutors based on user input
   const filterTutors = () => {
 
     console.log(tutors);
-    console.log(tutorsInfo); //name, time, and subject are reset even though we called setTutorsInfo earlier
+    console.log(tutorsInfo); //name, time, and subject are blank even though it has values??
 
     return tutorsInfo.filter((tutor) => {
-      const subjectMatch = !subject || tutor['subject'].toLowerCase().includes(subject.toLowerCase());
-      const timeMatch = !time || tutor['time'].toLowerCase().includes(time.toLowerCase());
-      const nameMatch = !name || tutor['name'].toLowerCase().includes(name.toLowerCase());
+      console.log(tutor);
+      console.log(tutorsInfo); 
+      const subjectMatch = !subject || tutor.subject.toLowerCase().includes(subject.toLowerCase());
+      const timeMatch = !time || tutor.time.toLowerCase().includes(time.toLowerCase());
+      const nameMatch = !name || tutor.name.toLowerCase().includes(name.toLowerCase());
 
       return subjectMatch && timeMatch && nameMatch;
     });
