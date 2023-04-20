@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './CalendarView.css';
 import { TextField, TextAreaField, CheckboxList, SelectField, TimeFrame } from '../common';
-import { availabilityApi, getAvailabilities, addAvailability } from '../../api';
-import { userApi, getUser } from '../../api';
+import { availabilityApi } from '../../api/availabilityApi';
+import { getAvailabilities } from '../../api/availabilityApi';
+import { addAvailability } from '../../api/availabilityApi';
+
 export const CalendarView = () => {
 
     const availability = [
@@ -33,12 +35,6 @@ export const CalendarView = () => {
         tutorTime: 2,
         tutorDay: 'Monday'
     }];
-
-    useEffect(() => {
-        availabilityApi.addAvailability('user6', testAvailability)
-        .then(setAvailabilities([...availabilities, testAvailability]))
-        .catch(error => console.log(error));
-    }, []);
 
     useEffect(() => {
         availabilityApi.getAvailabilities('user6')

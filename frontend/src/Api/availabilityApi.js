@@ -5,7 +5,7 @@ const url = 'http://localhost:8000';
 //////////////////////////////////GET ROUTES/////////////////////////////////
 
 export const getAvailabilities = (username) => new Promise((resolve, reject) => {
-    axios.get(`${url}/users/${username}/times_available`)
+    axios.get(`${url}/${username}/times_available`)
         .then(resp => resolve(resp.data))
         .catch(error => {
             alert(error);
