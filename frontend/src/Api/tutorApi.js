@@ -34,6 +34,26 @@ export const getTutorId = (username) => new Promise((resolve, reject) => {
         });
 });
 
+//Get Tutor Times
+export const getTutorTimes = (tutorId) => new Promise((resolve, reject) => {
+    axios.get(`${url}/${tutorId}/times_available`)
+        .then(resp => resolve(resp.data))
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
+
+//Get Tutor Subject
+export const getTutorSubject = (tutorId) => new Promise((resolve, reject) => {
+    axios.get(`${url}/${tutorId}/subjects_taught`)
+        .then(resp => resolve(resp.data))
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
+
 ///////////////////////////////END OF GET ROUTES/////////////////////////////
 
 
