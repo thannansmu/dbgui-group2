@@ -122,8 +122,10 @@ CREATE Table TimesAvailable (
 
 CREATE Table TutoringSessions (
     sessionID INT AUTO_INCREMENT,
+    studentID INT,
     tutorID INT,
-    tutorSession VARCHAR(50),
+    tutorTime VARCHAR(20),
+    tutorDay VARCHAR(20),
     PRIMARY KEY (sessionID),
     FOREIGN KEY (tutorID) REFERENCES Tutors(tutorID) ON DELETE CASCADE
 );
@@ -196,15 +198,21 @@ INSERT INTO TimesAvailable(tutorID, tutorTime, tutorDay) VALUES (1, '3:00', 'Mon
 INSERT INTO TimesAvailable(tutorID, tutorTime, tutorDay) VALUES (2, '5:00', 'Tuesday');
 INSERT INTO TimesAvailable(tutorID, tutorTime, tutorDay) VALUES (5, '7:00', 'Wednesday');
 
-INSERT INTO TutoringSessions(tutorID, tutorSession) VALUES (1, '3:00');
-INSERT INTO TutoringSessions(tutorID, tutorSession) VALUES (2, '5:00');
-INSERT INTO TutoringSessions(tutorID, tutorSession) VALUES (1, '7:00');
+INSERT INTO TutoringSessions(studentID, tutorID, tutorTime, tutorDay) VALUES (1, 1, '3:00', 'Monday');
+INSERT INTO TutoringSessions(studentID, tutorID, tutorTime, tutorDay) VALUES (2, 2, '5:00', 'Tuesday');
+INSERT INTO TutoringSessions(studentID, tutorID, tutorTime, tutorDay) VALUES (3, 1, '7:00', 'Wednesday');
 
 
 INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (1, 1, 'What is the difference between pass by value and pass by reference for pointers?', '');
 INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (3, 2, 'When was the Declaration of Independence signed?', '');
 INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (4, 5, 'What are the components of a SWOT Analysis?', '');
 INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (5, 3, 'What is the derivative of x-squared plus 3x?', '');
+INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (2, 3, 'How do I create an account for MATLAB?', '');
+INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (1, 2, 'Who was Grace Hopper?', '');
+INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (3, 5, 'Why was the IRS created?', '');
+INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (5, 4, 'Why is the Mitochondria the powerhouse of the cell?', '');
+
+
 
 INSERT INTO FavoriteTutors (username, studentID, tutorID) VALUES ('user1', 1, 1);
 INSERT INTO FavoriteTutors (username, studentID, tutorID) VALUES ('user3', 3, 2);

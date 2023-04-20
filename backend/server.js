@@ -329,9 +329,9 @@ app.post(`/users/:username/add_rating`, (req, res) => {
 })
 
 //Adds time available to database
-app.post(`/users/:username/add_time_available`, (req, res) => {
-  const username = req.params.username;
-  const {tutorID, tutorTime, tutorDay} = req.body
+app.post(`/users/:tutorID/add_time_available`, (req, res) => {
+  const tutorID = req.params.tutorID;
+  const {tutorTime, tutorDay} = req.body
   const query = `INSERT INTO TimesAvailable (tutorID, tutorTime, tutorDay) VALUES (${tutorID}, '${tutorTime}', ${tutorDay})`
   connection.query(query, (err, rows, fields) => {
     if (err) throw err
@@ -343,10 +343,10 @@ app.post(`/users/:username/add_time_available`, (req, res) => {
 })
 
 //Adds tutoring sesison to database
-app.post(`/users/:username/add_tutoring_session`, (req, res) => {
-  const username = req.params.username;
-  const {tutorID, tutorSession} = req.body
-  const query = `INSERT INTO TutoringSessions (tutorID, tutorSession) VALUES (${tutorID}, '${tutorSession}')`
+app.post(`/users/:tutorID/add_tutoring_session`, (req, res) => {
+  const tutorID = req.params.tutorID;
+  const {studentID, tutorTime, tutorDay} = req.body
+  const query = `INSERT INTO TutoringSessions(studentID, tutorID, tutorTime, tutorDay) VALUES (${studentID}, ${tutorID}, '${tutorTime}', '${tutorDay}')`
   connection.query(query, (err, rows, fields) => {
     if (err) throw err
     
@@ -457,10 +457,10 @@ app.get(`/:tutorID/times_available`, (req, res) => {
 })
 
 //Gets tutoring sessions for user
-app.get(`/:username/tutoring_sessions`, (req, res) => {
-  const username = req.params.username;
+app.get(`/:tutorID/tutoring_sessions`, (req, res) => {
+  const tutorID = req.params.tutorID;
   
-  connection.query(`SELECT * FROM TutoringSessions WHERE username = '${username}'`, (err, rows, fields) => {
+  connection.query(`SELECT * FROM TutoringSessions WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
     if (err) throw err
     res.status(200)
     res.send(rows)
@@ -470,10 +470,10 @@ app.get(`/:username/tutoring_sessions`, (req, res) => {
 })
 
 //Gets subjects taught for user
-app.get(`/:username/subjects_taught`, (req, res) => {
-  const username = req.params.username;
+app.get(`/:tutorID/subjects_taught`, (req, res) => {
+  const tutorID = req.params.tutorID;
  
-  connection.query(`SELECT * FROM SubjectsTaught WHERE username = '${username}'`, (err, rows, fields) => {
+  connection.query(`SELECT * FROM SubjectsTaught WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
     if (err) throw err
     res.status(200)
     res.send(rows)
