@@ -81,8 +81,7 @@ function App() {
       <Route path = '/review-tutor' element={<Review_Tutor/>}/>
       <Route path = '/profile' element={<ProfilePage />} />
       <Route path = '/tutor-profile' element={<TutorProfile />} />
-      <Route path = '/calendar-view' element={<CalendarView />} />    
-
+      <Route path='/calendar-view/:username' element={<CalendarView />} />
     </Routes>
     
     </Router>

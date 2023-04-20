@@ -4,8 +4,17 @@ const url = 'http://localhost:8000';
 
 //////////////////////////////////GET ROUTES/////////////////////////////////
 
-export const getAvailabilities = (username) => new Promise((resolve, reject) => {
-    axios.get(`${url}/${username}/times_available`)
+export const getTutorID = (username) => new Promise((resolve, reject) => {
+    axios.get(`${url}/${username}/tutorID`)
+        .then(resp => resolve(resp.data))
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
+
+export const getAvailabilities = (tutorID) => new Promise((resolve, reject) => {
+    axios.get(`${url}/${tutorID}/times_available`)
         .then(resp => resolve(resp.data))
         .catch(error => {
             alert(error);
@@ -27,4 +36,5 @@ export const addAvailability = (username, availability) => new Promise((resolve,
 export const availabilityApi = {
     getAvailabilities,
     addAvailability,
+    getTutorID,
 };
