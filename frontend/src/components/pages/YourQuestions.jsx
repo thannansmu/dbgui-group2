@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { getStudentIDByUsername } from '../../Api';
 
 export const YourQuestions = ({ loggedInUser }) => {
   const [studentID, setStudentID] = useState('');
@@ -7,14 +8,7 @@ export const YourQuestions = ({ loggedInUser }) => {
 
   useEffect(() => {
     // Make API call to retrieve student ID for given username
-    axios.get(`http://localhost:8000/students?username=${loggedInUser}`)
-      .then(response => {
-        // If response is successful, set the student ID state
-        setStudentID(response.data[1].studentID);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    getStudentIDByUsername(loggedInUser).then(x=>setStudentID(x))
   }, [loggedInUser]);
 
   useEffect(() => {

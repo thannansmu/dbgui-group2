@@ -65,7 +65,7 @@ export const getUserComments = (username) => new Promise((resolve, reject) => {
 });
 //Get StudentID by username
 export const getStudentIDByUsername = (username) => new Promise((resolve, reject) => {
-    axios.get(`${url}/${username}/info`)
+    axios.get(`${url}/${username}/studentID`)
         .then(resp => {
             const studentID = resp.data[0].studentID;
             resolve(studentID);
@@ -77,7 +77,7 @@ export const getStudentIDByUsername = (username) => new Promise((resolve, reject
 });
 
 
-//Returns the first question of a particular Student
+//Returns the first question of a particular Student----------------------------------------------------------
 export const getQuestionTextByStudentID = (studentID) => new Promise((resolve, reject) => {
     axios.get(`${url}/student/${studentID}/questions`)
         .then(resp => {
