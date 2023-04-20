@@ -3,10 +3,12 @@ import { UserInfo } from '../UserInfo';
 import { Button } from '../../Button';
 import '../../styles/Tutor.css';
 import '../../styles/Button.css';
+import { getTutor, getTutorId } from '../../../Api';
 
 export const TutorProfile = () => {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
+    const [tutor, setTutor] = useState('');
 
 
     const handleClick = () => setClick(!click);
@@ -22,6 +24,7 @@ export const TutorProfile = () => {
 
     useEffect(() => {
         showButton();
+        // const id = async getTutorId();
     }, []);
 
     window.addEventListener('resize', showButton);

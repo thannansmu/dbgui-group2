@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '../Button';
+import { getTutors } from '../../Api';
 
 // TutorCard component to display tutor information
 const TutorCard = ({ name, time, subject }) => {
@@ -8,10 +9,7 @@ const TutorCard = ({ name, time, subject }) => {
       <h2>{name}</h2>
       <p>Time: {time}</p>
       <p>Subject: {subject}</p>
-      <Button onClick={() => {
-        console.log(`Viewing profile for ${name}`);
-        // TODO: Implement logic to display tutor's profile
-      }}>View Profile</Button>
+      <Button to='/tutor-profile'>View Profile</Button>
       <Button to='/calendar-view'>Book Appointment</Button>
     </div>
   );
@@ -25,6 +23,7 @@ export const Schedule_Tutor_Filter = () => {
   const [time, setTime] = useState('');
   const [rating, setRating] = useState('');
   const [name, setName] = useState('');
+  const [tutors, setTutors] = useState('')
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -39,6 +38,7 @@ export const Schedule_Tutor_Filter = () => {
 
   useEffect(() => {
     showButton();
+    getTutors().then(list => setTutors(list));
   }, []);
 
   window.addEventListener('resize', showButton);
@@ -50,9 +50,14 @@ export const Schedule_Tutor_Filter = () => {
     { name: 'Bob Johnson', time: '1:00 PM', subject: 'History' },
   ];
 
+  console.log(tutors);
+
   // Function to filter tutors based on user input
   const filterTutors = () => {
-    return tutorData.filter((tutor) => {
+    //need each individual tutor info (use route)... what to do...
+    ///username/:tutorId
+
+    return tutors.filter((tutor) => {
       const subjectMatch = !subject || tutor.subject.toLowerCase().includes(subject.toLowerCase());
       const timeMatch = !time || tutor.time.toLowerCase().includes(time.toLowerCase());
       const nameMatch = !name || tutor.name.toLowerCase().includes(name.toLowerCase());

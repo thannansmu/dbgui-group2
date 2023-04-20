@@ -181,7 +181,7 @@ app.get(`/users/:username/requests`, (req, res) => {
 
 //Gets all comments for specific user
 app.get(`/users/:username/comments`, (req, res) => {
-  const username = req.params.username;;
+  const username = req.params.username;
   connection.query(`SELECT * FROM Comments WHERE username = '${username}'`, (err, rows, fields) => {
     if (err) throw err
     res.status(200)
