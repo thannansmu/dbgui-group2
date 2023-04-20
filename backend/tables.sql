@@ -110,7 +110,7 @@ CREATE Table Ratings (
 );
 
 
-CREATE Table TimesAvaliable (
+CREATE Table TimesAvailable (
    timeID INT AUTO_INCREMENT,
    tutorID INT,
    tutorTime VARCHAR(20),
@@ -192,9 +192,9 @@ INSERT INTO Requests(username, studentID, tutorID, request) VALUES('user1', 1, 1
 INSERT INTO Requests(username, studentID, tutorID, request) VALUES('user3', 3,2, 'meet at 2');
 INSERT INTO Requests(username, studentID, tutorID, request) VALUES('user4', 4, 5, 'meet at 11');
 
-INSERT INTO TimesAvaliable(tutorID, tutorTime, tutorDay) VALUES (1, '3:00', 'Monday');
-INSERT INTO TimesAvaliable(tutorID, tutorTime, tutorDay) VALUES (2, '5:00', 'Tuesday');
-INSERT INTO TimesAvaliable(tutorID, tutorTime, tutorDay) VALUES (5, '7:00', 'Wednesday');
+INSERT INTO TimesAvailable(tutorID, tutorTime, tutorDay) VALUES (1, '3:00', 'Monday');
+INSERT INTO TimesAvailable(tutorID, tutorTime, tutorDay) VALUES (2, '5:00', 'Tuesday');
+INSERT INTO TimesAvailable(tutorID, tutorTime, tutorDay) VALUES (5, '7:00', 'Wednesday');
 
 INSERT INTO TutoringSessions(tutorID, tutorSession) VALUES (1, '3:00');
 INSERT INTO TutoringSessions(tutorID, tutorSession) VALUES (2, '5:00');
