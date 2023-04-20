@@ -10,17 +10,9 @@ export const YourQuestions = ({ loggedInUser }) => {
     axios.get(`http://localhost:8000/students?username=${loggedInUser}`)
       .then(response => {
         // If response is successful, set the student ID state
-        setStudentID(response.data[0].studentID);
+        setStudentID(response.data[1].studentID);
 
-        // Use inline SQL statement to retrieve questions for logged-in student
-        axios.get(`http://localhost:8000/questions?query=SELECT questionText FROM Question WHERE studentID=${response.data[0].studentID}`)
-          .then(response => {
-            // If response is successful, set the questions state
-            setQuestions(response.data);
-          })
-          .catch(error => {
-            console.log(error);
-          });
+       
       })
       .catch(error => {
         console.log(error);
@@ -34,9 +26,7 @@ export const YourQuestions = ({ loggedInUser }) => {
       <h3>Student ID: {studentID}</h3>
       <h3>Questions:</h3>
       <ul>
-        {questions.map((question, index) => (
-          <li key={index}>{question.questionText}</li>
-        ))}
+       
       </ul>
     </div>
   );

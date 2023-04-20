@@ -73,6 +73,24 @@ export const getStudentIDByUsername = (username) => new Promise((resolve, reject
             reject(error);
         });
 });
+
+export const getQuestionTextByStudentID = (studentID) => new Promise((resolve, reject) => {
+    axios.get(`${url}/student/${studentID}/questions`)
+        .then(resp => {
+            const questions = resp.data;
+            if (questions.length > 0) {
+                const questionText = questions[0].questionText;
+                resolve(questionText);
+            } else {
+                reject(new Error(`No question found for student ID ${studentID}`));
+            }
+        })
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
+
 ///////////////////////////////END OF GET ROUTES/////////////////////////////
 
 
