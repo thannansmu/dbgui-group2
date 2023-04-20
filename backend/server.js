@@ -329,9 +329,9 @@ app.post(`/users/:username/add_rating`, (req, res) => {
 })
 
 //Adds time available to database
-app.post(`/users/:username/add_time_available`, (req, res) => {
-  const username = req.params.username;
-  const {tutorID, tutorTime, tutorDay} = req.body
+app.post(`/users/:tutorID/add_time_available`, (req, res) => {
+  const tutorID = req.params.tutorID;
+  const {tutorTime, tutorDay} = req.body
   const query = `INSERT INTO TimesAvailable (tutorID, tutorTime, tutorDay) VALUES (${tutorID}, '${tutorTime}', ${tutorDay})`
   connection.query(query, (err, rows, fields) => {
     if (err) throw err
@@ -343,10 +343,10 @@ app.post(`/users/:username/add_time_available`, (req, res) => {
 })
 
 //Adds tutoring sesison to database
-app.post(`/users/:username/add_tutoring_session`, (req, res) => {
-  const username = req.params.username;
-  const {tutorID, tutorSession} = req.body
-  const query = `INSERT INTO TutoringSessions (tutorID, tutorSession) VALUES (${tutorID}, '${tutorSession}')`
+app.post(`/users/:tutorID/add_tutoring_session`, (req, res) => {
+  const tutorID = req.params.tutorID;
+  const {studentID, tutorTime, tutorDay} = req.body
+  const query = `INSERT INTO TutoringSessions(studentID, tutorID, tutorTime, tutorDay) VALUES (${studentID}, ${tutorID}, '${tutorTime}', '${tutorDay}')`
   connection.query(query, (err, rows, fields) => {
     if (err) throw err
     
