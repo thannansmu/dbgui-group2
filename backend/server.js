@@ -457,7 +457,7 @@ app.get(`/:tutorID/times_available`, (req, res) => {
 })
 
 //Gets tutoring sessions for user
-app.get(`/:tutorIDtutoring_sessions`, (req, res) => {
+app.get(`/:tutorID/tutoring_sessions`, (req, res) => {
   const tutorID = req.params.tutorID;
   
   connection.query(`SELECT * FROM TutoringSessions WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
