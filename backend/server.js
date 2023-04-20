@@ -493,3 +493,27 @@ app.put(`/users/:questionID/update_answer`, (req, res) => {
     console.log(`Updated answer for ${questionID} to ${updatedValue}`)
   })
 })
+
+
+//Gets subjects taught by a tutor
+app.get(`/tutors/:tutorID/subjectsTaught`, (req, res) => {
+  const tutorID = req.params.tutorID;
+  connection.query(`SELECT * FROM SubjectsTaught WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+  })
+})
+
+//Gets time a tutor is available
+app.get(`/tutors/:tutorID/timesAvailable`, (req, res) => {
+  const tutorID = req.params.tutorID;
+  connection.query(`SELECT * FROM TimesAvailable WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+  })
+})
+

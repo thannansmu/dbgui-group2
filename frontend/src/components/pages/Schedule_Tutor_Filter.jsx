@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '../Button';
+import { getTutors, getTutorSubjectsTaught} from '../../Api/tutorApi';
 
 // TutorCard component to display tutor information
-const TutorCard = ({ name, time, subject }) => {
+const TutorCard = ({ name, timesAvailable, subjectsTaught }) => {
   return (
     <div style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px' }}>
       <h2>{name}</h2>
-      <p>Time: {time}</p>
-      <p>Subject: {subject}</p>
+      <p>Times available: {timesAvailable}</p>
+      <p>Subjects taught: {subjectsTaught}</p>
       <Button onClick={() => {
         console.log(`Viewing profile for ${name}`);
         // TODO: Implement logic to display tutor's profile
@@ -17,13 +18,13 @@ const TutorCard = ({ name, time, subject }) => {
   );
 };
 
+
 // Schedule_Tutor_Filter component to display tutor filter page
 export const Schedule_Tutor_Filter = () => {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
   const [subject, setSubject] = useState('');
   const [time, setTime] = useState('');
-  const [rating, setRating] = useState('');
   const [name, setName] = useState('');
 
   const handleClick = () => setClick(!click);
@@ -43,25 +44,28 @@ export const Schedule_Tutor_Filter = () => {
 
   window.addEventListener('resize', showButton);
 
-  // Example data for tutors
-  const tutorData = [
-    { name: 'John Doe', time: '10:00 AM', subject: 'Math' },
-    { name: 'Jane Smith', time: '11:00 AM', subject: 'Science' },
-    { name: 'Bob Johnson', time: '1:00 PM', subject: 'History' },
-  ];
-
   // Function to filter tutors based on user input
-  const filterTutors = () => {
-    return tutorData.filter((tutor) => {
-      const subjectMatch = !subject || tutor.subject.toLowerCase().includes(subject.toLowerCase());
-      const timeMatch = !time || tutor.time.toLowerCase().includes(time.toLowerCase());
-      const nameMatch = !name || tutor.name.toLowerCase().includes(name.toLowerCase());
+  const filterTutors = async () => {
+    try {
+      const tutors = await getTutors();
+      return tutors.filter((tutor) => {
+        const subjectMatch = !subject || tutor.subjectsTaught.includes(subject.toLowerCase());
+        const timeMatch = !time || tutor.timesAvailable.some(ta => ta.tutorTime.toLowerCase().includes(time.toLowerCase()));
+        const nameMatch = !name || tutor.username.toLowerCase().includes(name.toLowerCase());
 
-      return subjectMatch && timeMatch && nameMatch;
-    });
+        return subjectMatch && timeMatch && nameMatch;
+      });
+    } catch (error) {
+      alert(error);
+      return [];
+    }
   };
 
-  const filteredTutors = filterTutors();
+  const [filteredTutors, setFilteredTutors] = useState([]);
+
+  useEffect(() => {
+    filterTutors().then((tutors) => setFilteredTutors(tutors));
+  }, [subject, time, name]);
 
   return (
     <div>
@@ -77,16 +81,15 @@ export const Schedule_Tutor_Filter = () => {
         </div>
         <div>
         <label htmlFor="name">Name:</label>
-        <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} /> {/* Changed variable name from 'rating' to 'name' */}
+        <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
       </div>
-        <div>
-          <label htmlFor="rating">Rating:</label>
-          <input type="text" id="rating" value={rating} onChange={(e) => setRating(e.target.value)} />
-        </div>
       </div>
       {filteredTutors.map((tutor) => (
-        <TutorCard key={tutor.name} name={tutor.name} time={tutor.time} subject={tutor.subject} />
-      ))}
+  <TutorCard key={tutor.tutorID} name={tutor.username} times_available={tutor.timesAvailable} subjects_taught={tutor.subjectsTaught} />
+))}
+
+
+
     </div>
   );
 };
