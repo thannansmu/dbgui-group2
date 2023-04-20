@@ -63,6 +63,56 @@ export const getUserComments = (username) => new Promise((resolve, reject) => {
             reject(error);
         });
 });
+//Get StudentID by username
+export const getStudentIDByUsername = (username) => new Promise((resolve, reject) => {
+    axios.get(`${url}/${username}/studentID`)
+        .then(resp => {
+            const studentID = resp.data[0].studentID;
+            resolve(studentID);
+        })
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
+
+
+//Returns the first question of a particular Student----------------------------------------------------------
+export const getQuestionTextByStudentID = (studentID) => new Promise((resolve, reject) => {
+    axios.get(`${url}/student/${studentID}/questions`)
+        .then(resp => {
+            const questions = resp.data;
+            if (questions.length > 0) {
+                const questionText = questions[0].questionText;
+                resolve(questionText);
+            } else {
+                reject(new Error(`No question found for student ID ${studentID}`));
+            }
+        })
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
+
+//Returns all questions associated with student:
+export const getQuestionTextsByStudentID = (studentID) => new Promise((resolve, reject) => {
+    axios.get(`${url}/student/${studentID}/questions`)
+        .then(resp => {
+            const questions = resp.data;
+            if (questions.length > 0) {
+                const questionTexts = questions.map(question => question.questionText);
+                resolve(questionTexts);
+            } else {
+                reject(new Error(`No questions found for student ID ${studentID}`));
+            }
+        })
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
+
 
 ///////////////////////////////END OF GET ROUTES/////////////////////////////
 

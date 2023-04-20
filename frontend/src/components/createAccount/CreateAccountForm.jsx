@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './CreateAccountForm.css';
 import { TextField, TextAreaField, CheckboxList, SelectField, TimeFrame } from '../common';
 import { AvailabilityList } from '../createAccount';
-import { addUser } from '../../api';
+import { addUser } from '../../Api';
 
 const TutorForm = ({ accountType }) => {
   const [day, setDay] = useState("");
