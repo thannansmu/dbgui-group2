@@ -41,7 +41,7 @@ export const YourQuestions = ({ loggedInUser }) => {
           <li key={index}>{question}</li>
         ))}
       </ul>
-      <div style={{ position: 'absolute', bottom: 350, right: 128 }}>
+      <div style={{ position: 'absolute', bottom: 325, right: 128 }}>
       <Link to={askQuestionLink} style={linkStyles}>Ask a Question</Link></div>
     </div>
   );
