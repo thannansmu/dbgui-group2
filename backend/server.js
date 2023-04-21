@@ -408,9 +408,9 @@ app.get(`/:username/reviews`, (req, res) => {
 })
 
 //Gets questions for student
-app.get(`student/:studentID/questions`, (req, res) => {
+app.get(`/student/:studentID/questions`, (req, res) => {
   const studentID = req.params.studentID;
-  connection.query(`SELECT * FROM Question WHERE studentID = ${studentID}`, (err, rows, fields) => {
+  connection.query(`SELECT questionText FROM Question WHERE studentID = ${studentID}`, (err, rows, fields) => {
     if (err) throw err
     res.status(200)
     res.send(rows)
