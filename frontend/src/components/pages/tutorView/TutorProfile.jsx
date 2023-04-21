@@ -3,12 +3,15 @@ import { UserInfo } from '../UserInfo';
 import { Button } from '../../Button';
 import '../../styles/Tutor.css';
 import '../../styles/Button.css';
-import { getTutor, getTutorId } from '../../../Api';
+import { getTutor, getTutorId, getUserByAttribute } from '../../../Api';
 
-export const TutorProfile = () => {
+export const TutorProfile = ({ loggedInUser }) => {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
-    const [tutor, setTutor] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [userRole, setUserRole] = useState('');
+    const [bio, setBio] = useState('');
 
 
     const handleClick = () => setClick(!click);
@@ -24,21 +27,43 @@ export const TutorProfile = () => {
 
     useEffect(() => {
         showButton();
-        // const id = async getTutorId();
+        getUserInfo();
     }, []);
+
+    const getUserInfo = async () => {
+
+        const response = await getUserByAttribute(loggedInUser, 'firstName');
+        setFirstName(response[0].firstName);
+        const lastResponse = await getUserByAttribute(loggedInUser, 'lastName');
+        setLastName(lastResponse[0].lastName);
+        const roleResponse = await getUserByAttribute(loggedInUser, 'userRole');
+        setUserRole(roleResponse[0].userRole);
+        const bioResponse = await getUserByAttribute(loggedInUser, 'bio');
+        setBio(bioResponse[0].bio);
+    };
 
     window.addEventListener('resize', showButton);
 
     return <>
-        <h1 className='title'>Your Profile</h1>
+        <h1 className='title' style={{ textDecoration: 'underline' }}>
+            Your Profile
+        </h1>
 
         <div>
 
-            <br></br>
-            <UserInfo />
-            <div>First Name</div>
-            <div>Last Name</div>
-            <div>Bio</div>
+            <br />
+            <h4>
+                <u>User Information:</u>
+                <br></br>
+                <br></br>
+            </h4>
+
+            <h4>username: {loggedInUser}</h4>
+
+            {firstName && <h4>first name: {firstName}</h4>}
+            {lastName && <h4>last name: {lastName}</h4>}
+            {userRole && <h4>user role: {userRole}</h4>}
+            {bio && <h4>bio: {bio}</h4>}
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>

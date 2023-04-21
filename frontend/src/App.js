@@ -86,7 +86,7 @@ function App() {
       <Route path = '/main-student-screen' element={<ProfilePage/>}/>
       <Route path = '/review-tutor' element={<Review_Tutor/>}/>
       <Route path="/profile" element={<ProfilePage loggedInUser={loggedInUser} />} />
-      <Route path = '/tutor-profile' element={<TutorProfile />} />
+      <Route path = '/tutor-profile' element={<TutorProfile loggedInUser={loggedInUser} />} />
       <Route path = '/calendar-view' element={<CalendarView />} />    
 
     </Routes>

@@ -8,8 +8,12 @@ const TutorCard = ({ name, timesAvailable, subjectsTaught }) => {
     <div style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px' }}>
       <h2>{name}</h2>
       <p>Times available: {timesAvailable}</p>
-      <p>Subjects taught: {subjectsTaught}</p>
+      <p>Subjects taught: {subjectsTaught}</p>  
       
+      {/* Add logic to make tutor profile look like profile page
+          Maybe make a page for a user's view of a tutor (who's not logged in)?
+          Pass the tutor id and get tutor via id -> username
+       */}
       <Button to='/tutor-profile'>View Profile</Button>
       <Button to='/calendar-view'>Book Appointment</Button>
     </div>
@@ -64,11 +68,12 @@ export const Schedule_Tutor_Filter = () => {
     });
   };
 
-  const [filteredTutors, setFilteredTutors] = useState([]);
+  // const [filteredTutors, setFilteredTutors] = useState([]);
+  const filteredTutors = filterTutors();
 
-  useEffect(() => {
-    filterTutors().then((tutors) => setFilteredTutors(tutors));
-  }, [subject, time, name]);
+  // useEffect(() => {
+  //   filterTutors().then((tutors) => setFilteredTutors(tutors));
+  // }, [subject, time, name]);
 
   return (
     <div>
