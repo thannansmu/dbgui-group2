@@ -14,9 +14,9 @@ export const getTutors = () => new Promise((resolve, reject) => {
         });
 });
 
-//Get a Tutor
-export const getTutor = (tutorId) => new Promise((resolve, reject) => {
-    axios.get(`${url}/${tutorId}/info`)
+//Get Tutor
+export const getTutor = (username) => new Promise((resolve, reject) => {
+    axios.get(`${url}/users/${username}`)
         .then(resp => resolve(resp.data))
         .catch(error => {
             alert(error);
@@ -24,9 +24,8 @@ export const getTutor = (tutorId) => new Promise((resolve, reject) => {
         });
 });
 
-//Get Tutor Id
-export const getTutorId = (username) => new Promise((resolve, reject) => {
-    axios.get(`${url}/${username}/tutorId`)
+export const getTutorTimesAvailable = (username) => new Promise((resolve, reject) => {
+    axios.get(`${url}/users/${username}/timesAvailable`)
         .then(resp => resolve(resp.data))
         .catch(error => {
             alert(error);
@@ -34,9 +33,10 @@ export const getTutorId = (username) => new Promise((resolve, reject) => {
         });
 });
 
-//Get Tutor Times
-export const getTutorTimes = (tutorId) => new Promise((resolve, reject) => {
-    axios.get(`${url}/${tutorId}/times_available`)
+
+// Get subjects taught by a tutor
+export const getTutorSubjectsTaught = (tutorID) => new Promise((resolve, reject) => {
+    axios.get(`${url}/subjects/${tutorID}`)
         .then(resp => resolve(resp.data))
         .catch(error => {
             alert(error);
@@ -44,35 +44,50 @@ export const getTutorTimes = (tutorId) => new Promise((resolve, reject) => {
         });
 });
 
-//Get Tutor Subject
-export const getTutorSubject = (tutorId) => new Promise((resolve, reject) => {
-    axios.get(`${url}/${tutorId}/subjects_taught`)
-        .then(resp => resolve(resp.data))
-        .catch(error => {
-            alert(error);
-            reject(error);
-        });
-});
 
 ///////////////////////////////END OF GET ROUTES/////////////////////////////
 
 
 
 ////////////////////////////////POST ROUTES//////////////////////////////////
-
+//Register
+export const addTutor = (user) => new Promise((resolve, reject) => {
+    axios.post(`${url}/users/add`, user)
+        .then(resp => resolve(resp.data))
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
 
 //////////////////////////////END OF POST ROUTES/////////////////////////////
 
 
 
 //////////////////////////////////PUT ROUTES/////////////////////////////////
-
+//Update Profile
+export const updateTutor = (username, attribute, updatedValue) => new Promise((resolve, reject) => {
+    axios.put(`${url}/${username}/${attribute}/update`, updatedValue)
+        .then(resp => resolve(resp.data))
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
 
 ///////////////////////////////END OF PUT ROUTES/////////////////////////////
 
 
 
 ///////////////////////////////DELETE ROUTES/////////////////////////////////
-
+//Delete User
+export const deleteTutor = (username) => new Promise((resolve, reject) => {
+    axios.delete(`${url}/${username}/delete`)
+        .then(resp => resolve(resp.data))
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
 
 ////////////////////////////END OF DELETE ROUTES/////////////////////////////

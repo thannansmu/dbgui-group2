@@ -205,6 +205,7 @@ app.post(`/users/:username/add_request`, (req, res) => {
   })
 })
 
+//Adds comment to specific user
 app.post(`/users/:username/add_comment`, (req, res) => {
   const username = req.params.username;
   const {commentID, commentRecieverID, comment} = req.body
@@ -219,6 +220,7 @@ app.post(`/users/:username/add_comment`, (req, res) => {
   })
 })
 
+//Deletes user from database
 app.delete(`/users/:username/delete`, (req, res) => {
   const username = req.params.username;
   console.log(`DELETE FROM User WHERE username='${username}'`);
@@ -230,7 +232,8 @@ app.delete(`/users/:username/delete`, (req, res) => {
   })
 })
 
-app.delete(`/requests/delete_request/:requestID`, (req, res) => {
+//Deletes request from database
+app.delete(`/delete_request/:requestID`, (req, res) => {
   const requestID = req.params.requestID;
   connection.query(`DELETE FROM Requests WHERE requestID='${requestID}'`, (err, rows, fields) => {
     if (err) throw err
@@ -241,7 +244,8 @@ app.delete(`/requests/delete_request/:requestID`, (req, res) => {
   
 })
 
-app.delete(`/comments/delete_comment/:commentID`, (req, res) => {
+//Deletes comments from database
+app.delete(`/delete_comment/:commentID`, (req, res) => {
   const commentID = req.params.commentID;
   connection.query(`DELETE FROM Comments WHERE commentID='${commentID}'`, (err, rows, fields) => {
     if (err) throw err
@@ -440,10 +444,10 @@ app.get(`/:username/ratings`, (req, res) => {
 })
 
 //Gets times available for user
-app.get(`/:tutorID/times_available`, (req, res) => {
-  const tutorID = req.params.tutorID;
+app.get(`/:username/times_available`, (req, res) => {
+  const username = req.params.username;
   
-  connection.query(`SELECT * FROM TimesAvailable WHERE tutorID = ${tutorID}`, (err, rows, fields) => {
+  connection.query(`SELECT * FROM TimesAvailable WHERE username = '${username}'`, (err, rows, fields) => {
     if (err) throw err
     res.status(200)
     res.send(rows)
@@ -453,10 +457,10 @@ app.get(`/:tutorID/times_available`, (req, res) => {
 })
 
 //Gets tutoring sessions for user
-app.get(`/:tutorID/tutoring_sessions`, (req, res) => {
-  const tutorID = req.params.tutorID;
+app.get(`/:username/tutoring_sessions`, (req, res) => {
+  const username = req.params.username;
   
-  connection.query(`SELECT * FROM TutoringSessions WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
+  connection.query(`SELECT * FROM TutoringSessions WHERE username = '${username}'`, (err, rows, fields) => {
     if (err) throw err
     res.status(200)
     res.send(rows)
@@ -466,10 +470,10 @@ app.get(`/:tutorID/tutoring_sessions`, (req, res) => {
 })
 
 //Gets subjects taught for user
-app.get(`/:tutorID/subjects_taught`, (req, res) => {
-  const tutorID = req.params.tutorID;
+app.get(`/:username/subjects_taught`, (req, res) => {
+  const username = req.params.username;
  
-  connection.query(`SELECT * FROM SubjectsTaught WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
+  connection.query(`SELECT * FROM SubjectsTaught WHERE username = '${username}'`, (err, rows, fields) => {
     if (err) throw err
     res.status(200)
     res.send(rows)
@@ -489,3 +493,27 @@ app.put(`/users/:questionID/update_answer`, (req, res) => {
     console.log(`Updated answer for ${questionID} to ${updatedValue}`)
   })
 })
+
+
+//Gets subjects taught by a tutor
+app.get(`/tutors/:tutorID/subjectsTaught`, (req, res) => {
+  const tutorID = req.params.tutorID;
+  connection.query(`SELECT * FROM SubjectsTaught WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+  })
+})
+
+//Gets time a tutor is available
+app.get(`/tutors/:tutorID/timesAvailable`, (req, res) => {
+  const tutorID = req.params.tutorID;
+  connection.query(`SELECT * FROM TimesAvailable WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+  })
+})
+
