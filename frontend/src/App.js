@@ -9,6 +9,8 @@ import { ProfilePage } from './components/pages/ProfilePage';
 import { TutorProfile, TutorProfileStudent } from './components/pages/tutorView';
 import { Review_Tutor } from './components/pages';
 import { CalendarView } from './components/pages/CalendarView';
+import {ScheduleTutorFilter} from './components/pages/Schedule_Tutor_Filter';
+
 
 
 function App() {

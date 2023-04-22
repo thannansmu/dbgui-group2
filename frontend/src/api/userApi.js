@@ -149,6 +149,25 @@ export const addComment = (username, comment) => new Promise((resolve, reject) =
         });
 });
 
+
+//add new question
+export const addNewQuestion = async (username, studentID, tutorID, question, answer) => {
+  try {
+    const response = await axios.post(`${url}/users/${username}/add_question`, {
+      studentID,
+      tutorID,
+      question,
+      answer,
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('Error adding a new question:', error);
+    throw error;
+  }
+};
+
+
 //////////////////////////////END OF POST ROUTES/////////////////////////////
 
 
