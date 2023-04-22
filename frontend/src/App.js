@@ -6,10 +6,9 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import {Home, About, Services, LoginForm, CreateAccount, YourAppointments, Schedule_Tutor_Filter, Ask_Question} from './components/pages';
 import { LogInorCreateAcctOption } from './components/LogInorCreateAcctOption';
 import { ProfilePage } from './components/pages/ProfilePage';
-import { TutorProfile } from './components/pages/tutorView';
+import { TutorProfile, TutorProfileStudent } from './components/pages/tutorView';
 import { Review_Tutor } from './components/pages';
 import { CalendarView } from './components/pages/CalendarView';
-import {ScheduleTutorFilter} from './components/pages/Schedule_Tutor_Filter';
 
 
 function App() {
@@ -18,6 +17,7 @@ function App() {
   const url = 'http://localhost:8000'
 
   const [loggedInUser, setLoggedInUser] = useState('');
+  const [viewTutor, setViewTutor] = useState('');
 
 
   const checkAPI = () => {
@@ -81,13 +81,14 @@ function App() {
       <Route path="/login" element={<LoginForm setLoggedInUser={setLoggedInUser} />} />
       <Route path = '/create-account' element={<CreateAccount />} />
       <Route path = '/booked-appt' element={<YourAppointments />} />
-      <Route path = '/schedule-appt' element={<Schedule_Tutor_Filter />} />
+      <Route path = '/schedule-appt' element={<Schedule_Tutor_Filter setViewTutor={setViewTutor} />} />
       <Route path = '/ask-question' element={<Ask_Question/>}/>
       <Route path = '/main-student-screen' element={<ProfilePage/>}/>
       <Route path = '/review-tutor' element={<Review_Tutor/>}/>
-      <Route path="/profile" element={<ProfilePage loggedInUser={loggedInUser} />} />
+      <Route path= '/profile' element={<ProfilePage loggedInUser={loggedInUser} />} />
       <Route path = '/tutor-profile' element={<TutorProfile loggedInUser={loggedInUser} />} />
-      <Route path = '/calendar-view' element={<CalendarView />} />    
+      <Route path = '/tutor-student' element={<TutorProfileStudent viewTutor={viewTutor} />} />
+      <Route path = '/calendar-view' element={<CalendarView />} />
 
     </Routes>
     

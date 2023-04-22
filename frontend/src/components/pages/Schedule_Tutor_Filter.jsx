@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '../Button';
-import { getTutors, getTutorSubjectsTaught} from '../../Api/tutorApi';
+import { getTutors } from '../../Api/tutorApi';
+
+// Function to set viewTutor when a student looks at a tutor's profile
+const handleOpenTutorProfile = (setViewTutor, username ) => {
+  setViewTutor(username);
+}
 
 // TutorCard component to display tutor information
-const TutorCard = ({ name, timesAvailable, subjectsTaught }) => {
+const TutorCard = ({ username, name, timesAvailable, subjectsTaught, setViewTutor }) => {
+
   return (
     <div style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px' }}>
       <h2>{name}</h2>
       <p>Times available: {timesAvailable}</p>
-      <p>Subjects taught: {subjectsTaught}</p>  
-      
-      {/* Add logic to make tutor profile look like profile page
-          Maybe make a page for a user's view of a tutor (who's not logged in)?
-          Pass the tutor id and get tutor via id -> username
-       */}
-      <Button to='/tutor-profile'>View Profile</Button>
+      <p>Subjects taught: {subjectsTaught}</p>
+
+      <Button to='/tutor-student'>View Profile</Button>
       <Button to='/calendar-view'>Book Appointment</Button>
     </div>
   );
@@ -22,7 +25,7 @@ const TutorCard = ({ name, timesAvailable, subjectsTaught }) => {
 
 
 // Schedule_Tutor_Filter component to display tutor filter page
-export const Schedule_Tutor_Filter = () => {
+export const Schedule_Tutor_Filter = ({ setViewTutor }) => {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
   const [subject, setSubject] = useState('');
@@ -44,15 +47,16 @@ export const Schedule_Tutor_Filter = () => {
 
   useEffect(() => {
     showButton();
+    getTutors().then(x => setTutors(x));
   }, []);
 
   window.addEventListener('resize', showButton);
 
   // Example data for tutors
   const tutorData = [
-    { id: 1, name: 'John Doe', time: '10:00 AM', subject: 'Math' },
-    { id: 2, name: 'Jane Smith', time: '11:00 AM', subject: 'Science' },
-    { id: 3, name: 'Bob Johnson', time: '1:00 PM', subject: 'History' },
+    { username: 'user6', name: 'Sarah Garcia', time: '3:00 PM', subject: 'Computer Science' },
+    { username: 'user7', name: 'Thomas Anderson', time: '5:00 PM', subject: 'Writing' },
+    { username: 'user11', name: 'Patrick Bateman', time: '7:00 AM', subject: 'Business' },
   ];
 
   // Function to filter tutors based on user input
@@ -62,7 +66,7 @@ export const Schedule_Tutor_Filter = () => {
       const subjectMatch = !subject || tutor.subject.toLowerCase().includes(subject.toLowerCase());
       const timeMatch = !time || tutor.time.toLowerCase().includes(time.toLowerCase());
       const nameMatch = !name || tutor.name.toLowerCase().includes(name.toLowerCase());
-  
+
       // Function to filter tutors based on user input
       return subjectMatch && timeMatch && nameMatch;
     });
@@ -97,7 +101,7 @@ export const Schedule_Tutor_Filter = () => {
         </div>
       </div>
       {filteredTutors.map((tutor) => (
-        <TutorCard key={tutor.id} name={tutor.name} time={tutor.time} subject={tutor.subject} />
+        <TutorCard key={tutor.username} username={tutor.username} name={tutor.name} timesAvailable={tutor.time} subjectsTaught={tutor.subject} setViewTutor={handleOpenTutorProfile(setViewTutor, tutor.username)} />
       ))}
     </div>
   );
