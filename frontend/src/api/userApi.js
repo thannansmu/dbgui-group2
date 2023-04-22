@@ -216,4 +216,16 @@ export const deleteCommentt = (id) => new Promise((resolve, reject) => {
             reject(error);
         });
 });
+
+// Delete a question from the database based on question text
+export const deleteQuestionByQuestionText = async (questionText) => {
+    try {
+      const response = await axios.delete(`${url}/questions/${questionText}`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+  
 ////////////////////////////END OF DELETE ROUTES/////////////////////////////
