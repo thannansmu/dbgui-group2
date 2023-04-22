@@ -27,7 +27,8 @@ export const TutorProfileStudent = ({viewTutor}) => {
     useEffect(() => {
         showButton();
         getUserInfo();
-    }, []);
+    }, [viewTutor]);
+    
 
     const getUserInfo = async () => {
 

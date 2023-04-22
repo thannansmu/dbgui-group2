@@ -17,7 +17,7 @@ const TutorCard = ({ username, name, timesAvailable, subjectsTaught, setViewTuto
       <p>Times available: {timesAvailable}</p>
       <p>Subjects taught: {subjectsTaught}</p>
 
-      <Button to='/tutor-student'>View Profile</Button>
+      <Button to='/tutor-student' onClick={() => setViewTutor(username)}>View Profile</Button>
       <Button to='/calendar-view'>Book Appointment</Button>
     </div>
   );
@@ -101,7 +101,7 @@ export const Schedule_Tutor_Filter = ({ setViewTutor }) => {
         </div>
       </div>
       {filteredTutors.map((tutor) => (
-        <TutorCard key={tutor.username} username={tutor.username} name={tutor.name} timesAvailable={tutor.time} subjectsTaught={tutor.subject} setViewTutor={handleOpenTutorProfile(setViewTutor, tutor.username)} />
+        <TutorCard key={tutor.username} username={tutor.username} name={tutor.name} timesAvailable={tutor.time} subjectsTaught={tutor.subject} setViewTutor={() => handleOpenTutorProfile(setViewTutor, tutor.username)} />
       ))}
     </div>
   );

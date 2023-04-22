@@ -49,11 +49,7 @@ export const Navbar = () => {
                 </Link>
             </li>
 
-            <li className = 'nav-item'>
-                <Link to='/about-page' className = 'nav-links-mobile' onClick = {closeMobileMenu}>
-                    About
-                </Link>
-            </li>
+            
 
             
             </ul>

@@ -3,6 +3,8 @@ import axios from 'axios';
 import { getStudentIDByUsername } from '../../Api';
 import { getQuestionTextsByStudentID, deleteQuestionByQuestionText } from '../../Api';
 import { Link } from 'react-router-dom';
+import { Button } from '../Button';
+
 
 export const YourQuestions = ({ loggedInUser }) => {
   const [studentID, setStudentID] = useState('');
@@ -41,9 +43,7 @@ export const YourQuestions = ({ loggedInUser }) => {
 
   return (
     <div>
-      <h2><u>Your Questions</u></h2>
-      <h3>Username: {loggedInUser}</h3>
-      <h3>Student ID: {studentID}</h3>
+      <br></br>
       <h1>Your Questions</h1>
       <ul>
         {questions.map((question, index) => (
@@ -53,8 +53,12 @@ export const YourQuestions = ({ loggedInUser }) => {
           </li>
         ))}
       </ul>
-      <div style={{ position: 'absolute', bottom: 325, right: 128 }}>
-        <Link to={askQuestionLink} style={linkStyles}>Ask a Question</Link>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '15px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <Button to={askQuestionLink} className="page-button" style={{ marginBottom: '10px', marginRight: '10em' }}>
+            <i>Ask a Question</i>
+          </Button>
+        </div>
       </div>
     </div>
   );
