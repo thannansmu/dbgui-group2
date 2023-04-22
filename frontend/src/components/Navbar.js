@@ -49,9 +49,7 @@ export const Navbar = () => {
                 </Link>
             </li>
 
-            
-
-            
+        
             </ul>
             {button && (
             <Button buttonStyle="btn--outline" to="/sign-up">

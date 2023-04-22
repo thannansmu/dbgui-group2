@@ -52,12 +52,13 @@ export const LoginForm = ({ setLoggedInUser }) => {
         </div>
 
         <div className="login-field">
-          <TextField
-            id="password"
-            label="Password"
-            value={password}
-            setValue={setPassword}
-          />
+        <TextField
+  id="password"
+  label="Password"
+  value={password}
+  setValue={setPassword}
+  type="password" // Add this line. 
+/>
         </div>
 
         <button className="btn" type="button" onClick={handleSubmit}>
