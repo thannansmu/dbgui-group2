@@ -44,6 +44,16 @@ export const getTutorSubjectsTaught = (tutorID) => new Promise((resolve, reject)
         });
 });
 
+export const getTutorID = (username) => new Promise((resolve, reject) => {
+    axios.get(`${url}/${username}/tutorID`)
+      .then(resp => resolve(resp.data))
+      .catch(error => {
+        alert(error);
+        reject(error);
+      });
+  });
+  
+
 
 ///////////////////////////////END OF GET ROUTES/////////////////////////////
 

@@ -114,6 +114,16 @@ export const getQuestionTextsByStudentID = (studentID) => new Promise((resolve, 
 });
 
 
+export const getSubjectsTaughtByUsername = (username) => new Promise((resolve, reject) => {
+    axios.get(`${url}/${username}/subjects_taught`)
+        .then(resp => resolve(resp.data))
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
+
+
 ///////////////////////////////END OF GET ROUTES/////////////////////////////
 
 

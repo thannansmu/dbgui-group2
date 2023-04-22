@@ -121,6 +121,7 @@ app.get(`/:tutorID/info`, (req, res) => {
 app.get(`/users/:username/:attribute`, (req, res) => {
   const username = req.params.username;
   const attribute = req.params.attribute;
+
   connection.query(`SELECT ${attribute} FROM User WHERE username = '${username}'`, (err, rows, fields) => {
     if (err) throw err
     res.status(200)
