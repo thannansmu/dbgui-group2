@@ -67,7 +67,7 @@ app.get(`/users/:username`, (req, res) => {
   })
 })
 
-//Gets student id of a user
+//Returns student id of a user
 app.get(`/:username/studentID`, (req, res) => {
   const username = req.params.username;
   connection.query(`SELECT studentID FROM Students WHERE username = '${username}'`, (err, rows, fields) => {
@@ -78,7 +78,7 @@ app.get(`/:username/studentID`, (req, res) => {
   })
 })
 
-//Gets tutor id of a user
+//Returns tutor id of a user
 app.get(`/:username/tutorID`, (req, res) => {
   const username = req.params.username;
   connection.query(`SELECT tutorID FROM Tutors WHERE username = '${username}'`, (err, rows, fields) => {
@@ -163,7 +163,7 @@ app.put(`/users/:username/:attribute/update`, (req, res) => {
     })
 })
 
-//Gets all requests for specific user
+//Returns all requests for specific user
 app.get(`/users/:username/requests`, (req, res) => {
   const username = req.params.username;;
   connection.query(`SELECT * FROM Requests WHERE username = '${username}'`, (err, rows, fields) => {
@@ -174,7 +174,7 @@ app.get(`/users/:username/requests`, (req, res) => {
   })
 })
 
-//Gets all comments for specific user
+//Returns all comments for specific user
 app.get(`/users/:username/comments`, (req, res) => {
   const username = req.params.username;;
   connection.query(`SELECT * FROM Comments WHERE username = '${username}'`, (err, rows, fields) => {
@@ -236,7 +236,6 @@ app.delete(`/delete_request/:requestID`, (req, res) => {
     res.send(rows)
     console.log(`Deleted request with requestID ${requestID} from database`)
   })
-  
 })
 
 //Deletes comments from database
@@ -290,8 +289,7 @@ app.post(`/users/:username/add_review`, (req, res) => {
     console.log(rows)
     res.status(200)
     res.send("Successfully added review!")
-  })
-  
+  }) 
 })
 
 //Adds questions to database
@@ -306,7 +304,6 @@ app.post(`/users/:username/add_question`, (req, res) => {
     res.status(200)
     res.send("Successfully added review!")
   })
-  
 })
 
 //Adds rating to database
@@ -365,7 +362,7 @@ app.post(`/users/:username/add_subject_taught`, (req, res) => {
   })
 })
 
-//Gets reports for user
+//Returns reports for user
 app.get(`/:username/reports`, (req, res) => {
   const username = req.params.username;
   
@@ -374,10 +371,10 @@ app.get(`/:username/reports`, (req, res) => {
     res.status(200)
     res.send(rows)
     console.log(rows)
-})
+  })
 })
 
-//Gets favorite tutors for user
+//Returns favorite tutors for user
 app.get(`/:username/favoritetutors`, (req, res) => {
   const username = req.params.username;
   connection.query(`SELECT * FROM FavoriteTutors WHERE username = '${username}'`, (err, rows, fields) => {
@@ -385,11 +382,10 @@ app.get(`/:username/favoritetutors`, (req, res) => {
     res.status(200)
     res.send(rows)
     console.log(rows)
-})
-  
+  }) 
 })
 
-//Gets reviews for user
+//Returns reviews for user
 app.get(`/:username/reviews`, (req, res) => {
   const username = req.params.username;
   
@@ -398,11 +394,10 @@ app.get(`/:username/reviews`, (req, res) => {
     res.status(200)
     res.send(rows)
     console.log(rows)
-})
-  
+  }) 
 })
 
-//Gets questions for student
+//Returns questions for student
 app.get(`student/:studentID/questions`, (req, res) => {
   const studentID = req.params.studentID;
   connection.query(`SELECT * FROM Question WHERE studentID = ${studentID}`, (err, rows, fields) => {
@@ -410,10 +405,10 @@ app.get(`student/:studentID/questions`, (req, res) => {
     res.status(200)
     res.send(rows)
     console.log(rows)
-})
+  })
 })
 
-//Gets questions for tutor
+//Returns questions for tutor
 app.get(`tutor/:tutorID/questions`, (req, res) => {
   const tutorID = req.params.tutorID;
   connection.query(`SELECT * FROM Question WHERE tutorID = ${tutorID}`, (err, rows, fields) => {
@@ -421,11 +416,10 @@ app.get(`tutor/:tutorID/questions`, (req, res) => {
     res.status(200)
     res.send(rows)
     console.log(rows)
-})
-  
+  })
 })
 
-//Gets ratings for user
+//Returns ratings for user
 app.get(`/:username/ratings`, (req, res) => {
   const username = req.params.username;
   
@@ -434,11 +428,10 @@ app.get(`/:username/ratings`, (req, res) => {
     res.status(200)
     res.send(rows)
     console.log(rows)
-})
-  
+  }) 
 })
 
-//Gets times available for user
+//Returns times available for tutor
 app.get(`/:tutorID/times_available`, (req, res) => {
   const tutorID = req.params.tutorID;
   
@@ -447,11 +440,10 @@ app.get(`/:tutorID/times_available`, (req, res) => {
     res.status(200)
     res.send(rows)
     console.log(rows)
-})
-  
+  })
 })
 
-//Gets tutoring sessions for user
+//Returns tutoring sessions for tutor
 app.get(`/:tutorID/tutoring_sessions`, (req, res) => {
   const tutorID = req.params.tutorID;
   
@@ -460,11 +452,10 @@ app.get(`/:tutorID/tutoring_sessions`, (req, res) => {
     res.status(200)
     res.send(rows)
     console.log(rows)
-})
-  
+  })
 })
 
-//Gets subjects taught for user
+//Returns subjects taught for tutor
 app.get(`/:tutorID/subjects_taught`, (req, res) => {
   const tutorID = req.params.tutorID;
  
@@ -473,9 +464,8 @@ app.get(`/:tutorID/subjects_taught`, (req, res) => {
     res.status(200)
     res.send(rows)
     console.log(rows)
+  })
 })
-})
-
 
 //Adds answer to given question
 app.put(`/users/:questionID/update_answer`, (req, res) => {
