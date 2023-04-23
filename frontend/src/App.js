@@ -82,10 +82,10 @@ function App() {
       <Route path = '/schedule-appt' element={<Schedule_Tutor_Filter />} />
       <Route path = '/ask-question' element={<Ask_Question/>}/>
       <Route path = '/main-student-screen' element={<ProfilePage/>}/>
-      <Route path = '/review-tutor' element={<Review_Tutor/>}/>
+      <Route path = '/review-tutor:username' element={<Review_Tutor loggedInUser={loggedInUser} />}/>
       <Route path="/profile" element={<ProfilePage loggedInUser={loggedInUser} />} />
       <Route path = '/tutor-profile' element={<TutorProfile />} />
-      <Route path='/calendar-view/:username' element={<CalendarView />} />
+      <Route path='/calendar-view/:username' element={<CalendarView loggedInUser={loggedInUser} />} />
     </Routes>
     
     </Router>

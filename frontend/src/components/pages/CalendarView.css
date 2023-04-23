@@ -38,6 +38,10 @@ td[class$="-available"] {
     width: fit-content;
 }
 
+.checkCalendar {
+    display: none;
+}
+
 button[class*='calendar'] {
     padding: 0.5rem;
     padding-left: 1rem;

@@ -3,6 +3,7 @@ import './CreateAccountForm.css';
 import { TextField, TextAreaField, CheckboxList, SelectField, TimeFrame } from '../common';
 import { AvailabilityList } from '../createAccount';
 import { addUser } from '../../Api';
+import { Link } from 'react-router-dom';
 
 const TutorForm = ({ accountType }) => {
   const [day, setDay] = useState("");
@@ -149,7 +150,7 @@ export const CreateAccountForm = ({ accountType }) => {
 
         <TutorForm accountType={accountType} />
         <br />
-        <button className='createAccount' id='register' style={{marginBottom: '2rem'}} onClick={onRegister}>Register</button>
+        <Link to= '/login'><button className='createAccount' id='register' style={{marginBottom: '2rem'}} onClick={onRegister}>Register</button></Link>
       </div>
     )
   }

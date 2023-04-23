@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '../Button';
+import { Link } from 'react-router-dom';
 
 // TutorCard component to display tutor information
 const TutorCard = ({ name, time, subject }) => {
+  //hardcoded the username in the meantime until i connect this page to the api
+  const username= 'user6';
+
   return (
     <div style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px' }}>
       <h2>{name}</h2>
@@ -12,7 +16,7 @@ const TutorCard = ({ name, time, subject }) => {
         console.log(`Viewing profile for ${name}`);
         // TODO: Implement logic to display tutor's profile
       }}>View Profile</Button>
-      <Button to='/calendar-view'>Book Appointment</Button>
+      <Button to={`/calendar-view/${username}`}>Book Appointment</Button>
     </div>
   );
 };
@@ -25,6 +29,7 @@ export const Schedule_Tutor_Filter = () => {
   const [time, setTime] = useState('');
   const [rating, setRating] = useState('');
   const [name, setName] = useState('');
+  //const [selectedTutor, selectedTutorID] = useState('');
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -40,6 +45,14 @@ export const Schedule_Tutor_Filter = () => {
   useEffect(() => {
     showButton();
   }, []);
+
+  /*
+  useEffect(() => {
+    availabilityApi.getTutorID(username)
+    .then(data => setTutorID(data))
+    .catch(error => console.log(error));
+}, []);
+*/
 
   window.addEventListener('resize', showButton);
 
@@ -85,7 +98,7 @@ export const Schedule_Tutor_Filter = () => {
         </div>
       </div>
       {filteredTutors.map((tutor) => (
-        <TutorCard key={tutor.name} name={tutor.name} time={tutor.time} subject={tutor.subject} />
+        <TutorCard key={tutor.name} name={tutor.name} time={tutor.time} subject={tutor.subject}/>
       ))}
     </div>
   );

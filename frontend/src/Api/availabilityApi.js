@@ -6,6 +6,15 @@ const url = 'http://localhost:8000';
 
 export const getTutorID = (username) => new Promise((resolve, reject) => {
     axios.get(`${url}/${username}/tutorID`)
+        .then(resp => resolve(resp.data[0].tutorID))
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
+
+export const getStudentID = (username) => new Promise((resolve, reject) => {
+    axios.get(`${url}/${username}/studentID`)
         .then(resp => resolve(resp.data))
         .catch(error => {
             alert(error);
@@ -33,8 +42,20 @@ export const addAvailability = (username, availability) => new Promise((resolve,
         });
 });
 
+export const addTutoringSession = (tutorID, tutoringSession) => new Promise((resolve, reject) => {
+    axios.post(`${url}/users/${tutorID}/add_tutoring_session`, tutoringSession)
+      .then(resp => resolve(resp.data[0].tutorID))
+      .catch(error => {
+        alert(error);
+        reject(error);
+      });
+  });
+  
+
 export const availabilityApi = {
     getAvailabilities,
     addAvailability,
     getTutorID,
+    getStudentID,
+    addTutoringSession,
 };

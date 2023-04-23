@@ -1,46 +1,78 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './CalendarView.css';
 import { TextField, TextAreaField, CheckboxList, SelectField, TimeFrame } from '../common';
 import { availabilityApi } from '../../Api/availabilityApi';
 import { getAvailabilities } from '../../Api/availabilityApi';
 import { addAvailability } from '../../Api/availabilityApi';
 import { getTutorID } from '../../Api/availabilityApi';
+import { addTutoringSession } from '../../Api/availabilityApi';
+import { getStudentIDByUsername } from '../../Api';
 
-export const CalendarView = () => {
+export const CalendarView = ({loggedInUser}) => {
 
+    console.log(loggedInUser);
+
+    //username of tutor
     const {username} = useParams();
+
+    const navigate = useNavigate();
 
     const [day, setDay] = useState("");
     const [time, setTime] = useState("");
     const [availabilities, setAvailabilities] = useState([]);
     const [tutorID, setTutorID] = useState("");
+    const [studentID, setStudentID] = useState("");
+    const [bookClicked, setBookClicked] = useState(false);
+    
+    useEffect(() => {
+        const fetchTutorID = async () => {
+            try {
+                const data = await availabilityApi.getTutorID(username);
+                setTutorID(data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchTutorID();
+    }, [username]);
 
     useEffect(() => {
-        availabilityApi.getTutorID(username)
-        .then(data => setTutorID(data))
-        .catch(error => console.log(error));
-    }, []);
-
+        const fetchAvailabilities = async () => {
+            try {
+                const data = await availabilityApi.getAvailabilities(tutorID);
+                setAvailabilities(data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        if (tutorID) {
+            fetchAvailabilities();
+        }
+    }, [tutorID]);
 
     useEffect(() => {
-        availabilityApi.getAvailabilities(2)
-        .then(data => setAvailabilities(data))
-        .catch(error => console.log(error));
-    }, []);
+        const fetchStudentID = async () => {
+            try {
+                const data = await getStudentIDByUsername(loggedInUser);
+                setStudentID(data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchStudentID();
+    }, [loggedInUser]);
 
-    if (!availabilities && !tutorID) {
+    if (!availabilities && !tutorID && !studentID) {
         return <>
             Loading...
         </>
     }
 
-    availabilities.map((item) => {
-        console.log(item.timeID);
-        console.log(item.tutorID);
-        console.log(item.tutorTime);
-        console.log(item.tutorDay);
-      });
+    console.log("IDs!!");
+    console.log(tutorID);
+    console.log(studentID)
 
     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const hoursOfDay = ['06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00', '05:00'];
@@ -112,7 +144,14 @@ export const CalendarView = () => {
 
     const book = (day, time) => {
         if(isCellAvailable(day, time)) {
-            
+            const tutoringSession = {
+                studentID: studentID,
+                tutorTime: time,
+                tutorDay: day
+              };
+            availabilityApi.addTutoringSession(tutorID, tutoringSession);
+            console.log('booked appointment!')
+            navigate('/booked-appt');
         }
     };
 
@@ -149,7 +188,7 @@ export const CalendarView = () => {
                     optionLabelKey='label'
                     optionValueKey='value'
                 />
-                <button className='calendar'>Book</button>
+                <button className='checkCalendar' onClick={book(day, time)}>Book</button>
             </div>
         </div>
     </>);
