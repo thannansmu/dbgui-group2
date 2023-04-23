@@ -24,8 +24,10 @@ export const Ask_Question = () => {
   const handleSubmit = () => {
     console.log(`Subject: ${subject}`);
     console.log(`Question: ${question}`);
-    // TODO: Implement logic to submit question
-    addNewQuestion('username', studentID, '1', question, '') //I set the tutorID to always be 1 since it needs a tutor id as input. can adjust this to change if we want a tutor to be specified. 
+
+    const formattedQuestion = `${question} (${subject})`;
+
+    addNewQuestion('username', studentID, '1', formattedQuestion, '') 
       .then(response => {
         console.log(response);
         alert('Question submitted successfully');
@@ -33,7 +35,8 @@ export const Ask_Question = () => {
         setQuestion('');
       })
       .catch(error => console.error(error));
-  };
+};
+
 
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);

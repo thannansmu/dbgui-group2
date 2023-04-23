@@ -48,17 +48,21 @@ export const LoginForm = ({ setLoggedInUser }) => {
             label="Username"
             value={username}
             setValue={setUsername}
+            className="form-control" // Add this line.
+        
           />
         </div>
 
         <div className="login-field">
         <TextField
-  id="password"
-  label="Password"
-  value={password}
-  setValue={setPassword}
-  type="password" // Add this line. 
-/>
+          id="password"
+          label="Password"
+          value={password}
+          setValue={setPassword}
+          type="password" // Add this line. 
+          variant="outlined" // Add this line 
+          className="form-control" // Add this line.
+          />
         </div>
 
         <button className="btn" type="button" onClick={handleSubmit}>

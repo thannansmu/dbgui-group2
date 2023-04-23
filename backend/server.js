@@ -463,6 +463,19 @@ app.get(`/:username/ratings`, (req, res) => {
   
 })
 
+//get the rating for a partiular tutor. 
+app.get('/:tutorID/rating', (req, res) => {
+  const tutorID = req.params.tutorID;
+  
+  connection.query(`SELECT rating FROM Ratings WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+  });
+});
+
+
 //Gets times available for user
 app.get(`/:username/times_available`, (req, res) => {
   const username = req.params.username;

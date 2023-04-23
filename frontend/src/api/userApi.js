@@ -123,6 +123,17 @@ export const getSubjectsTaughtByUsername = (username) => new Promise((resolve, r
         });
 });
 
+export const getUserRating = (username) => new Promise((resolve, reject) => {
+    axios.get(`${url}/${username}/ratings`)
+    .then(resp => resolve(resp.data))
+    .catch(error => {
+        alert(error);
+        reject(error);
+    });
+});
+
+
+
 
 ///////////////////////////////END OF GET ROUTES/////////////////////////////
 

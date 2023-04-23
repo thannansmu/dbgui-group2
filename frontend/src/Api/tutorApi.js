@@ -54,6 +54,15 @@ export const getTutorID = (username) => new Promise((resolve, reject) => {
       });
   });
   
+  //return the tutor's ratings. 
+export const getTutorRating = (tutorID) => new Promise((resolve, reject) => {
+    axios.get(`${url}/${tutorID}/rating`)
+    .then(resp => resolve(resp.data))
+    .catch(error => {
+        alert(error);
+        reject(error);
+    });
+});
 
 
 ///////////////////////////////END OF GET ROUTES/////////////////////////////
