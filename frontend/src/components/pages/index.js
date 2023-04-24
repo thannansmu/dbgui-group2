@@ -10,3 +10,8 @@ export * from './Schedule_Tutor_Filter';
 export * from './New_Schedule_Tutor_Filter';
 export * from './Ask_Question';
 export * from './Review_Tutor';
+export * from './ReportUser';
+export * from './AdminPage';
+export * from './DeleteUser';
+export * from './tutorView/TutorProfile';
+export * from './tutorView/TutorProfileStudent';

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '../Button';
 import { getTutors, getTutorSubjectsTaught, getInfoForTutorID} from '../../Api/tutorApi';
 import { getTutorRating, getAverageRating} from '../../Api';
-
+import {getTutorID} from '../../Api'
 
 // Function to set viewTutor when a student looks at a tutor's profile
 const handleOpenTutorProfile = (setViewTutor, username ) => {

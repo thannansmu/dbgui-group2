@@ -3,7 +3,7 @@ import { UserInfo } from '../UserInfo';
 import { Button } from '../../Button';
 import '../../styles/Tutor.css';
 import '../../styles/Button.css';
-import { getTutor, getTutorId, getUserByAttribute } from '../../../Api';
+import { getTutor, getTutorId, getUserByAttribute } from '../../../Api/userApi';
 
 export const TutorProfile = ({ loggedInUser }) => {
     const [click, setClick] = useState(false);
@@ -12,60 +12,55 @@ export const TutorProfile = ({ loggedInUser }) => {
     const [lastName, setLastName] = useState('');
     const [userRole, setUserRole] = useState('');
     const [bio, setBio] = useState('');
-
-
+  
+  
+  
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
-
+  
     const showButton = () => {
-        if (window.innerWidth <= 960) {
-            setButton(false);
-        } else {
-            setButton(true);
-        }
+      if (window.innerWidth <= 960) {
+        setButton(false);
+      } else {
+        setButton(true);
+      }
     };
-
+  
     useEffect(() => {
-        showButton();
-        getUserInfo();
+      showButton();
+      getUserInfo();
     }, []);
-
+  
     const getUserInfo = async () => {
+      const response = await getUserByAttribute(loggedInUser, 'firstName');
+      setFirstName(response[0].firstName);
+      const lastResponse = await getUserByAttribute(loggedInUser, 'lastName');
+      setLastName(lastResponse[0].lastName);
+      const roleResponse = await getUserByAttribute(loggedInUser, 'userRole');
+      setUserRole(roleResponse[0].userRole);
+      const bioResponse = await getUserByAttribute(loggedInUser, 'bio');
+      setBio(bioResponse[0].bio);
 
-        const response = await getUserByAttribute(loggedInUser, 'firstName');
-        setFirstName(response[0].firstName);
-        const lastResponse = await getUserByAttribute(loggedInUser, 'lastName');
-        setLastName(lastResponse[0].lastName);
-        const roleResponse = await getUserByAttribute(loggedInUser, 'userRole');
-        setUserRole(roleResponse[0].userRole);
-        const bioResponse = await getUserByAttribute(loggedInUser, 'bio');
-        setBio(bioResponse[0].bio);
+  
     };
-
+  
     window.addEventListener('resize', showButton);
-
-    return <>
-        <h1 className='title' style={{ textDecoration: 'underline' }}>
-            Your Profile
-        </h1>
-
+  
+    return (
+      <div>
+        <h1 style={{ textDecoration: 'underline' }}>Your Profile</h1>
         <div>
-
-            <br />
-            <h4>
-                <u>User Information:</u>
-                <br></br>
-                <br></br>
-            </h4>
-
-            <h4>username: {loggedInUser}</h4>
-
-            {firstName && <h4>first name: {firstName}</h4>}
-            {lastName && <h4>last name: {lastName}</h4>}
-            {userRole && <h4>user role: {userRole}</h4>}
-            {bio && <h4>bio: {bio}</h4>}
+          <br />
+          <h4>
+            <br></br>
+            <br></br>
+          </h4>
+          <h4>username: {loggedInUser}</h4>
+          {firstName && <h4>first name: {firstName}</h4>}
+          {lastName && <h4>last name: {lastName}</h4>}
+          {userRole && <h4>user role: {userRole}</h4>}
+          {bio && <h4>bio: {bio}</h4>}
         </div>
-
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
 
             <div className="button-container" style={{ display: 'flex', flexDirection: 'column' }}>
@@ -96,7 +91,8 @@ export const TutorProfile = ({ loggedInUser }) => {
 
             <h2 className='title'>Your Reviews</h2>
         </div>
-    </>;
+        </div>
+    );
 }
 
 const buttonStyles = {
