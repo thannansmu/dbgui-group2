@@ -9,6 +9,7 @@ import { ProfilePage } from './components/pages/ProfilePage';
 import { TutorProfile } from './components/pages/tutorView';
 import { Review_Tutor } from './components/pages';
 import { CalendarView } from './components/pages/CalendarView';
+import { TutorForm } from './components/createAccount';
 
 function App() {
 
@@ -86,6 +87,8 @@ function App() {
       <Route path="/profile" element={<ProfilePage loggedInUser={loggedInUser} />} />
       <Route path = '/tutor-profile' element={<TutorProfile />} />
       <Route path='/calendar-view/:username' element={<CalendarView loggedInUser={loggedInUser} />} />
+      <Route path='/tutor-form/:username' element={<TutorForm />} />
+      <Route path='/review-tutor' element={<Review_Tutor loggedInUser={loggedInUser} />} />
     </Routes>
     
     </Router>

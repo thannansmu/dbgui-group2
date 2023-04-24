@@ -1,0 +1,52 @@
+.form {
+    text-align: center;
+    padding: 2rem;
+    border: 0.1rem solid black;
+    min-width: fit-content;
+    max-width: 75%;
+    margin: auto;
+    margin-top: 2rem;
+    border-radius: 1rem;
+}
+
+button.reviewTutor {
+    padding: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 0.7rem;
+    background-color: rgb(115, 189, 177);
+    color: rgb(255, 255, 255);
+    border-width: 0.1rem;
+    border-color: rgb(123, 208, 193);
+}
+
+button.reviewTutor:hover {
+    background-color: rgb(83, 161, 148);
+}
+
+.rating-container {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+}
+
+.rating-containr-inner {
+    height: fit-content;
+}
+
+.comment-container {
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+textarea {
+    min-width: 90%;
+    max-width: 90%;
+    max-height: 10rem;
+    padding: 0.5rem;
+}
+
+select {
+    width: 5rem;
+    margin-right: 1rem;
+}

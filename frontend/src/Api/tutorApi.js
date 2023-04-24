@@ -39,6 +39,15 @@ export const addTutor = (user) => new Promise((resolve, reject) => {
         });
 });
 
+export const addTutorAvailability = (tutorID, availability) => new Promise((resolve, reject) => {
+    axios.post(`${url}/users/${tutorID}/add_time_available`, availability)
+        .then(resp => resolve(resp.data))
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
+
 //////////////////////////////END OF POST ROUTES/////////////////////////////
 
 

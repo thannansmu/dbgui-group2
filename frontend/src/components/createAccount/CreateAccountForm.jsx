@@ -4,91 +4,9 @@ import { TextField, TextAreaField, CheckboxList, SelectField, TimeFrame } from '
 import { AvailabilityList } from '../createAccount';
 import { addUser } from '../../Api';
 import { Link } from 'react-router-dom';
-
-const TutorForm = ({ accountType }) => {
-  const [day, setDay] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
-  const [checkedItems, setCheckedItems] = useState("");
-  const [availability, setAvailability] = useState([]);
-
-  const addAvailability = () => {
-
-    if (day && startTime && endTime) {
-      const newAvailableTime = (
-        <div key={availability.length}>
-          <div className="availableTime">{day}: {startTime} - {endTime}</div>
-        </div>
-      );
-      setAvailability([...availability, newAvailableTime]);
-      setDay('');
-      setStartTime('');
-      setEndTime('');
-    };
-  };
-
-  const removeAvailability = (index) => {
-    const newAvailability = [...availability];
-    newAvailability.splice(index, 1);
-    setAvailability(newAvailability);
-  };
-
-  if (accountType === "tutor") {
-    const subjects = [
-      { value: 1, name: "Math" },
-      { value: 2, name: "Science" },
-      { value: 3, name: "Writing" },
-      { value: 4, name: "History" },
-    ];
-
-    const days = [
-      { value: "Monday", label: "Monday" },
-      { value: "Tuesday", label: "Tuesday" },
-      { value: "Wednesday", label: "Wednesday" },
-      { value: "Thursday", label: "Thursday" },
-      { value: "Friday", label: "Friday" },
-      { value: "Saturday", label: "Saturday" },
-      { value: "Sunday", label: "Sunday" },
-    ];
-
-    return (
-      <>
-        <h3>Subjects Taught:</h3>
-        <div className='tutorForm-checkbox'>
-          <CheckboxList
-            options={subjects}
-            checkedItems={checkedItems}
-            setCheckedItems={setCheckedItems}
-          />
-        </div>
-        <br />
-        <h3>Availability:</h3>
-        <div className='tutorForm-availability'>
-          <div className='tutorForm-availability-select'>
-            <SelectField
-              options={days}
-              label="Select Day: "
-              setValue={setDay}
-              value={day}
-              optionLabelKey='label'
-              optionValueKey='value'
-            />
-            <TimeFrame
-              startTime={startTime}
-              setStartTime={setStartTime}
-              endTime={endTime}
-              setEndTime={setEndTime}
-            />
-          </div>
-          <button className='createAccount' onClick={addAvailability}>
-            Add Availability
-          </button>
-          <AvailabilityList availability={availability} removeAvailability={removeAvailability} />
-        </div>
-      </>
-    );
-  }
-};
+import { addTutorAvailability } from '../../Api';
+import { TutorForm } from '../createAccount';
+import { RegisterButton } from './RegisterButton';
 
 export const CreateAccountForm = ({ accountType }) => {
 
@@ -107,10 +25,8 @@ export const CreateAccountForm = ({ accountType }) => {
     setBio('');
     setPassword('');
     setUserName('');
-
-    //perhaps navigate to the login page?
   };
-
+  
   if (accountType){
     return (
       <div className='createAccountForm'>
@@ -147,10 +63,8 @@ export const CreateAccountForm = ({ accountType }) => {
             setValue={setBio}
           />
         </div>
-
-        <TutorForm accountType={accountType} />
         <br />
-        <Link to= '/login'><button className='createAccount' id='register' style={{marginBottom: '2rem'}} onClick={onRegister}>Register</button></Link>
+        <RegisterButton accountType={accountType} onRegister={onRegister} username={userName}/>
       </div>
     )
   }

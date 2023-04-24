@@ -2,20 +2,10 @@ import React from 'react';
 import {CreateAccountForm} from '../createAccount';
 import { useState } from 'react';
 
-//delete after testing rate form
-import { ReviewTutorSearch } from './ReviewTutorSearch';
-
 export const CreateAccount = () => {
-  
-/*
-    return <>
-        <ReviewTutorSearch />
-    </> 
-*/
 
     const [accountType, setAccountType] = useState("");
     const [accountTypeSelected, setAccountTypeSelected] = useState(false);
-
 
     const renderCreateAccountForm = (accountTypeInput) => {
         setAccountType(accountTypeInput);
