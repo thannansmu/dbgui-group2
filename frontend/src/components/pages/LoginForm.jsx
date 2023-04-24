@@ -12,8 +12,8 @@ export const LoginForm = ({ setLoggedInUser }) => {
   const navigate = useNavigate();
 
   //calls login route & navigate to student/admin or tutor if successful
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    //e.preventDefault(); DO NOT PUT THIS BACK FOR NOW BUT IF NEED PUT e in async
 
     LoginCheck(username).then((accessToken) => {
       if (accessToken[0] != null && accessToken[0]['passWord'] === password) {

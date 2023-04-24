@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '../Button';
 import '../styles/Button.css';
 import { useLocation } from 'react-router-dom';
-import { addNewQuestion } from '../../Api';
+import { addNewQuestion, getUniqueSubjects, addSubjectTaught } from '../../Api';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -14,6 +14,7 @@ export const Ask_Question = () => {
 
   const [subject, setSubject] = useState('');
   const [question, setQuestion] = useState('');
+  const [subjects, setSubjects] = useState([]);
 
   const handleSubjectChange = e => {
     setSubject(e.target.value);
@@ -37,8 +38,19 @@ export const Ask_Question = () => {
         setQuestion('');
       })
       .catch(error => console.error(error));
-};
 
+    if (!subjects.includes(subject)) {
+      addSubjectTaught('username', null, subject)
+        .then(response => console.log(response))
+        .catch(error => console.error(error));
+    }
+  };
+
+  useEffect(() => {
+    getUniqueSubjects()
+      .then(data => setSubjects(data))
+      .catch(error => console.error(error));
+  }, []);
 
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
@@ -67,10 +79,16 @@ export const Ask_Question = () => {
         <label htmlFor="subject">Subject: </label>
         <select id="subject" name="subject" value={subject} onChange={handleSubjectChange}>
           <option value="">Select a subject</option>
-          <option value="math">Math</option>
-          <option value="science">Science</option>
-          <option value="history">History</option>
+          {subjects.map((subject, index) => (
+            <option key={index} value={subject}>{subject}</option>
+          ))}
         </select>
+        {!subjects.includes(subject) && (
+          <div>
+            <label htmlFor="new-subject">Enter a new subject: </label>
+            <input type="text" id="new-subject" name="new-subject" value={subject} onChange={handleSubjectChange} />
+          </div>
+        )}
       </div>
       <div style={{ marginBottom: '10px' }}>
         <label htmlFor="question">Question: </label>
@@ -82,5 +100,8 @@ export const Ask_Question = () => {
         </Button>
       )}
     </div>
+ 
+
   );
 };
+

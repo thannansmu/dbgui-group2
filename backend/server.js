@@ -520,6 +520,21 @@ app.get(`/:tutorID/subjects_taught`, (req, res) => {
     console.log(rows)
   })
 })
+//Returns all unique subjects taught from the SubjectsTaught table
+app.get('/subjects', (req, res) => {
+  const query = 'SELECT DISTINCT subject FROM SubjectsTaught';
+
+  connection.query(query, (error, results, fields) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Error retrieving subjects from database');
+    } else {
+      const subjects = results.map(result => result.subject);
+      res.status(200).send(subjects);
+    }
+  });
+});
+
 
 //Adds answer to given question
 app.put(`/users/:questionID/update_answer`, (req, res) => {

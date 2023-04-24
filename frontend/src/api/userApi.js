@@ -87,6 +87,15 @@ export const getStudentIDByUsername = (username) => new Promise((resolve, reject
         });
 });
 
+//Get all unique Subjects taught from the SubjectsTaught table
+export const getUniqueSubjects = () => new Promise((resolve, reject) =>{
+     axios.get(`${url}/subjects`)
+     .then(resp => resolve(resp.data))
+     .catch(error => {
+         alert(error);
+         reject(error);
+     });
+  });
 
 //Returns the first question of a particular Student----------------------------------------------------------
 export const getQuestionTextByStudentID = (studentID) => new Promise((resolve, reject) => {
@@ -192,6 +201,17 @@ export const addUser = (user) => new Promise((resolve, reject) => {
             reject(error);
         });
 });
+
+// add a subject taught to the SubjectsTaught table
+export const addSubjectTaught = (username, tutorID, subject) => new Promise((resolve, reject) =>{
+    axios.post(`${url}/users/${username}/add_subject_taught`, { tutorID, subject })
+    .then(resp => resolve(resp.data))
+    .catch(error => {
+        alert(error);
+        reject(error);
+    });
+});
+  
 
 //Add New Request
 export const addRequest = (username, request) => new Promise((resolve, reject) => {

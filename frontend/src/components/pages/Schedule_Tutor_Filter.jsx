@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../Button';
-import { getTutors } from '../../Api/tutorApi';
+import { getTutors, getTutorSubjectsTaught} from '../../Api/tutorApi';
 import { getTutorRating, getAverageRating} from '../../Api';
 import {getTutorID} from '../../Api'
 
@@ -13,14 +13,19 @@ const handleOpenTutorProfile = (setViewTutor, username ) => {
 // TutorCard component to display tutor information
 const TutorCard = ({ username, name, timesAvailable, subjectsTaught, setViewTutor }) => {
   const [rating, setRating] = useState(null);
+  const [subject, setSubject] = useState(null);
 
   useEffect(() => {
     const fetchRating = async () => {
       try {
-        const tutorID = await getTutorID(username);
+        const tutorIDinitial = await getTutorID(username);
+        const tutorID = tutorIDinitial[0].tutorID;
+        console.log("the tutor id is", tutorID)
+        const subjectsTaught = getTutorSubjectsTaught(tutorID);
         const userRating = await getTutorRating(tutorID); //change to getAverageRating?
         console.log("Rating for", tutorID, "is", userRating);
         setRating(userRating);
+        setSubject(subjectsTaught);
       } catch (error) {
         console.error("Failed to fetch user rating: ", error);
       }
@@ -33,8 +38,10 @@ const TutorCard = ({ username, name, timesAvailable, subjectsTaught, setViewTuto
     <div style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px' }}>
       <h2>{name}</h2>
       <p>Times available: {timesAvailable}</p>
-      <p>Subjects taught: {subjectsTaught}</p>
-      {rating !== null ? <p>Rating: {rating}</p> : <p>Loading rating...</p>}
+      <p>Subjects taught: {subject}</p>
+      {console.log(rating)}
+      
+      {rating !== null ? <p>Rating: {rating[0].rating}</p> : <p>Loading rating...</p>}
 
       <Button to='/tutor-student' onClick={() => setViewTutor(username)}>View Profile</Button>
       <Button to={`/calendar-view/${username}`}>Book Appointment</Button>

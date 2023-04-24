@@ -36,7 +36,7 @@ export const getTutorTimesAvailable = (username) => new Promise((resolve, reject
 
 // Get subjects taught by a tutor
 export const getTutorSubjectsTaught = (tutorID) => new Promise((resolve, reject) => {
-    axios.get(`${url}/tutors/${tutorID}/subjectsTaught`)
+    axios.get(`${url}/${tutorID}/subjects_taught`)
         .then(resp => resolve(resp.data))
         .catch(error => {
             alert(error);
@@ -56,7 +56,7 @@ export const getTutorID = (username) => new Promise((resolve, reject) => {
   
   //return the tutor's ratings. 
 export const getTutorRating = (tutorID) => new Promise((resolve, reject) => {
-    axios.get(`${url}/${tutorID}/rating`)
+    axios.get(`${url}/ratings/${tutorID}/average`)
     .then(resp => resolve(resp.data))
     .catch(error => {
         alert(error);
