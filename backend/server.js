@@ -250,6 +250,23 @@ app.delete(`/delete_comment/:commentID`, (req, res) => {
   })
 })
 
+// Deletes questions from the database based on question text
+app.delete('/questions/:questionText', (req, res) => {
+  const questionText = req.params.questionText;
+  const query = `DELETE FROM Question WHERE questionText = '${questionText}'`;
+
+  connection.query(query, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error deleting question from database');
+    } else if (result.affectedRows === 0) {
+      res.status(404).send('Question not found');
+    } else {
+      res.status(200).send('Question deleted successfully');
+    }
+  });
+});
+
 //Adds report to database
 app.post(`/users/:username/add_report`, (req, res) => {
   const username = req.params.username;
@@ -399,7 +416,7 @@ app.get(`/:username/reviews`, (req, res) => {
 })
 
 //Returns questions for student
-app.get(`student/:studentID/questions`, (req, res) => {
+app.get(`/student/:studentID/questions`, (req, res) => {
   const studentID = req.params.studentID;
   connection.query(`SELECT * FROM Question WHERE studentID = ${studentID}`, (err, rows, fields) => {
     if (err) throw err
