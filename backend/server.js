@@ -475,7 +475,7 @@ app.get(`/:username/ratings`, (req, res) => {
 //get average rating of specific tutor
 app.get('/ratings/:tutorID/average', (req, res) => {
   const tutorID = req.params.tutorID;
-  connection.query(`SELECT AVG(rating) FROM Ratings WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
+  connection.query(`SELECT AVG(rating) AS rating FROM Ratings WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
     if (err) throw err;
     res.status(200)
     res.send(rows)
