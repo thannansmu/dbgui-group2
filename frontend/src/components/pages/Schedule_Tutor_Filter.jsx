@@ -1,100 +1,59 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../Button';
-import { getTutors } from '../../Api/tutorApi';
-import { getTutorRating } from '../../Api';
-import { availabilityApi } from '../../Api/availabilityApi';
-import { getTutorID } from '../../Api/availabilityApi';
-import { getUserByAttribute } from '../../Api';
-import { getTutorSubjectsTaught } from '../../Api';
+import { getTutors, getTutorSubjectsTaught, getInfoForTutorID} from '../../Api/tutorApi';
+import { getTutorRating, getAverageRating} from '../../Api';
+
 
 // Function to set viewTutor when a student looks at a tutor's profile
-const handleOpenTutorProfile = (setViewTutor, username) => {
+const handleOpenTutorProfile = (setViewTutor, username ) => {
   setViewTutor(username);
 }
 
 // TutorCard component to display tutor information
-const TutorCard = ({ username, setViewTutor }) => {
-  //const [rating, setRating] = useState(null);
-  const [tutorID, setTutorID] = useState('');
-  const [tutorFirstName, setTutorFirstName] = useState('');
-  const [tutorLastName, setTutorLastName] = useState('');
-  const [tutorTimes, setTutorTimes] = useState([]);
-  const [tutorSubjects, setTutorSubjects] = useState([]);
-  const [tutorRating, setTutorRating] = useState('');
+const TutorCard = ({ username, name, timesAvailable, subjectsTaught, setViewTutor }) => {
+  const [rating, setRating] = useState(null);
+  const [subject, setSubject] = useState(null);
+  const [the_username, setthe_username] = useState(null);
 
   useEffect(() => {
-    const fetchTutorID = async () => {
+    const fetchRating = async () => {
       try {
-        const data = await availabilityApi.getTutorID(username);
-        setTutorID(data);
+        const tutorIDinitial = await getTutorID(username);
+        const tutorID = tutorIDinitial[0].tutorID;
+        console.log("the tutor id is", tutorID);
+        console.log("the type of tutor ID is", (typeof tutorID));
+
+        const theUsernames = await getInfoForTutorID(tutorID);
+        console.log("the usernames are", theUsernames);
+
+        const subjectsTaught = await getTutorSubjectsTaught(tutorID);
+        console.log("the subjects taught 1 is", subjectsTaught)
+        const subjectTaughtString = subjectsTaught[0].subject;
+        const userRating = await getTutorRating(tutorID); //change to getAverageRating?
+        console.log("Rating for", tutorID, "is", userRating);
+        setRating(userRating);
+        console.log("the subjects taught is", subjectTaughtString);
+        setSubject(subjectTaughtString);
       } catch (error) {
-        console.log(error);
+        console.error("Failed to fetch user rating: ", error);
       }
     };
-    fetchTutorID();
+
+    fetchRating();
   }, [username]);
 
-  useEffect(() => {
-    const fetchAvailabilities = async () => {
-      try {
-        const data = await availabilityApi.getAvailabilities(tutorID);
-        setTutorTimes(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    if (tutorID) {
-      fetchAvailabilities();
-    }
-  }, [tutorID]);
-
-  useEffect(() => {
-    const fetchSubjects = async () => {
-      try {
-        const data = await getTutorSubjectsTaught(tutorID);
-        setTutorSubjects(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    if (tutorID) {
-      fetchSubjects();
-    }
-  }, [tutorID]);
-
-  useEffect(() => {
-    const fetchRatings = async () => {
-      try {
-        const data = await getTutorRating(tutorID);
-        setTutorRating(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    if (tutorID) {
-      fetchRatings();
-    }
-  }, [tutorID]);
-
-  const getUserInfo = async () => {
-    const response = await getUserByAttribute(username, 'firstName');
-    setTutorFirstName(response[0].firstName);
-    const lastResponse = await getUserByAttribute(username, 'lastName');
-    setTutorLastName(lastResponse[0].lastName);
-  };
-
-  //tutor card html return statement
   return (
     <div style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px' }}>
-      <h2>{tutorFirstName} {tutorLastName}</h2>
-      <p>Times available: {}</p>
-      <p>Subjects taught: {tutorSubjects}</p>
-      {tutorRating !== null ? <p>Rating: {tutorRating}</p> : <p>Loading rating...</p>}
+      <h2>{name}</h2>
+      <p>Times available: {timesAvailable}</p>
+      <p>Subjects taught: {subject}</p>
+      {console.log(rating)}
+      
+      {rating !== null ? <p>Rating: {rating[0].rating}</p> : <p>Loading rating...</p>}
 
       <Button to='/tutor-student' onClick={() => setViewTutor(username)}>View Profile</Button>
       <Button to={`/calendar-view/${username}`}>Book Appointment</Button>
-      <Button to={`/review-tutor/${username}`}>Rate Tutor</Button>
     </div>
   );
 };
@@ -103,7 +62,7 @@ const TutorCard = ({ username, setViewTutor }) => {
 // Example data for tutors
 const tutorData = [
   { username: 'user6', name: 'Sarah Garcia', time: '3:00 PM', subject: 'Computer Science' },
-  { username: 'user7', name: 'Thomas Anderson', time: '5:00 PM', subject: 'Writing' },
+  { username: 'user7', name: 'Thomas Anderson', time: '5:00 PM', subject: 'Writing'   },
   { username: 'user11', name: 'Patrick Bateman', time: '7:00 AM', subject: 'Business' },
 ];
 
@@ -118,14 +77,13 @@ export const Schedule_Tutor_Filter = ({ setViewTutor }) => {
 
   //tutor data
   const [tutors, setTutors] = useState([]);
-  const [tutorUsername, setTutorUsername] = useState('');
   const [tutorID, setTutorID] = useState('');
   const [tutorFirstName, setTutorFirstName] = useState('');
   const [tutorLastName, setTutorLastName] = useState('');
-  const [tutorFullName, setTutorFullName] = useState('');
   const [tutorTimes, setTutorTimes] = useState([]);
   const [tutorSubjects, setTutorSubjects] = useState([]);
   const [tutorRating, setTutorRating] = useState('');
+
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -139,78 +97,19 @@ export const Schedule_Tutor_Filter = ({ setViewTutor }) => {
   };
 
   useEffect(() => {
-    getTutors()
-      .then(data => setTutors(data))
-      .catch(error => console.log(error));
+    showButton();
+    getTutors().then(x => setTutors(x));
   }, []);
 
+console.log(tutors);
+
+  /*
   useEffect(() => {
-    const fetchTutorID = async () => {
-      try {
-        const data = await availabilityApi.getTutorID(tutorUsername);
-        setTutorID(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    if (tutors && tutorUsername) {
-      fetchTutorID();
-    }
-  }, [tutorUsername]);
-
-  useEffect(() => {
-    const fetchAvailabilities = async () => {
-      try {
-        const data = await availabilityApi.getAvailabilities(tutorID);
-        setTutorTimes(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    if (tutorID) {
-      fetchAvailabilities();
-    }
-  }, [tutorID]);
-
-  useEffect(() => {
-    const fetchSubjects = async () => {
-      try {
-        const data = await getTutorSubjectsTaught(tutorID);
-        setTutorSubjects(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    if (tutorID) {
-      fetchSubjects();
-    }
-  }, [tutorID]);
-
-  useEffect(() => {
-    const fetchRatings = async () => {
-      try {
-        const data = await getTutorRating(tutorID);
-        setTutorRating(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    if (tutorID) {
-      fetchRatings();
-    }
-  }, [tutorID]);
-
-  const getUserInfo = async () => {
-    const response = await getUserByAttribute(tutorUsername, 'firstName');
-    setTutorFirstName(response[0].firstName);
-    const lastResponse = await getUserByAttribute(tutorUsername, 'lastName');
-    setTutorLastName(lastResponse[0].lastName);
-  };
-
-  console.log(tutors);
-  getUserInfo();
-  
-
+    availabilityApi.getTutorID(username)
+    .then(data => setTutorID(data))
+    .catch(error => console.log(error));
+}, []);
+*/
 
   window.addEventListener('resize', showButton);
 
@@ -219,11 +118,11 @@ export const Schedule_Tutor_Filter = ({ setViewTutor }) => {
 
     return tutorData.filter((tutor) => {
       const subjectMatch = !subject || tutor.subject.toLowerCase().includes(subject.toLowerCase());
-      //const timeMatch = !time || tutor.time.toLowerCase().includes(time.toLowerCase());
+      const timeMatch = !time || tutor.time.toLowerCase().includes(time.toLowerCase());
       const nameMatch = !name || tutor.name.toLowerCase().includes(name.toLowerCase());
 
       // Function to filter tutors based on user input
-      return subjectMatch && nameMatch;
+      return subjectMatch && timeMatch && nameMatch;
     });
   };
 
@@ -255,7 +154,9 @@ export const Schedule_Tutor_Filter = ({ setViewTutor }) => {
           <input type="text" id="rating" value={rating} onChange={(e) => setRating(e.target.value)} />
         </div>
       </div>
-        <TutorCard username={'user6'} setViewTutor={() => handleOpenTutorProfile(setViewTutor, 'user6')} />
+      {filteredTutors.map((tutor) => (
+      <TutorCard key={tutor.username} username={tutor.username} name={tutor.name} timesAvailable={tutor.time} subjectsTaught={tutor.subject} rating={tutor.rating}  setViewTutor={() => handleOpenTutorProfile(setViewTutor, tutor.username)} />
+      ))}
     </div>
   );
 };
