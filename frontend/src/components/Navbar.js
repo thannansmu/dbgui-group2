@@ -1,26 +1,34 @@
-import React, {useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
-import {Button} from './Button';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Button } from './Button';
 import './styles/Navbar.css';
 
-export const Navbar = () => {
-    const [click, setClick] = useState(false);
-    const [button, setButton] = useState(true);
+export const Navbar = ({ loggedInUser, setLoggedInUser }) => {
+  const [click, setClick] = useState(false);
+  const [button, setButton] = useState(true);
+  const navigate = useNavigate();
 
+  const handleClick = () => setClick(!click);
+  const closeMobileMenu = () => setClick(false);
 
-    const handleClick = ()=> setClick(!click);
-    const closeMobileMenu = () => setClick(false);
-
-    const showButton =()=>{if (window.innerWidth <=960){
-    setButton(false);
+  const showButton = () => {
+    if (window.innerWidth <= 960) {
+      setButton(false);
     } else {
-        setButton(true);
-    }};
+      setButton(true);
+    }
+  };
 
-    useEffect(()=> {showButton();
-    }, []);
+  useEffect(() => {
+    showButton();
+  }, []);
 
-    window.addEventListener('resize', showButton);
+  window.addEventListener('resize', showButton);
+
+  const handleLogout = () => {
+    setLoggedInUser(null);
+    navigate('/');
+  };
     return <>
     <nav className="navbar">
        <div className="navbar-container"> 
@@ -51,10 +59,16 @@ export const Navbar = () => {
 
         
             </ul>
-            {button && (
-            <Button buttonStyle="btn--outline" to="/sign-up">
-              Log in/Create Account
+            {loggedInUser ? (
+            <Button buttonStyle="btn--outline" to="/" onClick={handleLogout}>
+              Log Out
             </Button>
+          ) : (
+            button && (
+              <Button buttonStyle="btn--outline" to="/sign-up">
+                Log in/Create Account
+              </Button>
+            )
           )}
             
 

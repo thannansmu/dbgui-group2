@@ -77,6 +77,13 @@ export const ProfilePage = ({ loggedInUser }) => {
           style={{ display: 'flex', flexDirection: 'column' }}
         >
           
+
+{button && (
+  <Button to="/report-user" className="page-button" style={buttonStyles}>
+    <i> Report User</i>
+  </Button>
+)}
+
           {button && (
             <Button to="/schedule-appt" className="page-button" style={buttonStyles}>
               <i> Schedule Appointment</i>

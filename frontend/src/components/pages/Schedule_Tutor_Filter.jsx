@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../Button';
 import { getTutors } from '../../Api/tutorApi';
-import { getTutorRating } from '../../Api';
+import { getTutorRating, getAverageRating} from '../../Api';
 import {getTutorID} from '../../Api'
 
 // Function to set viewTutor when a student looks at a tutor's profile
@@ -18,7 +18,7 @@ const TutorCard = ({ username, name, timesAvailable, subjectsTaught, setViewTuto
     const fetchRating = async () => {
       try {
         const tutorID = await getTutorID(username);
-        const userRating = await getTutorRating(tutorID);
+        const userRating = await getTutorRating(tutorID); //change to getAverageRating?
         console.log("Rating for", tutorID, "is", userRating);
         setRating(userRating);
       } catch (error) {

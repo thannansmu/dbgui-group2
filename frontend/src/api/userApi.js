@@ -54,6 +54,17 @@ export const getUserRequests = (username) => new Promise((resolve, reject) => {
         });
 });
 
+
+export const getUsernames = () => new Promise((resolve, reject) => {
+  axios.get(`${url}/usernames`)
+    .then(resp => resolve(resp.data))
+    .catch(error => {
+      alert(error);
+      reject(error);
+    });
+});
+
+
 //Get User Comments
 export const getUserComments = (username) => new Promise((resolve, reject) => {
     axios.get(`${url}/users/${username}/comments`)
@@ -114,6 +125,18 @@ export const getQuestionTextsByStudentID = (studentID) => new Promise((resolve, 
 });
 
 
+
+export const getAverageRating = (tutorID) => new Promise((resolve, reject)=> {
+     axios.get(`${url}/ratings/${tutorID}/average`)
+     .then(resp => resolve(resp.data))
+     .catch(error => {
+         alert(error);
+         reject(error);
+     });
+});
+
+
+
 export const getSubjectsTaughtByUsername = (username) => new Promise((resolve, reject) => {
     axios.get(`${url}/${username}/subjects_taught`)
         .then(resp => resolve(resp.data))
@@ -133,6 +156,26 @@ export const getUserRating = (username) => new Promise((resolve, reject) => {
 });
 
 
+export const getReportedUsernames = () => new Promise((resolve, reject)=> {
+   axios.get(`${url}/reports`)
+   .then(resp => resolve(resp.data))
+   .catch(error => {
+    alert(error);
+    reject(error);
+  });
+  });
+
+ 
+
+  export const getReportForUsername =  (username) => new Promise((resolve, reject)=> {
+      axios.get(`${url}/${username}/reports`)
+      .then(resp => resolve(resp.data))
+   .catch(error => {
+    alert(error);
+    reject(error);
+  });
+  });
+  
 
 
 ///////////////////////////////END OF GET ROUTES/////////////////////////////

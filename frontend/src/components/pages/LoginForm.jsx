@@ -19,13 +19,14 @@ export const LoginForm = ({ setLoggedInUser }) => {
       if (accessToken[0] != null && accessToken[0]['passWord'] === password) {
         setUsername('');
         setPassword('');
+        setLoggedInUser(username);
 
         if (accessToken[0]['userRole'] === 'student') {
-          setLoggedInUser(username);
           navigate('/profile');
-        } else {
-          setLoggedInUser(username);
+        } else if (accessToken[0]['userRole'] === 'tutor') {
           navigate('/tutor-profile');
+        } else if (accessToken[0]['userRole'] === 'admin') {
+          navigate('/admin-page');
         }
 
         console.log('Successful login!');
@@ -48,20 +49,19 @@ export const LoginForm = ({ setLoggedInUser }) => {
             label="Username"
             value={username}
             setValue={setUsername}
-            className="form-control" // Add this line.
-        
+            className="form-control"
           />
         </div>
 
         <div className="login-field">
-        <TextField
-          id="password"
-          label="Password"
-          value={password}
-          setValue={setPassword}
-          type="password" // Add this line. 
-          variant="outlined" // Add this line 
-          className="form-control" // Add this line.
+          <TextField
+            id="password"
+            label="Password"
+            value={password}
+            setValue={setPassword}
+            type="password"
+            variant="outlined"
+            className="form-control"
           />
         </div>
 

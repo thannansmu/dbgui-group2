@@ -36,6 +36,17 @@ app.get('/users', (req, res) => {
   })
 })
 
+//returns usernames from user table
+app.get('/usernames', (req, res) => {
+  connection.query('SELECT username FROM User', (err, rows, fields) => {
+    if (err) throw err;
+    res.status(200);
+    res.send(rows);
+    console.log(rows);
+  });
+});
+
+
 //Returns all students in database
 app.get(`/students`, (req, res) => {
   connection.query(`SELECT * FROM Students`, (err, rows, fields) => {
@@ -380,11 +391,23 @@ app.post(`/users/:username/add_subject_taught`, (req, res) => {
   })
 })
 
-//Returns reports for user
+//Returns the report content for a user given username
 app.get(`/:username/reports`, (req, res) => {
   const username = req.params.username;
   
-  connection.query(`SELECT * FROM Report WHERE username = '${username}'`, (err, rows, fields) => {
+  connection.query(`SELECT report FROM Report WHERE username = '${username}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+  })
+})
+
+//Returns usernames reported. 
+app.get(`/reports`, (req, res) => {
+  const username = req.params.username;
+  
+  connection.query(`SELECT username FROM Report`, (err, rows, fields) => {
     if (err) throw err
     res.status(200)
     res.send(rows)
@@ -448,6 +471,18 @@ app.get(`/:username/ratings`, (req, res) => {
     console.log(rows)
   }) 
 })
+
+//get average rating of specific tutor
+app.get('/ratings/:tutorID/average', (req, res) => {
+  const tutorID = req.params.tutorID;
+  connection.query(`SELECT AVG(rating) FROM Ratings WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
+    if (err) throw err;
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+  });
+});
+
 
 //Returns times available for tutor
 app.get(`/:tutorID/times_available`, (req, res) => {

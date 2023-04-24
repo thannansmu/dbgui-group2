@@ -11,6 +11,10 @@ import { Review_Tutor } from './components/pages';
 import { CalendarView } from './components/pages/CalendarView';
 import { TutorForm } from './components/createAccount';
 import {ScheduleTutorFilter} from './components/pages/Schedule_Tutor_Filter';
+import { ReportUser } from './components/pages/ReportUser';
+import { AdminPage } from './components/pages/AdminPage'; // Make sure the path is correct
+import { DeleteUser } from './components/pages';
+import {ViewReports} from './components/pages/ViewReports';
 
 
 
@@ -75,8 +79,12 @@ function App() {
   return (
     <>
     <Router>
-      <Navbar />
+    <Navbar loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
     <Routes> 
+    <Route path='/user-reports' element={<ViewReports/>} />
+    <Route path='/delete-user' element={<DeleteUser/>} />
+      <Route path='/admin-page' element={<AdminPage/>} />
+      <Route path='/report-user' element={<ReportUser/>} />
       <Route path = '/' element={<Home />} />
       <Route path = '/services-page' element={<Services />} />
       <Route path = '/about-tutors' element={<About />} />
