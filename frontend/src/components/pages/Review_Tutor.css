@@ -39,14 +39,14 @@ button.reviewTutor:hover {
     border-radius: 1rem;
 }
 
-textarea {
+textarea.reviewTutor {
     min-width: 90%;
     max-width: 90%;
     max-height: 10rem;
     padding: 0.5rem;
 }
 
-select {
+select.reviewTutor {
     width: 5rem;
     margin-right: 1rem;
 }

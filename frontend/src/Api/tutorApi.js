@@ -89,6 +89,24 @@ export const addTutorAvailability = (tutorID, availability) => new Promise((reso
         });
 });
 
+export const addReview = (username, studentID, tutorID, review) => new Promise((resolve, reject) => {
+    axios.post(`${url}/users/${username}/add_review`, studentID, tutorID, review)
+        .then(resp => resolve(resp.data))
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
+
+export const addRating = (username, studentID, tutorID, rating) => new Promise((resolve, reject) => {
+    axios.post(`${url}/users/${username}/add_rating`, studentID, tutorID, rating)
+        .then(resp => resolve(resp.data))
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
+
 //////////////////////////////END OF POST ROUTES/////////////////////////////
 
 

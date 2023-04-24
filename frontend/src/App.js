@@ -92,8 +92,7 @@ function App() {
       <Route path = '/tutor-profile' element={<TutorProfile />} />
       <Route path='/calendar-view/:username' element={<CalendarView loggedInUser={loggedInUser} />} />
       <Route path='/tutor-form/:username' element={<TutorForm />} />
-      <Route path='/review-tutor' element={<Review_Tutor loggedInUser={loggedInUser} />} />
-      <Route path = '/review-tutor' element={<Review_Tutor/>}/>
+      <Route path='/review-tutor/:username' element={<Review_Tutor loggedInUser={loggedInUser} />} />
       <Route path= '/profile' element={<ProfilePage loggedInUser={loggedInUser} />} />
       <Route path = '/tutor-profile' element={<TutorProfile loggedInUser={loggedInUser} />} />
       <Route path = '/tutor-student' element={<TutorProfileStudent viewTutor={viewTutor} />} />

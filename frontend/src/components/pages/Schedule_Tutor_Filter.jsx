@@ -38,6 +38,7 @@ const TutorCard = ({ username, name, timesAvailable, subjectsTaught, setViewTuto
 
       <Button to='/tutor-student' onClick={() => setViewTutor(username)}>View Profile</Button>
       <Button to={`/calendar-view/${username}`}>Book Appointment</Button>
+      <Button to={`/review-tutor/${username}`}>Rate Tutor</Button>
     </div>
   );
 };
