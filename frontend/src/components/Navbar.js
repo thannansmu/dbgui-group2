@@ -29,37 +29,52 @@ export const Navbar = ({ loggedInUser, setLoggedInUser }) => {
     setLoggedInUser(null);
     navigate('/');
   };
-    return <>
-    <nav className="navbar">
-       <div className="navbar-container"> 
-        <Link to = "/" className="navbar-logo" onClick={closeMobileMenu}>
-          Tuder
-        </Link>
-        <div className='menu-icon' onClick={handleClick}>
-            <i className ={click ? 'fas fa-times' : 'fas fa-bars'} />
-        </div>
-            <ul className = {click ? 'nav-many active' : 'nav-menu'}>
-            <li className = 'nav-item'>
-                <Link to='/' className = 'nav-links' onClick = {closeMobileMenu}>
-                    Home
-                </Link>
+
+  return (
+    <>
+      <nav className="navbar">
+        <div className="navbar-container">
+          <button
+            onClick={() => navigate(-1)}
+            className="btn btn-primary"
+            style={{ marginRight: '1rem' }}
+          >
+            &larr; Back
+          </button>
+          <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
+            Tuder
+          </Link>
+          <div className="menu-icon" onClick={handleClick}>
+            <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
+          </div>
+          <ul className={click ? 'nav-many active' : 'nav-menu'}>
+            <li className="nav-item">
+              <Link to="/" className="nav-links" onClick={closeMobileMenu}>
+                Home
+              </Link>
             </li>
 
-            <li className = 'nav-item'>
-                <Link to='/services-page' className = 'nav-links' onClick = {closeMobileMenu}>
-                    Services
-                </Link>
+            <li className="nav-item">
+              <Link
+                to="/services-page"
+                className="nav-links"
+                onClick={closeMobileMenu}
+              >
+                Services
+              </Link>
             </li>
 
-            <li className = 'nav-item'>
-                <Link to='/about-tutors' className = 'nav-links' onClick = {closeMobileMenu}>
-                    About
-                </Link>
+            <li className="nav-item">
+              <Link
+                to="/about-tutors"
+                className="nav-links"
+                onClick={closeMobileMenu}
+              >
+                About
+              </Link>
             </li>
-
-        
-            </ul>
-            {loggedInUser ? (
+          </ul>
+          {loggedInUser ? (
             <Button buttonStyle="btn--outline" to="/" onClick={handleLogout}>
               Log Out
             </Button>
@@ -70,10 +85,8 @@ export const Navbar = ({ loggedInUser, setLoggedInUser }) => {
               </Button>
             )
           )}
-            
-
-
-       </div>
-    </nav>
-    </>;
-}
+        </div>
+      </nav>
+    </>
+  );
+};

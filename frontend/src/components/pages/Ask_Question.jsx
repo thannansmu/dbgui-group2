@@ -3,9 +3,11 @@ import { Button } from '../Button';
 import '../styles/Button.css';
 import { useLocation } from 'react-router-dom';
 import { addNewQuestion } from '../../Api';
+import { useNavigate } from 'react-router-dom';
 
 
 export const Ask_Question = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const studentID = queryParams.get('studentID');

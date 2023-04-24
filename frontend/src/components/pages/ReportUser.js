@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { getUsernames, addReport } from '../../Api/userApi';
+import { useNavigate } from 'react-router-dom';
+
 
 export const ReportUser = () => {
+    const navigate = useNavigate();
   const [usernames, setUsernames] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedUser, setSelectedUser] = useState(null);
@@ -36,7 +39,14 @@ export const ReportUser = () => {
 
   return (
     <div style={{ backgroundColor: 'lightblue', minHeight: '100vh', position: 'relative', zIndex: 1 }}>
-      <h1>Report User:</h1>
+        <button
+        onClick={() => navigate(-1)}
+        className="btn btn-primary mb-4"
+        style={{ position: 'absolute', left: '80rem', top: '2rem' }}
+      >
+        &larr; Back
+      </button>
+      <h1 style={{ paddingTop: '2rem', paddingBottom: '1rem' }}>Report User:</h1>
       <input
         type="text"
         placeholder="Search for a username..."
