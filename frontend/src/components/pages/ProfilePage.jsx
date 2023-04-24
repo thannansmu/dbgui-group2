@@ -4,6 +4,7 @@ import { YourQuestions } from './YourQuestions';
 import { Button } from '../Button';
 import '../styles/Button.css';
 import { getUserByAttribute } from '../../Api/userApi';
+import { Ask_Question } from './Ask_Question';
 
 export const ProfilePage = ({ loggedInUser }) => {
   const [click, setClick] = useState(false);
@@ -68,18 +69,14 @@ export const ProfilePage = ({ loggedInUser }) => {
         style={{
           display: 'flex',
           justifyContent: 'flex-end',
-          marginTop: '20px',
+          marginTop: '15px',
         }}
       >
         <div
-          className="button-container"
+          className=""
           style={{ display: 'flex', flexDirection: 'column' }}
         >
-          {button && (
-            <Button to="/ask-question" className="page-button" style={buttonStyles}>
-              <i> Ask Question</i>
-            </Button>
-          )}
+          
           {button && (
             <Button to="/schedule-appt" className="page-button" style={buttonStyles}>
               <i> Schedule Appointment</i>

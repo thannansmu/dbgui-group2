@@ -114,6 +114,27 @@ export const getQuestionTextsByStudentID = (studentID) => new Promise((resolve, 
 });
 
 
+export const getSubjectsTaughtByUsername = (username) => new Promise((resolve, reject) => {
+    axios.get(`${url}/${username}/subjects_taught`)
+        .then(resp => resolve(resp.data))
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
+
+export const getUserRating = (username) => new Promise((resolve, reject) => {
+    axios.get(`${url}/${username}/ratings`)
+    .then(resp => resolve(resp.data))
+    .catch(error => {
+        alert(error);
+        reject(error);
+    });
+});
+
+
+
+
 ///////////////////////////////END OF GET ROUTES/////////////////////////////
 
 
@@ -148,6 +169,25 @@ export const addComment = (username, comment) => new Promise((resolve, reject) =
             reject(error);
         });
 });
+
+
+//add new question
+export const addNewQuestion = async (username, studentID, tutorID, question, answer) => {
+  try {
+    const response = await axios.post(`${url}/users/${username}/add_question`, {
+      studentID,
+      tutorID,
+      question,
+      answer,
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('Error adding a new question:', error);
+    throw error;
+  }
+};
+
 
 //////////////////////////////END OF POST ROUTES/////////////////////////////
 
@@ -197,4 +237,16 @@ export const deleteCommentt = (id) => new Promise((resolve, reject) => {
             reject(error);
         });
 });
+
+// Delete a question from the database based on question text
+export const deleteQuestionByQuestionText = async (questionText) => {
+    try {
+      const response = await axios.delete(`${url}/questions/${questionText}`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+  
 ////////////////////////////END OF DELETE ROUTES/////////////////////////////

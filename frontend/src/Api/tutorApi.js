@@ -24,6 +24,47 @@ export const getTutor = (username) => new Promise((resolve, reject) => {
         });
 });
 
+export const getTutorTimesAvailable = (username) => new Promise((resolve, reject) => {
+    axios.get(`${url}/users/${username}/timesAvailable`)
+        .then(resp => resolve(resp.data))
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
+
+
+// Get subjects taught by a tutor
+export const getTutorSubjectsTaught = (tutorID) => new Promise((resolve, reject) => {
+    axios.get(`${url}/tutors/${tutorID}/subjectsTaught`)
+        .then(resp => resolve(resp.data))
+        .catch(error => {
+            alert(error);
+            reject(error);
+        });
+});
+
+
+export const getTutorID = (username) => new Promise((resolve, reject) => {
+    axios.get(`${url}/${username}/tutorID`)
+      .then(resp => resolve(resp.data))
+      .catch(error => {
+        alert(error);
+        reject(error);
+      });
+  });
+  
+  //return the tutor's ratings. 
+export const getTutorRating = (tutorID) => new Promise((resolve, reject) => {
+    axios.get(`${url}/${tutorID}/rating`)
+    .then(resp => resolve(resp.data))
+    .catch(error => {
+        alert(error);
+        reject(error);
+    });
+});
+
+
 ///////////////////////////////END OF GET ROUTES/////////////////////////////
 
 

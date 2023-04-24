@@ -1,18 +1,17 @@
 import { useState, useEffect } from 'react';
-import { UserInfo } from '../UserInfo';
 import { Button } from '../../Button';
 import '../../styles/Tutor.css';
 import '../../styles/Button.css';
-import { getTutor, getTutorId, getUserByAttribute } from '../../../Api';
+import { getUserByAttribute } from '../../../Api';
 
-export const TutorProfile = ({ loggedInUser }) => {
+export const TutorProfileStudent = ({viewTutor}) => {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [userRole, setUserRole] = useState('');
     const [bio, setBio] = useState('');
 
+    console.log(viewTutor);
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
@@ -28,42 +27,33 @@ export const TutorProfile = ({ loggedInUser }) => {
     useEffect(() => {
         showButton();
         getUserInfo();
-    }, []);
+    }, [viewTutor]);
+    
 
     const getUserInfo = async () => {
 
-        const response = await getUserByAttribute(loggedInUser, 'firstName');
+        const response = await getUserByAttribute(viewTutor, 'firstName');
         setFirstName(response[0].firstName);
-        const lastResponse = await getUserByAttribute(loggedInUser, 'lastName');
+        const lastResponse = await getUserByAttribute(viewTutor, 'lastName');
         setLastName(lastResponse[0].lastName);
-        const roleResponse = await getUserByAttribute(loggedInUser, 'userRole');
-        setUserRole(roleResponse[0].userRole);
-        const bioResponse = await getUserByAttribute(loggedInUser, 'bio');
+        const bioResponse = await getUserByAttribute(viewTutor, 'bio');
         setBio(bioResponse[0].bio);
     };
 
     window.addEventListener('resize', showButton);
 
     return <>
-        <h1 className='title' style={{ textDecoration: 'underline' }}>
-            Your Profile
-        </h1>
-
         <div>
-
-            <br />
-            <h4>
-                <u>User Information:</u>
+            <br></br>
+            <h1>
+                <u>Tutor Information:</u>
                 <br></br>
                 <br></br>
-            </h4>
+            </h1>
 
-            <h4>username: {loggedInUser}</h4>
-
-            {firstName && <h4>first name: {firstName}</h4>}
-            {lastName && <h4>last name: {lastName}</h4>}
-            {userRole && <h4>user role: {userRole}</h4>}
-            {bio && <h4>bio: {bio}</h4>}
+            {(firstName && lastName) && <h2>Name: {firstName} {lastName}</h2>}
+            <br></br>
+            {bio && <h3>Bio: {bio}</h3>}
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
@@ -71,30 +61,17 @@ export const TutorProfile = ({ loggedInUser }) => {
             <div className="button-container" style={{ display: 'flex', flexDirection: 'column' }}>
 
                 {button && (
-                    <Button to="/appts" className="page-button" style={buttonStyles}>
-                        <i>  View Appointments</i>
+                    <Button to="/calendar-view" className="page-button" style={buttonStyles}>
+                        <i>  Book Appointment </i>
                     </Button>
                 )}
 
                 {button && (
-                    <Button to="/questions" className="page-button" style={buttonStyles}>
-                        <i> View Questions</i>
-                    </Button>
-                )}
-
-                {button && (
-                    <Button to="/review-student" className="page-button" style={buttonStyles}>
-                        <i> Review Student</i>
+                    <Button to="/schedule-appt" className="page-button" style={buttonStyles}>
+                        <i>  Back </i>
                     </Button>
                 )}
             </div>
-        </div>
-
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-
-            <h2 className='title'>Your Answers</h2>
-
-            <h2 className='title'>Your Reviews</h2>
         </div>
     </>;
 }
