@@ -36,6 +36,17 @@ app.get('/users', (req, res) => {
   })
 })
 
+//returns usernames from user table
+app.get('/usernames', (req, res) => {
+  connection.query('SELECT username FROM User', (err, rows, fields) => {
+    if (err) throw err;
+    res.status(200);
+    res.send(rows);
+    console.log(rows);
+  });
+});
+
+
 //Returns all students in database
 app.get(`/students`, (req, res) => {
   connection.query(`SELECT * FROM Students`, (err, rows, fields) => {
@@ -116,7 +127,6 @@ app.get(`/:tutorID/info`, (req, res) => {
 app.get(`/users/:username/:attribute`, (req, res) => {
   const username = req.params.username;
   const attribute = req.params.attribute;
-
   connection.query(`SELECT ${attribute} FROM User WHERE username = '${username}'`, (err, rows, fields) => {
     if (err) throw err
     res.status(200)
@@ -270,8 +280,9 @@ app.delete('/questions/:questionText', (req, res) => {
 //Adds report to database
 app.post(`/users/:username/add_report`, (req, res) => {
   const username = req.params.username;
-  const {adminID, report} = req.body
-  const query = `INSERT INTO Report (username, adminID, report) VALUES ('${username}', ${adminID}, '${report}')`
+  const adminID = req.body.adminID;
+  const report = req.body.report;
+  const query = `INSERT INTO Report (username, adminID, report) VALUES ('${username}', null, '${report}')`
   connection.query(query, (err, rows, fields) => {
     if (err) throw err
     
@@ -380,11 +391,23 @@ app.post(`/users/:username/add_subject_taught`, (req, res) => {
   })
 })
 
-//Returns reports for user
+//Returns the report content for a user given
 app.get(`/:username/reports`, (req, res) => {
   const username = req.params.username;
   
-  connection.query(`SELECT * FROM Report WHERE username = '${username}'`, (err, rows, fields) => {
+  connection.query(`SELECT report FROM Report WHERE username = '${username}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+  })
+})
+
+//Returns usernames reported. 
+app.get(`/reports`, (req, res) => {
+  const username = req.params.username;
+  
+  connection.query(`SELECT username FROM Report`, (err, rows, fields) => {
     if (err) throw err
     res.status(200)
     res.send(rows)
@@ -449,6 +472,18 @@ app.get(`/:username/ratings`, (req, res) => {
   }) 
 })
 
+//get average rating of specific tutor
+app.get('/ratings/:tutorID/average', (req, res) => {
+  const tutorID = req.params.tutorID;
+  connection.query(`SELECT AVG(rating) AS rating FROM Ratings WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
+    if (err) throw err;
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+  });
+});
+
+
 //Returns times available for tutor
 app.get(`/:tutorID/times_available`, (req, res) => {
   const tutorID = req.params.tutorID;
@@ -477,13 +512,28 @@ app.get(`/:tutorID/tutoring_sessions`, (req, res) => {
 app.get(`/:tutorID/subjects_taught`, (req, res) => {
   const tutorID = req.params.tutorID;
  
-  connection.query(`SELECT * FROM SubjectsTaught WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
+  connection.query(`SELECT subject FROM SubjectsTaught WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
     if (err) throw err
     res.status(200)
     res.send(rows)
     console.log(rows)
   })
 })
+//Returns all unique subjects taught from the SubjectsTaught table
+app.get('/subjects', (req, res) => {
+  const query = 'SELECT DISTINCT subject FROM SubjectsTaught';
+
+  connection.query(query, (error, results, fields) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Error retrieving subjects from database');
+    } else {
+      const subjects = results.map(result => result.subject);
+      res.status(200).send(subjects);
+    }
+  });
+});
+
 
 //Adds answer to given question
 app.put(`/users/:questionID/update_answer`, (req, res) => {
