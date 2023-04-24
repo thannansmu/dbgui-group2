@@ -281,8 +281,9 @@ app.delete('/questions/:questionText', (req, res) => {
 //Adds report to database
 app.post(`/users/:username/add_report`, (req, res) => {
   const username = req.params.username;
-  const {adminID, report} = req.body
-  const query = `INSERT INTO Report (username, adminID, report) VALUES ('${username}', ${adminID}, '${report}')`
+  const adminID = req.body.adminID;
+  const report = req.body.report;
+  const query = `INSERT INTO Report (username, adminID, report) VALUES ('${username}', null, '${report}')`
   connection.query(query, (err, rows, fields) => {
     if (err) throw err
     
@@ -391,7 +392,7 @@ app.post(`/users/:username/add_subject_taught`, (req, res) => {
   })
 })
 
-//Returns the report content for a user given username
+//Returns the report content for a user given
 app.get(`/:username/reports`, (req, res) => {
   const username = req.params.username;
   

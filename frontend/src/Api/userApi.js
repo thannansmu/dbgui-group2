@@ -203,6 +203,17 @@ export const addRequest = (username, request) => new Promise((resolve, reject) =
         });
 });
 
+//Add a report given the username: 
+export const addReport = (username, adminID, report) => new Promise((resolve, reject)=> {
+    axios.post(`${url}/users/${username}/add_report`, report)
+    .then(resp => resolve(resp.data))
+            .catch(error => {
+                alert(error);
+                reject(error);
+            });
+    });
+  
+
 //Add New Comment
 export const addComment = (username, comment) => new Promise((resolve, reject) => {
     axios.post(`${url}/users/${username}/add_comment`, comment)

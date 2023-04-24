@@ -45,7 +45,7 @@ export const ViewReports = () => {
               boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
             }}
           >
-            <h3>{user.username}</h3>
+            <h3>{user.username}</h3> 
             {user.report && user.report.length > 0 && <p>{user.report[0].report}</p>}
           </div>
         ))}
