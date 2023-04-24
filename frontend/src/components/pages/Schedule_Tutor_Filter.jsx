@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../Button';
-import { getTutors, getTutorSubjectsTaught} from '../../Api/tutorApi';
+import { getTutors, getTutorSubjectsTaught, getInfoForTutorID} from '../../Api/tutorApi';
 import { getTutorRating, getAverageRating} from '../../Api';
 import {getTutorID} from '../../Api'
 
@@ -14,6 +14,7 @@ const handleOpenTutorProfile = (setViewTutor, username ) => {
 const TutorCard = ({ username, name, timesAvailable, subjectsTaught, setViewTutor }) => {
   const [rating, setRating] = useState(null);
   const [subject, setSubject] = useState(null);
+  const [the_username, setthe_username] = useState(null);
 
   useEffect(() => {
     const fetchRating = async () => {
@@ -22,6 +23,9 @@ const TutorCard = ({ username, name, timesAvailable, subjectsTaught, setViewTuto
         const tutorID = tutorIDinitial[0].tutorID;
         console.log("the tutor id is", tutorID);
         console.log("the type of tutor ID is", (typeof tutorID));
+
+        const theUsernames = await getInfoForTutorID(tutorID);
+        console.log("the usernames are", theUsernames);
 
         const subjectsTaught = await getTutorSubjectsTaught(tutorID);
         console.log("the subjects taught 1 is", subjectsTaught)

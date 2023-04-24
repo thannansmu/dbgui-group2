@@ -54,7 +54,7 @@ export const getUserRequests = (username) => new Promise((resolve, reject) => {
         });
 });
 
-
+//Getting a list of all the usernames
 export const getUsernames = () => new Promise((resolve, reject) => {
   axios.get(`${url}/usernames`)
     .then(resp => resolve(resp.data))

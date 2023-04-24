@@ -33,6 +33,14 @@ export const getTutorTimesAvailable = (username) => new Promise((resolve, reject
         });
 });
 
+export const getInfoForTutorID = (tutorID) => new Promise((resolve, reject) => 
+{   axios.get(`${url}/${tutorID}/info`)
+    .then(resp => resolve(resp.data))
+    .catch(error => {
+        alert(error);
+        reject(error);
+    });
+});
 
 // Get subjects taught by a tutor
 export const getTutorSubjectsTaught = (tutorID) => new Promise((resolve, reject) => {
