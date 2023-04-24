@@ -36,11 +36,7 @@ app.get('/users', (req, res) => {
   })
 })
 
-<<<<<<< HEAD
 //returns usernames from user table
-=======
-//Returns usernames from user table
->>>>>>> db-routes
 app.get('/usernames', (req, res) => {
   connection.query('SELECT username FROM User', (err, rows, fields) => {
     if (err) throw err;
@@ -131,10 +127,6 @@ app.get(`/:tutorID/info`, (req, res) => {
 app.get(`/users/:username/:attribute`, (req, res) => {
   const username = req.params.username;
   const attribute = req.params.attribute;
-<<<<<<< HEAD
-
-=======
->>>>>>> db-routes
   connection.query(`SELECT ${attribute} FROM User WHERE username = '${username}'`, (err, rows, fields) => {
     if (err) throw err
     res.status(200)
@@ -480,11 +472,7 @@ app.get(`/:username/ratings`, (req, res) => {
   }) 
 })
 
-<<<<<<< HEAD
 //get average rating of specific tutor
-=======
-//Returns average rating of specific tutor
->>>>>>> db-routes
 app.get('/ratings/:tutorID/average', (req, res) => {
   const tutorID = req.params.tutorID;
   connection.query(`SELECT AVG(rating) FROM Ratings WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
