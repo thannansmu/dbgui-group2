@@ -20,12 +20,17 @@ const TutorCard = ({ username, name, timesAvailable, subjectsTaught, setViewTuto
       try {
         const tutorIDinitial = await getTutorID(username);
         const tutorID = tutorIDinitial[0].tutorID;
-        console.log("the tutor id is", tutorID)
-        const subjectsTaught = getTutorSubjectsTaught(tutorID);
+        console.log("the tutor id is", tutorID);
+        console.log("the type of tutor ID is", (typeof tutorID));
+
+        const subjectsTaught = await getTutorSubjectsTaught(tutorID);
+        console.log("the subjects taught 1 is", subjectsTaught)
+        const subjectTaughtString = subjectsTaught[0].subject;
         const userRating = await getTutorRating(tutorID); //change to getAverageRating?
         console.log("Rating for", tutorID, "is", userRating);
         setRating(userRating);
-        setSubject(subjectsTaught);
+        console.log("the subjects taught is", subjectTaughtString);
+        setSubject(subjectTaughtString);
       } catch (error) {
         console.error("Failed to fetch user rating: ", error);
       }
