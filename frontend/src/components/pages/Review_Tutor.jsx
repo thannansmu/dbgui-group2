@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { ReviewForm } from '../common/review/reviewForm';
 import { SelectField } from '../common';
 import { TextAreaField } from '../common';
 import { Rating } from '../common/review/rating';
