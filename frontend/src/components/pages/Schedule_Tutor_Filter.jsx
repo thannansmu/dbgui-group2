@@ -37,7 +37,7 @@ const TutorCard = ({ username, name, timesAvailable, subjectsTaught, setViewTuto
       {rating !== null ? <p>Rating: {rating}</p> : <p>Loading rating...</p>}
 
       <Button to='/tutor-student' onClick={() => setViewTutor(username)}>View Profile</Button>
-      <Button to='/calendar-view'>Book Appointment</Button>
+      <Button to={`/calendar-view/${username}`}>Book Appointment</Button>
     </div>
   );
 };
@@ -58,8 +58,16 @@ export const Schedule_Tutor_Filter = ({ setViewTutor }) => {
   const [time, setTime] = useState('');
   const [name, setName] = useState('');
   const [rating, setRating] = useState('');
+
+  //tutor data
   const [tutors, setTutors] = useState([]);
-  
+  const [tutorID, setTutorID] = useState('');
+  const [tutorFirstName, setTutorFirstName] = useState('');
+  const [tutorLastName, setTutorLastName] = useState('');
+  const [tutorTimes, setTutorTimes] = useState([]);
+  const [tutorSubjects, setTutorSubjects] = useState([]);
+  const [tutorRating, setTutorRating] = useState('');
+
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -77,6 +85,8 @@ export const Schedule_Tutor_Filter = ({ setViewTutor }) => {
     getTutors().then(x => setTutors(x));
   }, []);
 
+console.log(tutors);
+
   /*
   useEffect(() => {
     availabilityApi.getTutorID(username)
@@ -86,8 +96,6 @@ export const Schedule_Tutor_Filter = ({ setViewTutor }) => {
 */
 
   window.addEventListener('resize', showButton);
-
-  
 
   // Function to filter tutors based on user input
   const filterTutors = () => {
