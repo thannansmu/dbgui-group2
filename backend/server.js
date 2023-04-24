@@ -36,7 +36,7 @@ app.get('/users', (req, res) => {
   })
 })
 
-//Returns usernames from user table
+//returns usernames from user table
 app.get('/usernames', (req, res) => {
   connection.query('SELECT username FROM User', (err, rows, fields) => {
     if (err) throw err;
@@ -472,7 +472,7 @@ app.get(`/:username/ratings`, (req, res) => {
   }) 
 })
 
-//Returns average rating of specific tutor
+//get average rating of specific tutor
 app.get('/ratings/:tutorID/average', (req, res) => {
   const tutorID = req.params.tutorID;
   connection.query(`SELECT AVG(rating) FROM Ratings WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
@@ -519,6 +519,21 @@ app.get(`/:tutorID/subjects_taught`, (req, res) => {
     console.log(rows)
   })
 })
+//Returns all unique subjects taught from the SubjectsTaught table
+app.get('/subjects', (req, res) => {
+  const query = 'SELECT DISTINCT subject FROM SubjectsTaught';
+
+  connection.query(query, (error, results, fields) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Error retrieving subjects from database');
+    } else {
+      const subjects = results.map(result => result.subject);
+      res.status(200).send(subjects);
+    }
+  });
+});
+
 
 //Adds answer to given question
 app.put(`/users/:questionID/update_answer`, (req, res) => {
