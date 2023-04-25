@@ -460,6 +460,17 @@ app.get(`tutor/:tutorID/questions`, (req, res) => {
   })
 })
 
+//returns all questions
+app.get('/questions', (req, res) => {
+  connection.query('SELECT questionText, studentID FROM Question', (err, rows, fields) => {
+    if (err) throw err;
+    res.status(200);
+    res.send(rows);
+    console.log(rows);
+  });
+});
+
+
 //Returns ratings for user
 app.get(`/:username/ratings`, (req, res) => {
   const username = req.params.username;
@@ -535,14 +546,14 @@ app.get('/subjects', (req, res) => {
 });
 
 
-//Adds answer to given question
-app.put(`/users/:questionID/update_answer`, (req, res) => {
-  const questionID = req.params.questionID;
+//Adds answer to given question given the questionText
+app.put(`/users/:questionText/update_answer`, (req, res) => {
+  const questionText = req.params.questionText;
   const updatedValue = req.body;
-  connection.query(`UPDATE Question SET answer = '${updatedValue}' WHERE questionID = ${questionID}`, (err, rows, fields) => {
+  connection.query(`UPDATE Question SET answer = '${updatedValue}' WHERE questionText = '${questionText}'`, (err, rows, fields) => {
     if (err) throw err
     res.status(200)
-    res.send(`Updated answer for question ${questionID}`)
-    console.log(`Updated answer for ${questionID} to ${updatedValue}`)
+    res.send(`Updated answer for question '${questionText}'`)
+    console.log(`Updated answer for '${questionText}' to '${updatedValue}'`)
   })
 })

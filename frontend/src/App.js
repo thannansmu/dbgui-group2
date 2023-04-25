@@ -16,6 +16,7 @@ import { ReportUser } from './components/pages/ReportUser';
 import { AdminPage } from './components/pages/AdminPage'; // Make sure the path is correct
 import { DeleteUser } from './components/pages';
 import {ViewReports} from './components/pages/ViewReports';
+import { AllQuestions } from './components/pages/tutorView/AllQuestions';
 
 
 
@@ -105,6 +106,7 @@ function App() {
       <Route path = '/review-tutor' element={<Review_Tutor/>}/>
       <Route path = '/tutor-student' element={<TutorProfileStudent viewTutor={viewTutor} />} />
       <Route path = '/calendar-view' element={<CalendarView />} />
+      <Route path = '/questions' element={<AllQuestions/>}/>
 
     </Routes>
     

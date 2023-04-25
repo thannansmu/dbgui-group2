@@ -12,12 +12,10 @@ export const TutorProfile = ({ loggedInUser }) => {
     const [lastName, setLastName] = useState('');
     const [userRole, setUserRole] = useState('');
     const [bio, setBio] = useState('');
-  
-  
-  
+
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
-  
+
     const showButton = () => {
       if (window.innerWidth <= 960) {
         setButton(false);
@@ -25,12 +23,12 @@ export const TutorProfile = ({ loggedInUser }) => {
         setButton(true);
       }
     };
-  
+
     useEffect(() => {
       showButton();
       getUserInfo();
     }, []);
-  
+
     const getUserInfo = async () => {
       const response = await getUserByAttribute(loggedInUser, 'firstName');
       setFirstName(response[0].firstName);
@@ -40,14 +38,12 @@ export const TutorProfile = ({ loggedInUser }) => {
       setUserRole(roleResponse[0].userRole);
       const bioResponse = await getUserByAttribute(loggedInUser, 'bio');
       setBio(bioResponse[0].bio);
-
-  
     };
-  
+
     window.addEventListener('resize', showButton);
-  
+
     return (
-      <div>
+      <div style={{ backgroundColor: 'white', padding: '50px' }}>
         <h1 style={{ textDecoration: 'underline' }}>Your Profile</h1>
         <div>
           <br />
@@ -96,18 +92,24 @@ export const TutorProfile = ({ loggedInUser }) => {
 }
 
 const buttonStyles = {
-    border: '1px solid #ccc',
-    borderRadius: '4px',
-    backgroundColor: '#fff',
-    padding: '10px 20px',
-    color: '#333',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-    transition: 'all 0.3s ease-in-out',
-    textDecoration: 'none',
-    display: 'inline-block',
-    textAlign: 'center',
-    width: '100%',
-    boxSizing: 'border-box',
-    marginBottom: '10px'
+  border: '1px solid #ccc',
+  borderRadius: '4px',
+  backgroundColor: '#fff',
+  padding: '10px 20px',
+  color: '',
+  fontWeight: 'bold',
+  cursor: 'pointer',
+  transition: 'all 0.3s ease-in-out',
+  textDecoration: 'none',
+  display: 'inline-block',
+  textAlign: 'center',
+  width: '100%',
+  boxSizing: 'border-box',
+  marginBottom: '10px',
+  boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
+  ':hover': {
+    backgroundColor: '#eee',
+    boxShadow: '0 5px 10px rgba(0,0,0,0.2)',
+  }
 };
+

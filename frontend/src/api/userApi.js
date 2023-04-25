@@ -14,6 +14,17 @@ export const LoginCheck = (username) => new Promise((resolve, reject) => {
         });
 });
 
+//Get studentID and corresponding Question:
+export const getQuestions = () => new Promise((resolve, reject) => {
+    axios.get(`${url}/questions`)
+      .then(resp => resolve(resp.data))
+      .catch(error => {
+        alert(error);
+        reject(error);
+      });
+  });
+  
+
 //Get Users
 export const getUsers = () => new Promise((resolve, reject) => {
     axios.get(`${url}/users`)
@@ -263,6 +274,8 @@ export const addNewQuestion = async (username, studentID, tutorID, question, ans
 };
 
 
+
+
 //////////////////////////////END OF POST ROUTES/////////////////////////////
 
 
@@ -277,6 +290,17 @@ export const updateUser = (username, attribute, updatedValue) => new Promise((re
             reject(error);
         });
 });
+
+//Updates the question with an answer given a questionText
+export const updateAnswer = (questionText, updatedValue) => new Promise((resolve, reject) => {
+    axios.put(`${url}/users/${questionText}/update_answer`, updatedValue)
+      .then(resp => resolve(resp.data))
+      .catch(error => {
+        alert(error);
+        reject(error);
+      });
+  });
+  
 ///////////////////////////////END OF PUT ROUTES/////////////////////////////
 
 
