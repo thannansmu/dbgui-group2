@@ -224,11 +224,7 @@ app.get(`/users/:username/comments`, (req, res) => {
 app.get('/tutors/:tutorID/answers', (req, res) => {
   const tutorID = req.params.tutorID;
 
-  const query = `
-    SELECT questionID, studentID, tutorID, questionText, answer
-    FROM Questions
-    WHERE tutorID = ?;
-  `;
+  const query = `SELECT questionID, answer FROM Question WHERE tutorID = ${tutorID};`;
 
   connection.query(query, [tutorID], (err, rows, fields) => {
     if (err) {
@@ -509,7 +505,7 @@ app.get(`tutor/:tutorID/questions`, (req, res) => {
 
 //returns all questions
 app.get('/questions', (req, res) => {
-  connection.query('SELECT questionText, studentID FROM Question', (err, rows, fields) => {
+  connection.query('SELECT questionText, studentID, questionID FROM Question', (err, rows, fields) => {
     if (err) throw err;
     res.status(200);
     res.send(rows);
@@ -597,14 +593,14 @@ app.get('/subjects', (req, res) => {
 //NOT WORKING HELP
 //Adds answer to given question given the questionText
 // Adds answer to given question given the questionText
-app.put('questions/:questionText/update_answer', (req, res) => {
-  const questionText = req.params.questionText;
+app.put('/questions/:questionID/update_answer', (req, res) => {
+  const questionID = req.params.questionID;
   const updatedValue = req.body.answer;
-  connection.query(`UPDATE Question SET answer = '${updatedValue}' WHERE questionID = '${questionText}'`, (err, rows, fields) => {
+  connection.query(`UPDATE Question SET answer = '${updatedValue}' WHERE questionID = '${questionID}'`, (err, rows, fields) => {
     if (err) throw err;
     res.status(200);
-    res.send(`Updated answer for question '${questionText}'`);
-    console.log(`Updated answer for '${questionText}' to '${updatedValue}'`);
+    res.send(`Updated answer for question '${questionID}'`);
+    console.log(`Updated answer for '${questionID}' to '${updatedValue}'`);
   });
 });
 

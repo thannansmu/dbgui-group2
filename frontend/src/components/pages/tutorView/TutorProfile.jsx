@@ -48,12 +48,14 @@ export const TutorProfile = ({ loggedInUser }) => {
       const bioResponse = await getUserByAttribute(loggedInUser, 'bio');
       setBio(bioResponse[0].bio);
       const tutorIdResponse = await getTutorID(loggedInUser);
-      setTutorID(tutorIdResponse);
+      const newTutorId = tutorIdResponse[0].tutorID;
+      setTutorID(newTutorId);
+      console.log("The tutor ID response is", newTutorId);
       if (tutorID) {
-        const fetchedAnswers = await getTutorAnswers(tutorID);
+        const fetchedAnswers = await getTutorAnswers(newTutorId);
         setAnswers(fetchedAnswers);
       }
-
+console.log("the fetched answers are", answers);
       
     };
 
@@ -96,13 +98,16 @@ export const TutorProfile = ({ loggedInUser }) => {
 
         <div style={{ backgroundColor: '#AED6F1', display: 'flex', justifyContent: 'space-between' }}>
 
-        <h2 className='title'>Your Answers</h2>
-            {answers.map((answer) => (
-              <div key={answer.questionID}>
-                <h3>{answer.questionText}</h3>
-                <p>{answer.answer}</p>
-              </div>
-            ))}
+<h2 className='title'>Your Answers</h2>
+<br />
+<div style={{ marginTop: '10px' }}>
+  {answers.map((answer) => (
+    <div key={answer.questionID}>
+      <p>{answer.answer}</p>
+    </div>
+  ))}
+</div>
+
 
         </div>
         </div>
