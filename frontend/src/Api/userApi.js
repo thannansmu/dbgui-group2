@@ -291,15 +291,19 @@ export const updateUser = (username, attribute, updatedValue) => new Promise((re
         });
 });
 
+
+//NOT WORKING HELP
 //Updates the question with an answer given a questionText
+// Updates the question with an answer given a questionText
 export const updateAnswer = (questionText, updatedValue) => new Promise((resolve, reject) => {
-    axios.put(`${url}/users/${questionText}/update_answer`, updatedValue)
+    axios.put(`${url}/questions/${questionText}/update_answer`, { answer: updatedValue })
       .then(resp => resolve(resp.data))
       .catch(error => {
         alert(error);
         reject(error);
       });
   });
+  
   
 ///////////////////////////////END OF PUT ROUTES/////////////////////////////
 

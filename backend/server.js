@@ -546,14 +546,19 @@ app.get('/subjects', (req, res) => {
 });
 
 
+
+//NOT WORKING HELP
 //Adds answer to given question given the questionText
-app.put(`/users/:questionText/update_answer`, (req, res) => {
+// Adds answer to given question given the questionText
+app.put('questions/:questionText/update_answer', (req, res) => {
   const questionText = req.params.questionText;
-  const updatedValue = req.body;
-  connection.query(`UPDATE Question SET answer = '${updatedValue}' WHERE questionText = '${questionText}'`, (err, rows, fields) => {
-    if (err) throw err
-    res.status(200)
-    res.send(`Updated answer for question '${questionText}'`)
-    console.log(`Updated answer for '${questionText}' to '${updatedValue}'`)
-  })
-})
+  const updatedValue = req.body.answer;
+  connection.query(`UPDATE Question SET answer = '${updatedValue}' WHERE questionID = '${questionText}'`, (err, rows, fields) => {
+    if (err) throw err;
+    res.status(200);
+    res.send(`Updated answer for question '${questionText}'`);
+    console.log(`Updated answer for '${questionText}' to '${updatedValue}'`);
+  });
+});
+
+
