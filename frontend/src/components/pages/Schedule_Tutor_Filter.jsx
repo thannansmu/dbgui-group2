@@ -192,20 +192,8 @@ console.log(tutors);
       <h1><b><u>Filters:</u></b></h1>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div>
-          <label htmlFor="subject">Subject:</label>
-          <input type="text" id="subject" value={subject} onChange={(e) => setSubject(e.target.value)} />
-        </div>
-        <div>
-          <label htmlFor="time">Time:</label>
-          <input type="text" id="time" value={time} onChange={(e) => setTime(e.target.value)} />
-        </div>
-        <div>
           <label htmlFor="name">Name:</label>
           <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} /> {/* Changed variable name from 'rating' to 'name' */}
-        </div>
-        <div>
-          <label htmlFor="rating">Rating:</label>
-          <input type="text" id="rating" value={rating} onChange={(e) => setRating(e.target.value)} />
         </div>
       </div>
       {filteredTutors.map((tutor) => (
@@ -229,3 +217,18 @@ export const Schedule_Tutor_Filter = ({setViewTutor}) => {
     <Tutor_Filter tutorData={tutorData} setViewTutor={setViewTutor}/>
   </>
 };
+
+/*
+<div>
+          <label htmlFor="subject">Subject:</label>
+          <input type="text" id="subject" value={subject} onChange={(e) => setSubject(e.target.value)} />
+        </div>
+        <div>
+          <label htmlFor="time">Time:</label>
+          <input type="text" id="time" value={time} onChange={(e) => setTime(e.target.value)} />
+        </div>
+          <div>
+          <label htmlFor="rating">Rating:</label>
+          <input type="text" id="rating" value={rating} onChange={(e) => setRating(e.target.value)} />
+        </div>
+*/
