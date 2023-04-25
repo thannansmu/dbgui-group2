@@ -54,8 +54,8 @@ export const TutorProfile = ({ loggedInUser }) => {
       if (tutorID) {
         const fetchedAnswers = await getTutorAnswers(newTutorId);
         setAnswers(fetchedAnswers);
+        console.log("the answers are", fetchedAnswers);
       }
-console.log("the fetched answers are", answers);
       
     };
 
@@ -79,7 +79,7 @@ console.log("the fetched answers are", answers);
         </div>
         <div style={{ backgroundColor: '#AED6F1', display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
 
-            <div className="button-container" style={{ display: 'flex', flexDirection: 'column' }}>
+            <div className="button-container" style={{ backgroundColor: '#AED6F1', display: 'flex', flexDirection: 'column' }}>
 
 
                 {button && (
@@ -96,21 +96,37 @@ console.log("the fetched answers are", answers);
             </div>
         </div>
 
-        <div style={{ backgroundColor: '#AED6F1', display: 'flex', justifyContent: 'space-between' }}>
-
-<h2 className='title'>Your Answers</h2>
-<br />
-<div style={{ marginTop: '10px' }}>
-  {answers.map((answer) => (
-    <div key={answer.questionID}>
-      <p>{answer.answer}</p>
+        <div
+      style={{
+        backgroundColor: '#AED6F1',
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+      }}
+    >
+      <h2 className="title">Your Answers</h2>
+      <br />
+      <div
+        style={{
+          marginTop: '130px', // increase this value to move answers down
+          paddingLeft: '200px', // increase this value to move answers to the left
+          borderLeft: '2px solid #666',
+          marginLeft: '20px',
+          maxWidth: '80%',
+        }}
+      >
+        {answers.map((answer) => (
+          <div key={answer.questionID} style={{ marginBottom: '10px' }}>
+            <p>
+              <b>Question ID:</b> {answer.questionID}
+            </p>
+            <p>{answer.answer}</p>
+            <hr />
+          </div>
+        ))}
+      </div>
     </div>
-  ))}
-</div>
-
-
-        </div>
-        </div>
+  </div>
     );
 }
 
