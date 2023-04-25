@@ -113,15 +113,10 @@ export const CalendarView = ({loggedInUser}) => {
     ];
 
     const isCellAvailable = (day, time) => {
-        const currentIndex = hoursOfDay.indexOf(time);
-        var endTime = hoursOfDay[currentIndex + 1];
-        if(currentIndex+1 === hoursOfDay.length) {
-            endTime = '6:00';
-        }
     
         for (let i = 0; i < availabilities.length; i++) {
         const availability = availabilities[i];
-        if (availability.tutorDay === day && availability.tutorTime >= time && availability.tutorTime < endTime) {
+        if (availability.tutorDay === day && availability.tutorTime === time) {
             return true;
         }
         }

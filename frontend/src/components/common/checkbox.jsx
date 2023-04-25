@@ -2,7 +2,12 @@ export const CheckboxList = ({ id, label, value, setValue, options, checkedItems
 
   const handleChange = (event) => {
     setCheckedItems({ ...checkedItems, [event.target.name]: event.target.checked });
+    const updatedValue = Object.keys(checkedItems)
+      .filter((key) => checkedItems[key])
+      .map((key) => options.find((option) => option.name === key).value);
+    setValue(updatedValue);
   };
+  
 
   return (
     <div>

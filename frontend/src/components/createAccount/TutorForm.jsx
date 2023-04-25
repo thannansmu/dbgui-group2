@@ -7,7 +7,8 @@ import { addUser } from '../../Api';
 import { Link } from 'react-router-dom';
 import { availabilityApi } from '../../Api/availabilityApi';
 import { getTutorID } from '../../Api/availabilityApi';
-import { addTutorAvailability } from '../../Api';
+import { addTutorAvailability} from '../../Api';
+import { addSubjectTaught } from '../../Api';
 
 export const TutorForm = () => {
 
@@ -15,7 +16,7 @@ export const TutorForm = () => {
 
     const [day, setDay] = useState("");
     const [time, setTime] = useState("");
-    const [checkedItems, setCheckedItems] = useState("");
+    const [checkedItems, setCheckedItems] = useState({});
     const [availability, setAvailability] = useState([]);
     const [tutorID, setTutorID] = useState([]);
     const [availabilitiesApi, setAvailabilitiesApi] = useState([]);
@@ -32,7 +33,7 @@ export const TutorForm = () => {
         </>
     }
 
-    console.log(tutorID);
+    console.log(checkedItems)
 
     const addAvailability = () => {
 
@@ -70,6 +71,8 @@ export const TutorForm = () => {
         { value: 2, name: "Science" },
         { value: 3, name: "Writing" },
         { value: 4, name: "History" },
+        { value: 5, name: "Computer Science"},
+        { value: 6, name: "Business"}
     ];
 
     const days = [
@@ -118,6 +121,32 @@ export const TutorForm = () => {
             
             addTutorAvailability(tutorID, newAvailability);
         })
+
+        if(checkedItems.Math) {
+            console.log('math checked');
+            addSubjectTaught(username, tutorID, "Math");
+        }
+        if(checkedItems.Science) {
+            console.log('science checked');
+            addSubjectTaught(username, tutorID, "Science");
+        }
+        if(checkedItems.Writing) {
+            console.log('writing checked');
+            addSubjectTaught(username, tutorID, "Writing");
+        }
+        if(checkedItems.History) {
+            console.log('history checked');
+            addSubjectTaught(username, tutorID, "History");
+        }
+        if(checkedItems["Computer Science"]) {
+            console.log('comp sci checked');
+            addSubjectTaught(username, tutorID, "Computer Science");
+        }
+        if(checkedItems.Business) {
+            console.log('business checked');
+            addSubjectTaught(username, tutorID, "Business");
+        }
+
     };
 
     return <>

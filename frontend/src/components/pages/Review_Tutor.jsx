@@ -83,10 +83,12 @@ export const Review_Tutor = ({ loggedInUser }) => {
     { value: 5, label: '5 stars' }
   ];
 
+  console.log(rating);
+
   const onSubmit = () => {
     // Submit review data
     addReview(username, {"studentID":studentID, "tutorID":tutorID, "review":comment});
-    addRating(username, {"studentID":studentID, "tutorID":tutorID, "review":rating});
+    addRating(username, {"studentID":studentID, "tutorID":tutorID, "rating":rating});
     console.log('added review + rating!')
   }
 
