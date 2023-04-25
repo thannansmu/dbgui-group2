@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '../Button';
 import { getTutors, getTutorSubjectsTaught, getInfoForTutorID} from '../../Api/tutorApi';
 import { getTutorRating, getAverageRating} from '../../Api';
+import { getUserByAttribute } from '../../Api';
 import {getTutorID} from '../../Api'
 
 // Function to set viewTutor when a student looks at a tutor's profile
@@ -58,16 +59,57 @@ const TutorCard = ({ username, name, timesAvailable, subjectsTaught, setViewTuto
   );
 };
 
-
+// tutorData contains times, usernames, and full names.
 // Example data for tutors
+/*
 const tutorData = [
   { username: 'user6', name: 'Sarah Garcia', time: '3:00 PM', subject: 'Computer Science' },
   { username: 'user7', name: 'Thomas Anderson', time: '5:00 PM', subject: 'Writing'   },
   { username: 'user11', name: 'Patrick Bateman', time: '7:00 AM', subject: 'Business' },
 ];
+*/
+
+//const tutorData = [];
+
+const GetTutorData = ({tutorData, setTutorData}) => {
+  const [tutors, setTutors] = useState([]);
+
+  useEffect(() => {
+    const fetchTutors = async () => {
+      const data = await getTutors();
+      setTutors(data);
+    };
+
+    fetchTutors();
+  }, []);
+
+  useEffect(() => {
+    const makeTutorList = async () => {
+      const list = [];
+      for (const tutor of tutors) {
+        const firstName = await getUserByAttribute(tutor.username, 'firstName');
+        const lastName = await getUserByAttribute(tutor.username, 'lastName');
+        list.push({
+          username: tutor.username,
+          tutorID: tutor.tutorID,
+          tutorFirstName: firstName[0].firstName,
+          tutorLastName: lastName[0].lastName,
+          name: `${firstName[0].firstName} ${lastName[0].lastName}`,
+        });
+      }
+      setTutorData(list);
+    };
+
+    if (tutors.length > 0) {
+      makeTutorList();
+    }
+  }, [tutors]);
+
+  return <></>
+};
 
 // Schedule_Tutor_Filter component to display tutor filter page
-export const Schedule_Tutor_Filter = ({ setViewTutor }) => {
+const Tutor_Filter = ({ setViewTutor, tutorData }) => {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
   const [subject, setSubject] = useState('');
@@ -83,7 +125,6 @@ export const Schedule_Tutor_Filter = ({ setViewTutor }) => {
   const [tutorTimes, setTutorTimes] = useState([]);
   const [tutorSubjects, setTutorSubjects] = useState([]);
   const [tutorRating, setTutorRating] = useState('');
-
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -116,6 +157,7 @@ console.log(tutors);
   // Function to filter tutors based on user input
   const filterTutors = () => {
 
+    console.log(tutorData);
     return tutorData.filter((tutor) => {
       const subjectMatch = !subject || tutor.subject.toLowerCase().includes(subject.toLowerCase());
       const timeMatch = !time || tutor.time.toLowerCase().includes(time.toLowerCase());
@@ -159,4 +201,19 @@ console.log(tutors);
       ))}
     </div>
   );
+};
+
+export const Schedule_Tutor_Filter = ({setViewTutor}) => {
+  const [tutorData, setTutorData] = useState([]);
+
+  if (!tutorData) {
+    return <>
+      Loading...
+    </>
+  }
+
+  return <>
+    <GetTutorData tutorData={tutorData} setTutorData={setTutorData}/>
+    <Tutor_Filter tutorData={tutorData} setViewTutor={setViewTutor}/>
+  </>
 };
