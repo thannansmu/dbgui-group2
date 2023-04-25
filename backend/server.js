@@ -550,10 +550,10 @@ app.get(`/:tutorID/times_available`, (req, res) => {
   })
 })
 
-//Returns tutoring sessions for user
-app.get(`/:username/tutoring_sessions`, (req, res) => {
-  const username = req.params.username;
-  connection.query(`SELECT * FROM TutoringSessions WHERE username = '${username}'`, (err, rows, fields) => {
+//Returns tutoring sessions for student
+app.get(`/:studentID/tutoring_sessions`, (req, res) => {
+  const studentID = req.params.studentID;
+  connection.query(`SELECT * FROM TutoringSessions WHERE studentID = '${studentID}'`, (err, rows, fields) => {
     if (err) throw err
     res.status(200)
     res.send(rows)
