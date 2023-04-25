@@ -1,0 +1,176 @@
+.createAccountForm {
+    text-align: center;
+}
+
+.accountTypeSelection {
+    text-align: center;
+}
+
+[class*="container"] {
+    border-width: 1;
+    border-style: solid;
+}
+
+#accountTypeContainer {
+    max-width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 1rem;
+    margin-top: 2rem;
+    border-radius: 1rem;
+    min-width: 55%;
+}
+
+button[class*='accountType'][class] {
+    margin: 1rem;
+    padding: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-radius: 1rem;
+}
+
+.availability {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.075rem solid black;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.availableTime {
+    padding: 1rem;
+    border: 0rem;
+}
+
+h2 {
+    margin-top: 2rem;
+}
+
+h3 {
+    margin-bottom: 1rem;
+}
+
+.userForm {
+    border: 0.075rem solid black;
+    max-width: 20rem;
+    margin: auto;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.userForm-TextField {
+    border: 0.1rem solid black;
+}
+
+input[type="text"] {
+    position: relative;
+    background-color: rgb(241, 241, 241);
+    border-width: 0.1rem;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border-width: 0.1rem;
+
+}
+
+textarea {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    background-color: rgb(241, 241, 241);
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 3rem;
+    border-radius: 0.25rem;
+    border-width: 0.1rem;
+}
+
+input[type='checkbox'] {
+    margin: 0.5rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.tutorForm-checkbox {
+    border: 0.075rem solid black;
+    max-width: fit-content;
+    margin: auto;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    text-align: left;
+}
+
+.tutorForm-availability {
+    border: 0.075rem solid black;
+    max-width: 20rem;
+    margin: auto;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-top: 1rem;
+}
+
+.removeButton {
+    padding: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 0.7rem;
+    margin-right: 1rem;
+    margin-left: 0rem;
+    background-color: rgb(230, 83, 83);
+    border-color: rgb(241, 9, 9);;
+    color: rgb(255, 255, 255);
+    border-width: 0.1rem;
+}
+
+.removeButton:hover {
+    background-color: rgb(209, 61, 61);
+
+}
+
+.tutorForm-availability-select {
+    border: 0.075rem solid rgb(207, 207, 207);
+    max-width: fit-content;
+    margin: auto;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+select, input[type="time"] {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    background-color: rgb(241, 241, 241);
+    border-radius: 0.25rem;
+    border-width: 0.1rem;
+    border-color: gray;
+
+}
+
+button[class*='createAccount']{
+    padding: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 0.7rem;
+    background-color: rgb(115, 189, 177);
+    color: rgb(255, 255, 255);
+    border-width: 0.1rem;
+    border-color: rgb(123, 208, 193);
+}
+
+button[class*='createAccount']:hover {
+    background-color: rgb(83, 161, 148);
+}

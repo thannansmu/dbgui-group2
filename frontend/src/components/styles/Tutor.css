@@ -1,0 +1,26 @@
+* {
+    box-sizing: border-box;
+}
+
+.title {
+    text-decoration: underline;
+    margin: 0rem 10rem 0rem 1rem;
+}
+
+.tutor-fns {
+    display: flex;
+    flex-direction: column;
+    border: '1px solid #ccc';
+    border-radius: '4px';
+    background-color: '#fff';
+    padding: '10px 20px';
+    color: '#333';
+    font-weight: 'bold';
+    cursor: 'pointer';
+    transition: 'all 0.3s ease-in-out';
+    text-decoration: 'none';
+    display: 'inline-block';
+    text-align: 'center';
+    width: '100%';
+    margin: 0rem 4.5rem 10rem 0rem;
+}
