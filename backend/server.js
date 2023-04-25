@@ -509,7 +509,7 @@ app.get(`tutor/:tutorID/questions`, (req, res) => {
 
 //returns all questions
 app.get('/questions', (req, res) => {
-  connection.query('SELECT questionText, studentID FROM Question', (err, rows, fields) => {
+  connection.query('SELECT questionText, studentID, questionID FROM Question', (err, rows, fields) => {
     if (err) throw err;
     res.status(200);
     res.send(rows);
