@@ -93,7 +93,7 @@ function App() {
       <Route path = '/sign-up' element={<LogInorCreateAcctOption />} />
       <Route path="/login" element={<LoginForm setLoggedInUser={setLoggedInUser} />} />
       <Route path = '/create-account' element={<CreateAccount />} />
-      <Route path = '/booked-appt' element={<YourAppointments />} />
+      <Route path = '/booked-appt' element={<YourAppointments loggedInUser={loggedInUser}/>} />
       <Route path = '/schedule-appt' element={<Schedule_Tutor_Filter setViewTutor={setViewTutor} />} />
       <Route path = '/ask-question' element={<Ask_Question/>}/>
       <Route path = '/main-student-screen' element={<ProfilePage/>}/>

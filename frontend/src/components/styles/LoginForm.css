@@ -2,6 +2,14 @@
     box-sizing: border-box;
 }
 
+.entireLoginForm {
+    border: 0.1rem solid black;
+    max-width: 70%;
+    margin: auto;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
 .login-title {
     margin-top: 2rem;
     margin-left: 2rem;

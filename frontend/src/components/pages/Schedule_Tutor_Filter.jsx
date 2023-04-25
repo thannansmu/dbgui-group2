@@ -5,6 +5,8 @@ import { getTutors, getTutorSubjectsTaught, getInfoForTutorID} from '../../Api/t
 import { getTutorRating, getAverageRating} from '../../Api';
 import { getUserByAttribute } from '../../Api';
 import {getTutorID} from '../../Api'
+import { availabilityApi } from '../../Api/availabilityApi';
+import { getAvailabilities } from '../../Api/availabilityApi';
 
 // Function to set viewTutor when a student looks at a tutor's profile
 const handleOpenTutorProfile = (setViewTutor, username ) => {
@@ -47,7 +49,7 @@ const TutorCard = ({ username, name, timesAvailable, subjectsTaught, setViewTuto
   return (
     <div style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px' }}>
       <h2>{name}</h2>
-      <p>Times available: {timesAvailable}</p>
+      <p>Times available:{timesAvailable}</p>
       <p>Subjects taught: {subject}</p>
       {console.log(rating)}
       
@@ -72,6 +74,8 @@ const tutorData = [
 
 //const tutorData = [];
 
+
+
 const GetTutorData = ({tutorData, setTutorData}) => {
   const [tutors, setTutors] = useState([]);
 
@@ -90,12 +94,19 @@ const GetTutorData = ({tutorData, setTutorData}) => {
       for (const tutor of tutors) {
         const firstName = await getUserByAttribute(tutor.username, 'firstName');
         const lastName = await getUserByAttribute(tutor.username, 'lastName');
+        const availabilities = await getAvailabilities(tutor.tutorID);
+        const times = [];
+        availabilities.map(availability => {
+          const formattedString = ` ${availability.tutorTime},`;
+          times.push(formattedString);
+        });
         list.push({
           username: tutor.username,
           tutorID: tutor.tutorID,
           tutorFirstName: firstName[0].firstName,
           tutorLastName: lastName[0].lastName,
           name: `${firstName[0].firstName} ${lastName[0].lastName}`,
+          time: times,
         });
       }
       setTutorData(list);

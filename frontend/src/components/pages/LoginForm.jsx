@@ -42,32 +42,34 @@ export const LoginForm = ({ setLoggedInUser }) => {
     <>
       <h1 className="login-title">Login</h1>
 
-      <div className="login-form">
-        <div className="login-field">
-          <TextField
-            id="username"
-            label="Username"
-            value={username}
-            setValue={setUsername}
-            className="form-control"
-          />
-        </div>
+      <div className='entireLoginForm'>
+        <div className="login-form">
+          <div className="login-field">
+            <TextField
+              id="username"
+              label="Username"
+              value={username}
+              setValue={setUsername}
+              className="form-control"
+            />
+          </div>
 
-        <div className="login-field">
-          <TextField
-            id="password"
-            label="Password"
-            value={password}
-            setValue={setPassword}
-            type="password"
-            variant="outlined"
-            className="form-control"
-          />
-        </div>
+          <div className="login-field">
+            <TextField
+              id="password"
+              label="Password"
+              value={password}
+              setValue={setPassword}
+              type="password"
+              variant="outlined"
+              className="form-control"
+            />
+          </div>
 
-        <button className="btn" type="button" onClick={handleSubmit}>
-          Login
-        </button>
+          <button className="btn" type="button" onClick={handleSubmit}>
+            Login
+          </button>
+        </div>
       </div>
     </>
   );

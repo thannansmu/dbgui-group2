@@ -23,7 +23,6 @@ export const YourAppointments = () => {
            <tr>
            <th style={{ width: '30%', fontWeight: 'bold', textDecoration: 'underline' }}>Time</th>
             <th style={{ width: '40%', fontWeight: 'bold', textDecoration: 'underline' }}>Tutor</th>
-            <th style={{ width: '30%', fontWeight: 'bold', textDecoration: 'underline' }}>Status</th>
            </tr>
          </thead>
          <tbody>
