@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { getQuestions, updateAnswer } from '../../../Api';
+import { getQuestions } from '../../../Api';
+import {updateAnswer} from '../../../Api/userApi';
 
 export const AllQuestions = () => {
   const [questions, setQuestions] = useState([]);
+  const [questionID, setQuestionID] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getQuestions();
         setQuestions(data);
+        setQuestionID(data[0].questionID);
+        console.log("the data is", data[0].questionID);
       } catch (error) {
         console.error(error);
       }
@@ -24,7 +28,8 @@ export const AllQuestions = () => {
 
     if (selectedQuestion) {
       try {
-        await updateAnswer(selectedQuestion.questionText, answerText);
+        console.log("the question id is", questionID);
+        await updateAnswer(questionID, answerText);
         const data = await getQuestions();
         setQuestions(data);
         setSelectedQuestion(null);
@@ -55,7 +60,7 @@ export const AllQuestions = () => {
       {selectedQuestion && (
        <form onSubmit={handleSubmit}>
        <label>
-         Answer to "{selectedQuestion.questionText}":
+         Answer to {selectedQuestion.questionText}:
          <input type="text" value={answerText} onChange={(e) => setAnswerText(e.target.value)} />
        </label>
        <button type="submit">Submit</button>
