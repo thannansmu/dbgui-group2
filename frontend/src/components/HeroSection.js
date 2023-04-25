@@ -15,8 +15,6 @@ export const HeroSection = () => {
             </center>
             <div className="hero-btns">
 
-                <Button className='btns' buttonStyle='btn--primary'
-                    buttonSize='btn--large'>About the Tutors</Button>
 
             </div>
         </div>

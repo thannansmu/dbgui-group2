@@ -63,61 +63,66 @@ export const TutorProfile = ({ loggedInUser }) => {
     window.addEventListener('resize', showButton);
 
     return (
-<div style={{ backgroundColor: '#AED6F1', padding: '50px' }}>
-        <h1 style={{ textDecoration: 'underline' }}>Your Profile</h1>
-        <div>
-          <br />
-          <h4>
-            <br></br>
-            <br></br>
-          </h4>
-          <h4>username: {loggedInUser}</h4>
-          {firstName && <h4>first name: {firstName}</h4>}
-          {lastName && <h4>last name: {lastName}</h4>}
-          {userRole && <h4>user role: {userRole}</h4>}
-          {bio && <h4>bio: {bio}</h4>}
-        </div>
-        <div style={{ backgroundColor: '#AED6F1', display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
-
-            <div className="button-container" style={{ backgroundColor: '#AED6F1', display: 'flex', flexDirection: 'column' }}>
-
-
-                {button && (
-                    <Button to="/questions" className="page-button" style={buttonStyles}>
-                        <i> View Questions</i>
-                    </Button>
-                )}
-
-                {button && (
-                    <Button to="/review-student" className="page-button" style={buttonStyles}>
-                        <i> Review Student</i>
-                    </Button>
-                )}  
-            </div>
-        </div>
-
-        <div
+<div style={{
+      backgroundColor: '#AED6F1',
+      padding: '50px',
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1)',
+      borderRadius: '10px',
+    }}>
+<h1
+      style={{
+        textDecoration: 'underline',
+        fontWeight: 'bold',
+        textShadow: '2px 2px 2px #000000',
+      }}
+    >Your Profile</h1>
+    <div>
+      <h4 style={{ fontWeight: 'bold', marginTop: '20px', marginBottom: '10px' }}>username: {loggedInUser}</h4>
+      {firstName && <h4 style={{ fontWeight: 'bold' }}>first name: {firstName}</h4>}
+      {lastName && <h4 style={{ fontWeight: 'bold' }}>last name: {lastName}</h4>}
+      {userRole && <h4 style={{ fontWeight: 'bold' }}>user role: {userRole}</h4>}
+      {bio && <h4 style={{ fontWeight: 'bold' }}>bio: {bio}</h4>}
+    </div>
+    <div
       style={{
         backgroundColor: '#AED6F1',
         display: 'flex',
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
+        justifyContent: 'flex-end',
+        marginTop: '20px',
+        marginBottom: '20px',
       }}
     >
-      <h2 className="title">Your Answers</h2>
-      <br />
+      <div className="button-container" style={{ backgroundColor: '#AED6F1', display: 'flex', flexDirection: 'column' }}>
+        {button && (
+          <Button to="/questions" className="page-button" style={buttonStyles}>
+            <i> View Questions</i>
+          </Button>
+        )}
+
+        {button && (
+          <Button to="/review-student" className="page-button" style={buttonStyles}>
+            <i> Review Student</i>
+          </Button>
+        )}
+      </div>
+    </div>
+
+    <div style={{ backgroundColor: '#AED6F1', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+      <h2 className="title" style={{ fontWeight: 'bold', textDecoration: 'underline', marginBottom: '20px' }}>
+        Your Answers
+      </h2>
       <div
         style={{
-          marginTop: '130px', // increase this value to move answers down
-          paddingLeft: '200px', // increase this value to move answers to the left
+          marginTop: '20px',
+          paddingLeft: '10px',
           borderLeft: '2px solid #666',
           marginLeft: '20px',
           maxWidth: '80%',
         }}
       >
         {answers.map((answer) => (
-          <div key={answer.questionID} style={{ marginBottom: '10px' }}>
-            <p>
+          <div key={answer.questionID} style={{ marginBottom: '20px' }}>
+            <p style={{ fontWeight: 'bold' }}>
               <b>Question ID:</b> {answer.questionID}
             </p>
             <p>{answer.answer}</p>

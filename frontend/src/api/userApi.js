@@ -312,7 +312,7 @@ export const updateAnswer = (questionID, updatedValue) => new Promise((resolve, 
 ///////////////////////////////DELETE ROUTES/////////////////////////////////
 //Delete User
 export const deleteUser = (username) => new Promise((resolve, reject) => {
-    axios.delete(`${url}/${username}/delete`)
+    axios.delete(`${url}/users/${username}/delete`)
         .then(resp => resolve(resp.data))
         .catch(error => {
             alert(error);
