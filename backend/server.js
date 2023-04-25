@@ -550,6 +550,17 @@ app.get(`/:tutorID/times_available`, (req, res) => {
   })
 })
 
+//Returns tutoring sessions for user
+app.get(`/:username/tutoring_sessions`, (req, res) => {
+  const username = req.params.username;
+  connection.query(`SELECT * FROM TutoringSessions WHERE username = '${username}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+  })
+})
+
 //Returns tutoring sessions for tutor
 app.get(`/:tutorID/tutoring_sessions`, (req, res) => {
   const tutorID = req.params.tutorID;
@@ -573,6 +584,7 @@ app.get(`/:tutorID/subjects_taught`, (req, res) => {
     console.log(rows)
   })
 })
+
 //Returns all unique subjects taught from the SubjectsTaught table
 app.get('/subjects', (req, res) => {
   const query = 'SELECT DISTINCT subject FROM SubjectsTaught';
@@ -603,5 +615,3 @@ app.put('/questions/:questionID/update_answer', (req, res) => {
     console.log(`Updated answer for '${questionID}' to '${updatedValue}'`);
   });
 });
-
-
