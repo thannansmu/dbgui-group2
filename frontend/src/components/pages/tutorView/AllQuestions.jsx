@@ -25,11 +25,11 @@ export const AllQuestions = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (selectedQuestion) {
       try {
-        console.log("the question id is", questionID);
-        await updateAnswer(questionID, answerText);
+        console.log("the question id is", selectedQuestion.questionID);
+        await updateAnswer(selectedQuestion.questionID, answerText);
         const data = await getQuestions();
         setQuestions(data);
         setSelectedQuestion(null);
@@ -39,6 +39,7 @@ export const AllQuestions = () => {
       }
     }
   };
+  
 
   return (
     <div style={{ backgroundColor: '#FFF9C4', padding: '50px' }}>
@@ -50,7 +51,11 @@ export const AllQuestions = () => {
           <div
             key={index}
             style={{ backgroundColor: '#cbf2ba', padding: '20px', borderRadius: '10px', margin: '10px 0' }}
-            onClick={() => setSelectedQuestion(question)}
+            onClick={() => {
+              setSelectedQuestion(question);
+              setQuestionID(question.questionID);
+            }}
+            
           >
             <h3 style={{ color: '#000000' }}>Student ID: {question.studentID}</h3>
             <p style={{ color: '#000000' }}>Question: {question.questionText}</p>
