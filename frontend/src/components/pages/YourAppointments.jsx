@@ -1,32 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { getBookedAppointments, getStudentIDByUsername } from '../../Api';
 import { getInfoForTutorID } from '../../Api';
-import { getStudentIDByUsername } from '../../Api';
+import { getTutors } from '../../Api';
 
-const AppointmentList = (tutorID, time, day) => {
-  
-  const [info, setInfo] = useState([]);
-
-  useEffect(() => {
-    getUserInfo();
-  }, []);
-
-  const getUserInfo = async () => {
-    const response = await getInfoForTutorID(tutorID, 'firstName');
-    setInfo(response);
-  };
-  
-  console.log(info);
+const AppointmentList = (tutorID) => {
 
   return <>
     <tr>
-      <td>{tutorID}</td>
-      <td></td>
+      <td>{tutorID.tutorID}</td>
+      <td>{tutorID.time}</td>
+      <td>{tutorID.day}</td>
     </tr>
   </>
 };
 
-export const YourAppointments = ({loggedInUser}) => {
+//export const YourAppointments = ({loggedInUser}) => {
+export const YourAppointments = ({ }) => {
+
+  const loggedInUser = '1';
 
   const [bookedAppts, setBookedAppts] = useState([]);
   const [studentID, setStudentID] = useState('');
@@ -53,15 +44,17 @@ export const YourAppointments = ({loggedInUser}) => {
         console.log(error);
       }
     };
-    if(studentID)
-    fetchAppointments();
+    if (studentID)
+      fetchAppointments();
   }, [studentID]);
 
-  if(!bookedAppts && !studentID) {
+  if (!bookedAppts && !studentID) {
     return <>
       Loading...
     </>
   }
+
+  console.log(bookedAppts)
 
   return (
     <div style={{ position: 'relative' }}>
@@ -81,7 +74,7 @@ export const YourAppointments = ({loggedInUser}) => {
       <table style={{ borderSpacing: ' 30px' }}>
         <thead>
           <tr>
-            <th style={{ width: '40%', fontWeight: 'bold', textDecoration: 'underline' }}>Tutor</th>
+            <th style={{ width: '40%', fontWeight: 'bold', textDecoration: 'underline' }}>Tutor ID</th>
             <th style={{ width: '30%', fontWeight: 'bold', textDecoration: 'underline' }}>Day</th>
             <th style={{ width: '30%', fontWeight: 'bold', textDecoration: 'underline' }}>Time</th>
 
@@ -90,7 +83,7 @@ export const YourAppointments = ({loggedInUser}) => {
         </thead>
         <tbody>
           {bookedAppts.map((appt) => (
-            <AppointmentList tutorID={appt.tutorID} time={appt.tutorTime} day={appt.tutorDay} />
+            <AppointmentList key={appt.scheduleID} tutorID={appt.tutorID} time={appt.tutorTime} day={appt.tutorDay} />
           ))}
         </tbody>
       </table>

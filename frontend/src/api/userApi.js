@@ -196,8 +196,8 @@ export const getReportedUsernames = () => new Promise((resolve, reject)=> {
   });
   });
   
-  export const getBookedAppointments = (username) => new Promise((resolve, reject)=> {
-    axios.get(`${url}/${username}/tutoring_sessions`)
+  export const getBookedAppointments = (studentID) => new Promise((resolve, reject)=> {
+    axios.get(`${url}/${studentID}/tutoring_sessions`)
     .then(resp => resolve(resp.data))
  .catch(error => {
   alert(error);
