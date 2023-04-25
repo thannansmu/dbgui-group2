@@ -24,6 +24,16 @@ export const getTutor = (username) => new Promise((resolve, reject) => {
         });
 });
 
+// Fetch answers for a specific tutor
+export const getTutorAnswers = (tutorID) => new Promise((resolve, reject) => {
+    axios.get(`${url}/tutors/${tutorID}/answers`)
+      .then(resp => resolve(resp.data))
+      .catch(error => {
+        alert(error);
+        reject(error);
+      });
+  });
+
 export const getTutorTimesAvailable = (username) => new Promise((resolve, reject) => {
     axios.get(`${url}/users/${username}/timesAvailable`)
         .then(resp => resolve(resp.data))
@@ -71,6 +81,16 @@ export const getTutorRating = (tutorID) => new Promise((resolve, reject) => {
         reject(error);
     });
 });
+
+// Fetch all requests for a specific tutor
+export const getTutorRequests = (tutorID) => new Promise((resolve, reject) => {
+    axios.get(`${url}/tutors/${tutorID}/requests`)
+      .then(resp => resolve(resp.data))
+      .catch(error => {
+        alert(error);
+        reject(error);
+      });
+  });
 
 
 ///////////////////////////////END OF GET ROUTES/////////////////////////////

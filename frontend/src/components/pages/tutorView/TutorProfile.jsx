@@ -3,7 +3,12 @@ import { UserInfo } from '../UserInfo';
 import { Button } from '../../Button';
 import '../../styles/Tutor.css';
 import '../../styles/Button.css';
-import { getTutor, getTutorId, getUserByAttribute } from '../../../Api/userApi';
+import { getTutor, getUserByAttribute } from '../../../Api/userApi';
+import { AllQuestions } from './AllQuestions'; // Update the path to the AllQuestions component
+import {getTutorID, getTutorAnswers} from '../../../Api/tutorApi'
+import { Link } from 'react-router-dom';
+
+
 
 export const TutorProfile = ({ loggedInUser }) => {
     const [click, setClick] = useState(false);
@@ -12,6 +17,10 @@ export const TutorProfile = ({ loggedInUser }) => {
     const [lastName, setLastName] = useState('');
     const [userRole, setUserRole] = useState('');
     const [bio, setBio] = useState('');
+    const [tutorID, setTutorID] = useState(null);
+    const [answers, setAnswers] = useState([]);
+
+
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
@@ -38,12 +47,21 @@ export const TutorProfile = ({ loggedInUser }) => {
       setUserRole(roleResponse[0].userRole);
       const bioResponse = await getUserByAttribute(loggedInUser, 'bio');
       setBio(bioResponse[0].bio);
+      const tutorIdResponse = await getTutorID(loggedInUser);
+      setTutorID(tutorIdResponse);
+      if (tutorID) {
+        const fetchedAnswers = await getTutorAnswers(tutorID);
+        setAnswers(fetchedAnswers);
+      }
+
+      
     };
+
 
     window.addEventListener('resize', showButton);
 
     return (
-      <div style={{ backgroundColor: 'white', padding: '50px' }}>
+<div style={{ backgroundColor: '#AED6F1', padding: '50px' }}>
         <h1 style={{ textDecoration: 'underline' }}>Your Profile</h1>
         <div>
           <br />
@@ -57,15 +75,10 @@ export const TutorProfile = ({ loggedInUser }) => {
           {userRole && <h4>user role: {userRole}</h4>}
           {bio && <h4>bio: {bio}</h4>}
         </div>
-        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
+        <div style={{ backgroundColor: '#AED6F1', display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
 
             <div className="button-container" style={{ display: 'flex', flexDirection: 'column' }}>
 
-                {button && (
-                    <Button to="/appts" className="page-button" style={buttonStyles}>
-                        <i>  View Appointments</i>
-                    </Button>
-                )}
 
                 {button && (
                     <Button to="/questions" className="page-button" style={buttonStyles}>
@@ -77,15 +90,20 @@ export const TutorProfile = ({ loggedInUser }) => {
                     <Button to="/review-student" className="page-button" style={buttonStyles}>
                         <i> Review Student</i>
                     </Button>
-                )}
+                )}  
             </div>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div style={{ backgroundColor: '#AED6F1', display: 'flex', justifyContent: 'space-between' }}>
 
-            <h2 className='title'>Your Answers</h2>
+        <h2 className='title'>Your Answers</h2>
+            {answers.map((answer) => (
+              <div key={answer.questionID}>
+                <h3>{answer.questionText}</h3>
+                <p>{answer.answer}</p>
+              </div>
+            ))}
 
-            <h2 className='title'>Your Reviews</h2>
         </div>
         </div>
     );

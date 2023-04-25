@@ -185,6 +185,30 @@ app.get(`/users/:username/requests`, (req, res) => {
   })
 })
 
+//returns all request, corresponding student ID, and username given the tutorID:
+app.get('/tutors/:tutorID/requests', (req, res) => {
+  const tutorID = req.params.tutorID;
+
+  const query = `
+    SELECT Requests.requestID, Requests.request, Users.username, Requests.studentID
+    FROM Requests
+    INNER JOIN Users ON Users.studentID = Requests.studentID
+    WHERE Requests.tutorID = '${tutorID}';
+  `;
+
+  connection.query(query, (err, rows, fields) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error fetching data');
+    } else {
+      res.status(200).send(rows);
+      console.log(rows);
+    }
+  });
+});
+
+
+
 //Returns all comments for specific user
 app.get(`/users/:username/comments`, (req, res) => {
   const username = req.params.username;
@@ -195,6 +219,29 @@ app.get(`/users/:username/comments`, (req, res) => {
     console.log(rows)
   })
 })
+
+//returns answers for a given tutorID
+app.get('/tutors/:tutorID/answers', (req, res) => {
+  const tutorID = req.params.tutorID;
+
+  const query = `
+    SELECT questionID, studentID, tutorID, questionText, answer
+    FROM Questions
+    WHERE tutorID = ?;
+  `;
+
+  connection.query(query, [tutorID], (err, rows, fields) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error fetching data');
+    } else {
+      res.status(200).send(rows);
+      console.log(rows);
+    }
+  });
+});
+
+
 
 //Addes request to specific user
 app.post(`/users/:username/add_request`, (req, res) => {

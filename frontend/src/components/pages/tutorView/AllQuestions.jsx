@@ -55,7 +55,7 @@ export const AllQuestions = () => {
       {selectedQuestion && (
        <form onSubmit={handleSubmit}>
        <label>
-         Answer to "{selectedQuestion.questionText}":
+         Answer to {selectedQuestion.questionText}:
          <input type="text" value={answerText} onChange={(e) => setAnswerText(e.target.value)} />
        </label>
        <button type="submit">Submit</button>

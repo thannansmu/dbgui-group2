@@ -15,3 +15,5 @@ export * from './AdminPage';
 export * from './DeleteUser';
 export * from './tutorView/TutorProfile';
 export * from './tutorView/TutorProfileStudent';
+export * from './tutorView/ViewRequests';
+export * from './tutorView/AllQuestions';
