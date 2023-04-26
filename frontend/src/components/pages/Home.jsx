@@ -1,12 +1,10 @@
 import React from 'react';
 import '../../App.css';
-import HeroSection from '../HeroSection';
-import { ProfilePage } from './ProfilePage';
+import { HeroSection } from '../HeroSection';
 
 export const Home = () => {
     return <>
-        {/* <HeroSection /> */}
-        <ProfilePage />
+        <HeroSection />
 
     </>;
 }

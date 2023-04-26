@@ -1,71 +1,92 @@
-import React, {useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
-import {Button} from './Button';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Button } from './Button';
 import './styles/Navbar.css';
 
-export const Navbar = () => {
-    const [click, setClick] = useState(false);
-    const [button, setButton] = useState(true);
+export const Navbar = ({ loggedInUser, setLoggedInUser }) => {
+  const [click, setClick] = useState(false);
+  const [button, setButton] = useState(true);
+  const navigate = useNavigate();
 
+  const handleClick = () => setClick(!click);
+  const closeMobileMenu = () => setClick(false);
 
-    const handleClick = ()=> setClick(!click);
-    const closeMobileMenu = () => setClick(false);
-
-    const showButton =()=>{if (window.innerWidth <=960){
-    setButton(false);
+  const showButton = () => {
+    if (window.innerWidth <= 960) {
+      setButton(false);
     } else {
-        setButton(true);
-    }};
+      setButton(true);
+    }
+  };
 
-    useEffect(()=> {showButton();
-    }, []);
+  useEffect(() => {
+    showButton();
+  }, []);
 
-    window.addEventListener('resize', showButton);
-    return <>
-    <nav className="navbar">
-       <div className="navbar-container"> 
-        <Link to = "/" className="navbar-logo" onClick={closeMobileMenu}>
-          Tuder
-        </Link>
-        <div className='menu-icon' onClick={handleClick}>
-            <i className ={click ? 'fas fa-times' : 'fas fa-bars'} />
-        </div>
-            <ul className = {click ? 'nav-many active' : 'nav-menu'}>
-            <li className = 'nav-item'>
-                <Link to='/' className = 'nav-links' onClick = {closeMobileMenu}>
-                    Home
-                </Link>
+  window.addEventListener('resize', showButton);
+
+  const handleLogout = () => {
+    setLoggedInUser(null);
+    navigate('/');
+  };
+
+  return (
+    <>
+      <nav className="navbar">
+        <div className="navbar-container">
+          <button
+            onClick={() => navigate(-1)}
+            className="btn btn-primary"
+            style={{ marginRight: '1rem' }}
+          >
+            &larr; Back
+          </button>
+          <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
+            Tuder
+          </Link>
+          <div className="menu-icon" onClick={handleClick}>
+            <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
+          </div>
+          <ul className={click ? 'nav-many active' : 'nav-menu'}>
+            <li className="nav-item">
+              <Link to="/" className="nav-links" onClick={closeMobileMenu}>
+                Home
+              </Link>
             </li>
 
-            <li className = 'nav-item'>
-                <Link to='/services-page' className = 'nav-links' onClick = {closeMobileMenu}>
-                    Services
-                </Link>
+            <li className="nav-item">
+              <Link
+                to="/services-page"
+                className="nav-links"
+                onClick={closeMobileMenu}
+              >
+                Services
+              </Link>
             </li>
 
-            <li className = 'nav-item'>
-                <Link to='/about-tutors' className = 'nav-links' onClick = {closeMobileMenu}>
-                    About
-                </Link>
+            <li className="nav-item">
+              <Link
+                to="/about-tutors"
+                className="nav-links"
+                onClick={closeMobileMenu}
+              >
+                About
+              </Link>
             </li>
-
-            <li className = 'nav-item'>
-                <Link to='/about-page' className = 'nav-links-mobile' onClick = {closeMobileMenu}>
-                    About
-                </Link>
-            </li>
-
-            
-            </ul>
-            {button && (
-            <Button buttonStyle="btn--outline" to="/sign-up">
-              log in/Create Account
+          </ul>
+          {loggedInUser ? (
+            <Button buttonStyle="btn--outline" to="/" onClick={handleLogout}>
+              Log Out
             </Button>
+          ) : (
+            button && (
+              <Button buttonStyle="btn--outline" to="/sign-up">
+                Log in/Create Account
+              </Button>
+            )
           )}
-            
-
-
-       </div>
-    </nav>
-    </>;
-}
+        </div>
+      </nav>
+    </>
+  );
+};
