@@ -101,7 +101,7 @@ app.get(`/:username/tutorID`, (req, res) => {
 })
 
 
-//Returns all info for specific student
+//Returns username for specific student
 app.get(`/:studentID/info`, (req, res) => {
   const studentID = req.params.tutorID;
   connection.query(`SELECT * FROM Students WHERE studentID = '${studentID}'`, (err, rows, fields) => {
@@ -112,7 +112,7 @@ app.get(`/:studentID/info`, (req, res) => {
   })
 })
 
-//Returns all info for specific tutor
+//Returns username for specific tutor
 app.get(`/:tutorID/info`, (req, res) => {
   const tutorID = req.params.tutorID;
   connection.query(`SELECT * FROM Tutors WHERE tutorID = '${tutorID}'`, (err, rows, fields) => {
@@ -550,6 +550,17 @@ app.get(`/:tutorID/times_available`, (req, res) => {
   })
 })
 
+//Returns tutoring sessions for student
+app.get(`/:studentID/tutoring_sessions`, (req, res) => {
+  const studentID = req.params.studentID;
+  connection.query(`SELECT * FROM TutoringSessions WHERE studentID = '${studentID}'`, (err, rows, fields) => {
+    if (err) throw err
+    res.status(200)
+    res.send(rows)
+    console.log(rows)
+  })
+})
+
 //Returns tutoring sessions for tutor
 app.get(`/:tutorID/tutoring_sessions`, (req, res) => {
   const tutorID = req.params.tutorID;
@@ -573,6 +584,7 @@ app.get(`/:tutorID/subjects_taught`, (req, res) => {
     console.log(rows)
   })
 })
+
 //Returns all unique subjects taught from the SubjectsTaught table
 app.get('/subjects', (req, res) => {
   const query = 'SELECT DISTINCT subject FROM SubjectsTaught';
@@ -603,5 +615,3 @@ app.put('/questions/:questionID/update_answer', (req, res) => {
     console.log(`Updated answer for '${questionID}' to '${updatedValue}'`);
   });
 });
-
-
