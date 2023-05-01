@@ -6,12 +6,13 @@ export const About = () => {
     <div className="About Page">
 
       <p className="About-text">
-        <h1>About the Tutors</h1>
-        Meet Olivia Rodriguez, a graduate of Harvard University with a degree in Mathematics. Olivia is a skilled and experienced math teacher who has taught in various institutions for over a decade. Her passion for teaching stems from her love for numbers and the joy of seeing her students excel in their math skills. Olivia has an impeccable teaching style that helps her students understand complex mathematical concepts with ease.
+        <br></br>
+        <h1>&#160; About the Tutors</h1>
+        At Southern Methodist University, students are renowned for their unwavering passion for teaching and making a tangible impact in their local community. These young individuals are deeply committed to assisting nearby high schools, offering their time and energy to improve the educational experiences of students in need. By forming strong partnerships with local institutions, SMU students actively contribute to building a brighter future for the surrounding area.
 
-        Johnathan Green is an experienced Science teacher with over 15 years of experience teaching in various institutions. Johnathan holds a Ph.D. in Physics from Stanford University and is known for his unique and creative teaching techniques. He has a passion for sharing his knowledge and expertise with his students and has helped many of them excel in their academic careers. Johnathan's fun and interactive teaching style make his classes enjoyable and effective for his students.
+Service to the community is ingrained in the ethos of SMU, where students wholeheartedly embrace opportunities to give back. Their dedication is evident in the numerous initiatives designed to provide education resources to those who face challenges in accessing high-quality learning experiences. By organizing tutoring sessions, workshops, and mentoring programs, SMU students work tirelessly to support learners from all backgrounds in their pursuit of knowledge and personal growth.
 
-        Meet Sarah Adams, an English teacher with over 20 years of teaching experience. Sarah holds a Master's degree in English Literature from Oxford University and has taught in various institutions worldwide. Sarah's passion for teaching stems from her love for literature and her desire to instill a love of reading and writing in her students. Her engaging teaching style and attention to detail make her classes a great learning experience for her students. Sarah's commitment to excellence has helped her students excel in their language and literature skills.
+This spirit of altruism, combined with a genuine love for teaching, creates a dynamic and supportive atmosphere on the SMU campus. Students here recognize the power of education to transform lives and are determined to make a positive difference for others. In doing so, they demonstrate the values that define the Southern Methodist University community and inspire others to follow in their footsteps.
       </p>
     </div>
   );
