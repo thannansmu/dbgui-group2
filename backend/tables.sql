@@ -167,11 +167,11 @@ INSERT INTO Tutors (username) VALUES ('user11');
 
 INSERT INTO Administration (username) VALUES ('user10');
 
-INSERT INTO Report(username, adminID, report) VALUES ('user1', 1, 'report1');
-INSERT INTO Report(username, adminID, report) VALUES ('user2', 1, 'report2');
-INSERT INTO Report(username, adminID, report) VALUES ('user3', 1, 'report3');
-INSERT INTO Report(username, adminID, report) VALUES ('user4', 1, 'report4');
-INSERT INTO Report(username, adminID, report) VALUES ('user5', 1, 'report5');
+INSERT INTO Report(username, adminID, report) VALUES ('user1', 1, 'horrible');
+INSERT INTO Report(username, adminID, report) VALUES ('user2', 1, 'this user is horrible. ban this user');
+INSERT INTO Report(username, adminID, report) VALUES ('user3', 1, 'span');
+INSERT INTO Report(username, adminID, report) VALUES ('user4', 1, 'spamming');
+INSERT INTO Report(username, adminID, report) VALUES ('user5', 1, 'spam');
 
 
 INSERT INTO FavoriteTutors(username, studentID, tutorID) VALUES ('user4', 1, 1); 
@@ -204,13 +204,13 @@ INSERT INTO TutoringSessions(studentID, tutorID, tutorTime, tutorDay) VALUES (3,
 
 
 INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (1, 1, 'What is the difference between pass by value and pass by reference for pointers?', '');
-INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (3, 2, 'When was the Declaration of Independence signed?', '');
-INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (4, 5, 'What are the components of a SWOT Analysis?', '');
-INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (5, 3, 'What is the derivative of x-squared plus 3x?', '');
-INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (2, 3, 'How do I create an account for MATLAB?', '');
-INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (1, 2, 'Who was Grace Hopper?', '');
-INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (3, 5, 'Why was the IRS created?', '');
-INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (5, 4, 'Why is the Mitochondria the powerhouse of the cell?', '');
+-- INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (3, 2, 'When was the Declaration of Independence signed?', '');
+-- INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (4, 5, 'What are the components of a SWOT Analysis?', '');
+-- INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (5, 3, 'What is the derivative of x-squared plus 3x?', '');
+-- INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (2, 3, 'How do I create an account for MATLAB?', '');
+-- INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (1, 2, 'Who was Grace Hopper?', '');
+-- INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (3, 5, 'Why was the IRS created?', '');
+-- INSERT INTO Question (studentID, tutorID, questionText, answer) VALUES (5, 5, 'Why is Computer Science awesome?', 'This is an answer');
 
 
 

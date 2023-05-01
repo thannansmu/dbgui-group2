@@ -47,72 +47,105 @@ export const ProfilePage = ({ loggedInUser }) => {
   window.addEventListener('resize', showButton);
 
   return (
-    <div>
-      <h1 style={{ textDecoration: 'underline' }}>Your Profile</h1>
-      <div>
-        <br />
-        <h4>
-          <u>User Information:</u>
-          <br></br>
-          <br></br>
-        </h4>
-        <h4>username: {loggedInUser}</h4>
-        {firstName && <h4>first name: {firstName}</h4>}
-        {lastName && <h4>last name: {lastName}</h4>}
-        {userRole && <h4>user role: {userRole}</h4>}
-        {bio && <h4>bio: {bio}</h4>}
-      </div>
-      <div>
-      <YourQuestions loggedInUser={loggedInUser} />
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          marginTop: '15px',
-        }}
-      >
-        <div
-          className=""
-          style={{ display: 'flex', flexDirection: 'column' }}
-        >
-          
-
-{button && (
-  <Button to="/report-user" className="page-button" style={buttonStyles}>
-    <i> Report User</i>
-  </Button>
-)}
-
-          {button && (
-            <Button to="/schedule-appt" className="page-button" style={buttonStyles}>
-              <i> Schedule Appointment</i>
-            </Button>
-          )}
-          {button && (
-            <Button to="/review-tutor" className="page-button" style={buttonStyles}>
-              <i> Review Tutor</i>
-            </Button>
-          )}
-          {button && (
-            <Button to="/booked-appt" className="page-button" style={buttonStyles}>
-              <i> Your Booked Appointments</i>
-            </Button>
-          )}
-        </div>
-      </div>
-      <br />
-      <br />
-      <br />
-     
-      
-
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        
-        
-      </div>
+    <div style={containerStyle}>
+  <h1 style={headingStyle}>Your Profile</h1>
+  <div style={userInfoContainerStyle}>
+    <div style={userInfoHeaderStyle}>
+      <h4 style={userInfoTitleStyle}>User Information:</h4>
     </div>
+    <div style={userInfoContentStyle}>
+      <h4 style={userInfoTextStyle}>username: {loggedInUser}</h4>
+      {firstName && <h4 style={userInfoTextStyle}>first name: {firstName}</h4>}
+      {lastName && <h4 style={userInfoTextStyle}>last name: {lastName}</h4>}
+      {userRole && <h4 style={userInfoTextStyle}>user role: {userRole}</h4>}
+      {bio && <h4 style={userInfoTextStyle}>bio: {bio}</h4>}
+    </div>
+  </div>
+  <div style={yourQuestionsContainerStyle}>
+    <YourQuestions loggedInUser={loggedInUser} />
+  </div>
+  <div style={buttonContainerStyle}>
+    {button && (
+      <Button to="/report-user" className="page-button" style={buttonStyles}>
+        <i>Report User</i>
+      </Button>
+    )}
+    {button && (
+      <Button to="/schedule-appt" className="page-button" style={buttonStyles}>
+        <i>Schedule Appointment</i>
+      </Button>
+    )}
+    <br></br>
+    <br></br>
+    {/* {button && (
+      <Button to="/booked-appt" className="page-button" style={buttonStyles}>
+        <i>Your Booked Appointments</i>
+      </Button>
+    )} */}
+  </div>
+</div>
+
   );
+};
+
+const containerStyle = {
+  margin: '50px auto',
+  maxWidth: '800px',
+  padding: '0 20px',
+  backgroundColor: '#F5F5F5',
+  borderRadius: '10px',
+  boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
+};
+
+const headingStyle = {
+  textAlign: 'center',
+  textDecoration: 'underline',
+  fontSize: '36px',
+  margin: '0 0 50px',
+  color: '#333',
+};
+
+const userInfoContainerStyle = {
+  backgroundColor: '#FFFFFF',
+  borderRadius: '10px',
+  padding: '20px',
+  marginBottom: '50px',
+};
+
+const userInfoHeaderStyle = {
+  borderBottom: '1px solid #CCCCCC',
+  paddingBottom: '10px',
+  marginBottom: '20px',
+};
+
+const userInfoTitleStyle = {
+  fontWeight: 'bold',
+  fontSize: '24px',
+  margin: '0 0 10px',
+};
+
+const userInfoContentStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+};
+
+const userInfoTextStyle = {
+  fontSize: '18px',
+  margin: '0 0 10px',
+};
+
+const yourQuestionsContainerStyle = {
+  backgroundColor: '#FFFFFF',
+  borderRadius: '10px',
+  padding: '20px',
+  marginBottom: '50px',
+};
+
+const buttonContainerStyle = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  flexWrap: 'wrap',
 };
 
 const buttonStyles = {
@@ -129,5 +162,6 @@ const buttonStyles = {
   textAlign: 'center',
   width: '100%',
   boxSizing: 'border-box',
-  marginBottom: '10px'
+  marginBottom: '10px',
+  marginRight: '10px',
 };
