@@ -72,7 +72,8 @@ export const CalendarView = ({loggedInUser}) => {
 
     console.log("IDs!!");
     console.log(tutorID);
-    console.log(studentID)
+    console.log(studentID);
+    console.log(availabilities);
 
     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const hoursOfDay = ['06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00', '05:00'];
@@ -114,15 +115,32 @@ export const CalendarView = ({loggedInUser}) => {
 
     const isCellAvailable = (day, time) => {
     
+        console.log('checking availability...');
+        console.log(availabilities.tutorDay);
+        console.log(availabilities.tutorTime);
         for (let i = 0; i < availabilities.length; i++) {
         const availability = availabilities[i];
-        if (availability.tutorDay === day && availability.tutorTime === time) {
+        if (availability.tutorDay == day && availability.tutorTime == time) {
+            console.log('cell is available!')
             return true;
         }
         }
         return false;
     };
   
+    const book = (day, time) => {
+        if(isCellAvailable(day, time)) {
+            const tutoringSession = {
+                studentID: studentID,
+                tutorTime: time,
+                tutorDay: day
+              };
+            availabilityApi.addTutoringSession(tutorID, tutoringSession);
+            console.log('booked appointment!')
+            navigate('/booked-appt');
+        }
+    };
+
     const renderTableRows = () => {
         return hoursOfDay.map((hour) => {
             return (
@@ -135,19 +153,6 @@ export const CalendarView = ({loggedInUser}) => {
                 </tr>
             );
         });
-    };
-
-    const book = (day, time) => {
-        if(isCellAvailable(day, time)) {
-            const tutoringSession = {
-                studentID: studentID,
-                tutorTime: time,
-                tutorDay: day
-              };
-            availabilityApi.addTutoringSession(tutorID, tutoringSession);
-            console.log('booked appointment!')
-            navigate('/booked-appt');
-        }
     };
 
     return (<>

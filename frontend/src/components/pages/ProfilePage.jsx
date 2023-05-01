@@ -14,8 +14,6 @@ export const ProfilePage = ({ loggedInUser }) => {
   const [userRole, setUserRole] = useState('');
   const [bio, setBio] = useState('');
 
-
-
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 

@@ -61,12 +61,6 @@ export const TutorProfileStudent = ({viewTutor}) => {
             <div className="button-container" style={{ display: 'flex', flexDirection: 'column' }}>
 
                 {button && (
-                    <Button to="/calendar-view" className="page-button" style={buttonStyles}>
-                        <i>  Book Appointment </i>
-                    </Button>
-                )}
-
-                {button && (
                     <Button to="/schedule-appt" className="page-button" style={buttonStyles}>
                         <i>  Back </i>
                     </Button>
